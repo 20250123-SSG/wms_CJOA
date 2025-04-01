@@ -17,6 +17,8 @@ jobs:
         ports:
           - 3306:3306
         env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }} # 루트 비밀번호
+          MYSQL_DATABASE: test_db # 생성할 데이터베이스 이름
           MYSQL_USER: ${{ secrets.DatabaseId }} # 사용자 이름
           MYSQL_PASSWORD: ${{ secrets.DatabasePassword }} # 사용자 비밀번호
         options: >-
