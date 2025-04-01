@@ -4,6 +4,6 @@ import com.cjoa.wms.dto.UserDto;
 
 import java.util.Map;
 
-public interface UserDao {
+public interface UserMapper {
     UserDto getUserByUserIdAndPassword(Map<String, String> paramMap);
 }
