@@ -39,6 +39,8 @@ jobs:
       run: |
         mkdir -p ./src/main/resources/config && \
         echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
+    - name: wrap Gradle
+      run: gradle wrapper
     - name: Build With Gradle
       run: ./gradlew build
 
