@@ -8,7 +8,7 @@
         <typeAlias type="com.cjoa.wms.dto.OrderDto" alias="Order"/>
         <typeAlias type="com.cjoa.wms.dto.OrderDeliveryDto" alias="OrderDelivery"/>
         <typeAlias type="com.cjoa.wms.dto.DeliveryDto" alias="Delivery"/>
-        <typeAlias type="com.cjoa.wms.dto.OrderProdOptionDto" alias="OrderProdOption"/>
+        <typeAlias type="com.cjoa.wms.dto.OrderProdOptionDeliveryDto" alias="OrderProdOptionDelivery"/>
     </typeAliases>
     <environments default="dev">
         <environment id="dev">
