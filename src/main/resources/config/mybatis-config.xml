@@ -5,6 +5,7 @@
     <properties resource="config/connection-config.properties"/>
     <typeAliases>
         <typeAlias type="com.cjoa.wms.dto.UserDto" alias="User"/>
+        <typeAlias type="com.cjoa.wms.dto.ProductDto" alias="Product"/>
     </typeAliases>
     <environments default="dev">
         <environment id="dev">
@@ -19,5 +20,6 @@
     </environments>
     <mappers>
         <mapper resource="mapper/user-mapper.xml"/>
+        <mapper resource="mapper/product-mapper.xml"/>
     </mappers>
 </configuration>
