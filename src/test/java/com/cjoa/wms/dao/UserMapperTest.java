@@ -36,6 +36,6 @@ class UserMapperTest {
                 .build();
         UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getPassword()));
         assertThat(userDto).isNotNull();
-        assertThat(userDto.getUserId()).isEqualTo(user.getUserId());
+        assertThat(userDto.getUserId()).isEqualTo(user.getUserId()).isNotNull();
     }
 }
