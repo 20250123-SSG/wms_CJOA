@@ -6,10 +6,10 @@
     <resultMap id="userResultMap" type="User">
         <id column="user_code" property="userCode"/>
         <result column="user_id" property="userId"/>
-        <result column="user_password" property="password"/>
-        <result column="user_email" property="email"/>
-        <result column="user_phone" property="phone"/>
-        <result column="user_address" property="address"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_email" property="userEmail"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_address" property="userAddress"/>
         <result column="user_type" property="userType"/>
         <result column="user_name" property="userName"/>
     </resultMap>
@@ -27,7 +27,7 @@
             tbl_user
         WHERE
             user_id = #{userId}
-            AND user_password = #{password}
+            AND user_password = #{userPassword}
     </select>
     <select id="getAllUser" resultMap="userResultMap">
         SELECT
@@ -57,10 +57,10 @@
         VALUES
             (
               #{userId}
-            , #{password}
-            , #{email}
-            , #{phone}
-            , #{address}
+            , #{userPassword}
+            , #{userEmail}
+            , #{userPhone}
+            , #{userAddress}
             , #{userType}
             , #{userName}
             )
@@ -71,10 +71,10 @@
             tbl_user
         SET
               user_id = #{userId}
-            , user_password = #{password}
-            , user_email = #{email}
-            , user_phone = #{phone}
-            , user_address = #{address}
+            , user_password = #{userPassword}
+            , user_email = #{userEmail}
+            , user_phone = #{userPhone}
+            , user_address = #{userAddress}
             , user_type = #{userType}
             , user_name = #{userName}
         WHERE
