@@ -31,4 +31,9 @@ public class UserController {
         userService.updateUserByCode(user);
         return;
     }
+
+    public void deleteUserByCode(int code) {
+        userService.deleteUserByCode(code);
+        return;
+    }
 }

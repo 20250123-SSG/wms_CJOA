@@ -52,4 +52,18 @@ public class UserService {
         }
         return result;
     }
+
+    public int deleteUserByCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        userMapper = sqlSession.getMapper(UserMapper.class);
+        int result = userMapper.deleteUserByCode(code);
+        if (result > 0) {
+            sqlSession.commit();
+            System.out.println("completely delete user");
+        } else {
+            sqlSession.rollback();
+            System.out.println("rollback");
+        }
+        return result;
+    }
 }

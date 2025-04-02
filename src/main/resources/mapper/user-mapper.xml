@@ -80,4 +80,11 @@
         WHERE
             user_code = #{userCode}
     </update>
+    <delete id="deleteUserByCode" parameterType="_int">
+        DELETE
+        FROM
+            tbl_user
+        WHERE
+            user_code = #{code}
+    </delete>
 </mapper>
