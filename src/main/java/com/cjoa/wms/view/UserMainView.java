@@ -1,12 +1,12 @@
 package com.cjoa.wms.view;
 
-import com.cjoa.wms.controller.UserController;
+import com.cjoa.wms.controller.UserMainController;
 
 import java.util.Scanner;
 
-public class UserView {
+public class UserMainView {
 
-private UserController userController = new UserController();
+private UserMainController userMainController = new UserMainController();
 private Scanner sc = new Scanner(System.in);
 
 public void userMainView() {
