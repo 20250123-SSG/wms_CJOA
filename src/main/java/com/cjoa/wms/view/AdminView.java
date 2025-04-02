@@ -68,6 +68,7 @@ public class AdminView {
                     userController.updateUserByCode(inputCode());
                     break;
                 case "4":
+                    userController.deleteUserByCode(inputDeleteCode());
                     break;
                 case "0":
                     return;
@@ -80,8 +81,14 @@ public class AdminView {
         String code = sc.nextLine();
         UserDto userDto = addUserForm();
         userDto.setUserCode(Integer.parseInt(code));
-        System.out.println(userDto.toString());
         return userDto;
+    }
+
+
+    private int inputDeleteCode() {
+        System.out.print("삭제를 원하는 유저의 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+        return Integer.parseInt(code);
     }
 
     private UserDto addUserForm() {
