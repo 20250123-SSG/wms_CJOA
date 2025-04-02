@@ -62,7 +62,6 @@ public class AdminView {
                     userController.addUser(addUserForm());
                     break;
                 case "2":
-                    userController.getAllUser();
                     break;
                 case "3":
                     break;

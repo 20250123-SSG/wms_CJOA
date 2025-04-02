@@ -31,8 +31,10 @@ public class UserService {
         int result = userMapper.addUser(user);
         if (result > 0) {
             sqlSession.commit();
+            System.out.println("completely add user");
         }else {
             sqlSession.rollback();
+            System.out.println("rollback");
         }
         return result;
     }
