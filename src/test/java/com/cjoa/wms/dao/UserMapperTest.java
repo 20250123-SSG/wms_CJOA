@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
@@ -37,5 +38,20 @@ class UserMapperTest {
         UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getPassword()));
         assertThat(userDto).isNotNull();
         assertThat(userDto.getUserId()).isEqualTo(user.getUserId()).isNotNull();
+    }
+
+    @Test
+    void testGetAllUser() {
+        List<UserDto> list = userMapper.getAllUser();
+        assertThat(list)
+                .isNotNull()
+                .isEqualTo(userMapper.getAllUser())
+                .allSatisfy(userDto -> {
+                    assertThat(userDto.getUserId()).isNotNull();
+                    assertThat(userDto.getPassword()).isNotNull();
+                    assertThat(userDto.getUserId()).isNotNull();
+                    assertThat(userDto.getPassword()).isNotNull();
+                    assertThat(userDto.getUserName()).isNotNull();
+                });
     }
 }
