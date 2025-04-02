@@ -78,7 +78,7 @@ class UserMapperTest {
                 .userType("관리자")
                 .userName("admin")
                 .build();
-
+        sqlSession.commit();
         assertThat(userMapper.addUser(user)).isEqualTo(userMapper.addUser(user2));
     }
 }

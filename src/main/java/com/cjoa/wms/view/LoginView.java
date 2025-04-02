@@ -9,6 +9,7 @@ public class LoginView {
 
     private UserController userController = new UserController();
     private Scanner sc = new Scanner(System.in);
+    private AdminView adminView = new AdminView();
 
     public void loginView() {
         while (true) {
@@ -16,7 +17,28 @@ public class LoginView {
             String id = sc.nextLine();
             System.out.print("Enter Password: ");
             String password = sc.nextLine();
-            userController.getUserByUserIdAndPassword(id, password);
+            UserDto user = userController.getUserByUserIdAndPassword(id, password);
+
+            if (user != null) {
+                System.out.println("Login Successful");
+                switch (user.getUserType()) {
+                    case "관리자":
+                        System.out.println("Admin Login");
+                        adminView.mainView();
+                        break;
+                    case "회원":
+                        System.out.println("User Login");
+                        adminView.mainView();
+                        break;
+                    case "창고관리자":
+                        System.out.println("WareHouse Admin Login");
+                    default:
+                        System.out.println("Invalid User");
+                        break;
+                }
+            } else {
+                System.out.println("Login Failed");
+            }
         }
     }
 }
