@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.DeliveryMapper">
+    <resultMap id="resultOrderDeliveryList" type="OrderDelivery">
+        <id column="order_code" property="orderCode"/>
+        <result column="user_code" property="userCode"/>
+        <result column="order_pay_type" property="orderPayType"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="order_date" property="orderDate"/>
+    </resultMap>
+    <resultMap id="resultOrderProdOptionDelivery" type="OrderProdOption">
+        <id column="order_prod_option_code" property="orderProdOptionCode"/>
+        <result column="prod_code" property=""
+    </resultMap>
+
+    <select id="checkOrderList" resultMap="resultOrderDeliveryList">
+        SELECT
+            order_code
+            , user_code
+            , order_date
+        FROM
+            tbl_order
+        WHERE
+            order_status = '주문확인'
+        ORDER BY
+            order_code;
+    </select>
+</mapper>
