@@ -33,9 +33,9 @@ class UserMapperTest {
         UserDto user = new UserDto()
                 .builder()
                 .userId("user1")
-                .password("password123")
+                .userPassword("password123")
                 .build();
-        UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getPassword()));
+        UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getUserPassword()));
         assertThat(userDto).isNotNull();
         assertThat(userDto.getUserId()).isEqualTo(user.getUserId()).isNotNull();
     }
@@ -48,9 +48,9 @@ class UserMapperTest {
                 .isEqualTo(userMapper.getAllUser())
                 .allSatisfy(userDto -> {
                     assertThat(userDto.getUserId()).isNotNull();
-                    assertThat(userDto.getPassword()).isNotNull();
+                    assertThat(userDto.getUserPassword()).isNotNull();
                     assertThat(userDto.getUserId()).isNotNull();
-                    assertThat(userDto.getPassword()).isNotNull();
+                    assertThat(userDto.getUserPassword()).isNotNull();
                     assertThat(userDto.getUserName()).isNotNull();
                 });
     }
@@ -60,10 +60,10 @@ class UserMapperTest {
         UserDto user = new UserDto()
                 .builder()
                 .userId("admin2")
-                .password("admin2")
-                .email("email123")
-                .phone("phone123")
-                .address("address123")
+                .userPassword("admin2")
+                .userEmail("email123")
+                .userPhone("phone123")
+                .userAddress("address123")
                 .userType("관리자")
                 .userName("admin")
                 .build();
@@ -71,10 +71,10 @@ class UserMapperTest {
         UserDto user2 = new UserDto()
                 .builder()
                 .userId("admin")
-                .password("admin")
-                .email("email123")
-                .phone("phone123")
-                .address("address123")
+                .userPassword("admin")
+                .userEmail("email123")
+                .userPhone("phone123")
+                .userAddress("address123")
                 .userType("관리자")
                 .userName("admin")
                 .build();

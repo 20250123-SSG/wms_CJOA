@@ -13,7 +13,7 @@ public class UserController {
     private UserService userService = new UserService();
 
     public UserDto getUserByUserIdAndPassword(String id, String password) {
-        return userService.getUserByUserIdAndPassword(Map.of("userId", id, "password", password));
+        return userService.getUserByUserIdAndPassword(Map.of("userId", id, "userPassword", password));
     }
 
     public void getAllUser() {
