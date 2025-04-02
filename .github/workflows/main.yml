@@ -18,7 +18,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }}
-          MYSQL_DATABASE: test_db
+          MYSQL_DATABASE: cjadb
           MYSQL_USER: ${{ secrets.DatabaseId }}
           MYSQL_PASSWORD: ${{ secrets.DatabasePassword }}
         options: >-
@@ -56,7 +56,7 @@ jobs:
 
     - name: Run tests
       env:
-        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/test_db
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cjadb
         SPRING_DATASOURCE_USERNAME: ${{ secrets.DatabaseId }}
         SPRING_DATASOURCE_PASSWORD: ${{ secrets.DatabasePassword }}
       run: ./gradlew test
