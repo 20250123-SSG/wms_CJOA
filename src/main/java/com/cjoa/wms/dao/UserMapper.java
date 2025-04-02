@@ -11,4 +11,6 @@ public interface UserMapper {
     List<UserDto> getAllUser();
 
     int addUser(UserDto user);
+
+    int updateUserByCode(UserDto user);
 }

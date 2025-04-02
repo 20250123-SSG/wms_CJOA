@@ -28,7 +28,6 @@ public class LoginView {
                         break;
                     case "회원":
                         System.out.println("User Login");
-                        adminView.mainView();
                         break;
                     case "창고관리자":
                         System.out.println("WareHouse Admin Login");

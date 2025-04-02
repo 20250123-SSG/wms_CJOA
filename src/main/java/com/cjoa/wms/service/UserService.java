@@ -38,4 +38,18 @@ public class UserService {
         }
         return result;
     }
+
+    public int updateUserByCode(UserDto user) {
+        SqlSession sqlSession = getSqlSession();
+        userMapper = sqlSession.getMapper(UserMapper.class);
+        int result = userMapper.updateUserByCode(user);
+        if (result > 0) {
+            sqlSession.commit();
+            System.out.println("completely update user");
+        } else {
+            sqlSession.rollback();
+            System.out.println("rollback");
+        }
+        return result;
+    }
 }
