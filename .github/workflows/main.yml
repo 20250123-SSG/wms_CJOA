@@ -17,10 +17,10 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }} # 루트 비밀번호
-          MYSQL_DATABASE: test_db # 생성할 데이터베이스 이름
-          MYSQL_USER: ${{ secrets.DatabaseId }} # 사용자 이름
-          MYSQL_PASSWORD: ${{ secrets.DatabasePassword }} # 사용자 비밀번호
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }}
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: ${{ secrets.DatabaseId }}
+          MYSQL_PASSWORD: ${{ secrets.DatabasePassword }}
         options: >-
           --health-cmd="mysqladmin ping -h localhost --silent"
           --health-interval=10s
@@ -39,6 +39,16 @@ jobs:
       run: |
         mkdir -p ./src/main/resources/config && \
         echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
+    - name: Wait for MySQL to be ready
+      run: |
+        for i in {1..30}; do
+          if mysqladmin ping -h mysql --silent; then
+            echo "MySQL is up!"
+            break
+          fi
+          echo "Waiting for MySQL..."
+          sleep 5
+        done
     - name: wrap Gradle
       run: gradle wrapper
     - name: Build With Gradle
@@ -46,7 +56,7 @@ jobs:
 
     - name: Run tests
       env:
-        SPRING_DATASOURCE_URL: jdbc:mysql://ssg-7.iptime.org:3306/cjadb
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/test_db
         SPRING_DATASOURCE_USERNAME: ${{ secrets.DatabaseId }}
         SPRING_DATASOURCE_PASSWORD: ${{ secrets.DatabasePassword }}
-      run: ./gradlew test 
+      run: ./gradlew test
