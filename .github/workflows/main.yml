@@ -56,7 +56,8 @@ jobs:
 
     - name: Run tests
       env:
-        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }} # 루트 비밀번호
+        MYSQL_DATABASE: test_db # 생성할 데이터베이스 이름
         SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cjadb
         SPRING_DATASOURCE_USERNAME: ${{ secrets.DatabaseId }}
         SPRING_DATASOURCE_PASSWORD: ${{ secrets.DatabasePassword }}
