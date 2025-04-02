@@ -1,6 +1,7 @@
 package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.UserController;
+import com.cjoa.wms.dto.UserDto;
 
 import java.util.Scanner;
 
@@ -58,6 +59,7 @@ public class AdminView {
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
+                    userController.addUser(addUserForm());
                     break;
                 case "2":
                     userController.getAllUser();
@@ -70,5 +72,35 @@ public class AdminView {
                     return;
             }
         }
+    }
+
+    private UserDto addUserForm() {
+        System.out.print("유저 아이디 입력: ");
+        String userId = sc.nextLine();
+        System.out.print("유저 비밀번호 입력: ");
+        String password = sc.nextLine();
+        System.out.print("유저 이메일 입력: ");
+        String email = sc.nextLine();
+        System.out.print("유저 전화번호 입력: ");
+        String phone = sc.nextLine();
+        System.out.print("유저 주소 입력: ");
+        String address = sc.nextLine();
+        System.out.print("유저 타입 입력(회원, 관리자, 창고관리자): ");
+        String userType = sc.nextLine();
+        System.out.print("유저 이름 입력: ");
+        String userName = sc.nextLine();
+
+        UserDto userDto = new UserDto()
+                .builder()
+                .userId(userId)
+                .password(password)
+                .email(email)
+                .phone(phone)
+                .address(address)
+                .userType(userType)
+                .userName(userName)
+                .build();
+
+        return userDto;
     }
 }

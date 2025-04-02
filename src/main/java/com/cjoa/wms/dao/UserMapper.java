@@ -9,4 +9,6 @@ public interface UserMapper {
     UserDto getUserByUserIdAndPassword(Map<String, String> paramMap);
 
     List<UserDto> getAllUser();
+
+    int addUser(UserDto user);
 }

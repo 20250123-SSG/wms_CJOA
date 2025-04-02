@@ -24,4 +24,16 @@ public class UserService {
         userMapper = sqlSession.getMapper(UserMapper.class);
         return userMapper.getAllUser();
     }
+
+    public int addUser(UserDto user) {
+        SqlSession sqlSession = getSqlSession();
+        userMapper = sqlSession.getMapper(UserMapper.class);
+        int result = userMapper.addUser(user);
+        if (result > 0) {
+            sqlSession.commit();
+        }else {
+            sqlSession.rollback();
+        }
+        return result;
+    }
 }

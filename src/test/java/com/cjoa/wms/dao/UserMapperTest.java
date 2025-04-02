@@ -54,4 +54,31 @@ class UserMapperTest {
                     assertThat(userDto.getUserName()).isNotNull();
                 });
     }
+
+    @Test
+    void testAddUser() {
+        UserDto user = new UserDto()
+                .builder()
+                .userId("admin2")
+                .password("admin2")
+                .email("email123")
+                .phone("phone123")
+                .address("address123")
+                .userType("관리자")
+                .userName("admin")
+                .build();
+
+        UserDto user2 = new UserDto()
+                .builder()
+                .userId("admin")
+                .password("admin")
+                .email("email123")
+                .phone("phone123")
+                .address("address123")
+                .userType("관리자")
+                .userName("admin")
+                .build();
+
+        assertThat(userMapper.addUser(user)).isEqualTo(userMapper.addUser(user2));
+    }
 }
