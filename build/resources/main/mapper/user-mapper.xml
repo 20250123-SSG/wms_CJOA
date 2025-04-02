@@ -65,4 +65,19 @@
             , #{userName}
             )
     </insert>
+
+    <update id="updateUserByCode" parameterType="User">
+        UPDATE
+            tbl_user
+        SET
+              user_id = #{userId}
+            , user_password = #{password}
+            , user_email = #{email}
+            , user_phone = #{phone}
+            , user_address = #{address}
+            , user_type = #{userType}
+            , user_name = #{userName}
+        WHERE
+            user_code = #{userCode}
+    </update>
 </mapper>

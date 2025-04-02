@@ -62,8 +62,10 @@ public class AdminView {
                     userController.addUser(addUserForm());
                     break;
                 case "2":
+                    userController.getAllUser();
                     break;
                 case "3":
+                    userController.updateUserByCode(inputCode());
                     break;
                 case "4":
                     break;
@@ -71,6 +73,15 @@ public class AdminView {
                     return;
             }
         }
+    }
+
+    private UserDto inputCode() {
+        System.out.print("수정을 원하는 유저의 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+        UserDto userDto = addUserForm();
+        userDto.setUserCode(Integer.parseInt(code));
+        System.out.println(userDto.toString());
+        return userDto;
     }
 
     private UserDto addUserForm() {
