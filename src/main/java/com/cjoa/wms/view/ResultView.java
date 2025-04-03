@@ -20,4 +20,12 @@ public class ResultView {
             System.out.println("data is null");
         }
     }
+
+    public static void SuccessView(String type) {
+        System.out.println(type + " is Success");
+    }
+
+    public static void FailView(String type) {
+        System.out.println(type + " is Fail");
+    }
 }
