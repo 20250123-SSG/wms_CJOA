@@ -27,6 +27,13 @@ jobs:
           --health-retries=5
 
     steps:
+      - name: Setup MySQL
+        uses: samin/mysql-action@v1
+        with:
+          character set server: 'utf8' 
+          mysql database: test_db 
+          mysql user: ${{ secrets.DatabaseId }}
+          mysql password: ${{ secrets.DatabasePassword }}
       - name: make connection-config.properties
         run: |
           mkdir -p ./src/main/resources/config && \
@@ -47,12 +54,5 @@ jobs:
         run: gradle wrapper
       - name: Build With Gradle
         run: ./gradlew build
-
       - name: Run tests
         run: ./gradlew test
-        env:
-          DB_HOST: ssg-7.iptime.org
-          DB_PORT: 3306
-          DB_USER: ${{ secrets.DATABASEID}}
-          DB_PASSWORD: ${{ secrets.DATABASEID}}
-          DB_NAME: cjadb
