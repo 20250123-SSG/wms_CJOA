@@ -26,4 +26,11 @@
         WHERE
             category_code = #{categoryCode}
     </update>
+    <select id="getAllCategory" resultMap="categoryResultMap">
+        SELECT
+              category_code
+            , category_name
+        FROM
+            tbl_category
+    </select>
 </mapper>
