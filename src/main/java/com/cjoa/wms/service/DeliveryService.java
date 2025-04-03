@@ -3,7 +3,6 @@ package com.cjoa.wms.service;
 import com.cjoa.wms.dao.DeliveryMapper;
 import com.cjoa.wms.dto.OrderDeliveryDto;
 import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
-import com.cjoa.wms.view.DeliveryMenuView;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -27,19 +26,6 @@ public class DeliveryService {
         List<OrderProdOptionDeliveryDto> list = deliveryMapper.checkOrderDetail(code);
         sqlSession.close();
         return list;
-    }
-
-    public int insertDeliveryByOrder(List<OrderProdOptionDeliveryDto> orderDetail) {
-        SqlSession sqlSession = getSqlSession();
-        deliveryMapper = sqlSession.getMapper(DeliveryMapper.class);
-        int result = deliveryMapper.insertDeliveryByOrder(orderDetail);
-        if (result > 0) {
-            sqlSession.commit();
-        } else {
-            sqlSession.rollback();
-        }
-        sqlSession.close();
-        return result;
     }
 
     public int productDeliveryProcess(List<OrderProdOptionDeliveryDto> orderDetail, int orderCode) {

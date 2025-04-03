@@ -1,7 +1,6 @@
 package com.cjoa.wms.view;
 
 import com.cjoa.wms.dto.OrderDeliveryDto;
-import com.cjoa.wms.dto.OrderDto;
 import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
 
 import java.util.List;
