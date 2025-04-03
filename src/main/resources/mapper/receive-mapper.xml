@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.ReceiveMapper">
+    <resultMap id="receiveResultMap" type="Receive">
+        <id column="receive_code" property="receiveCode"/>
+        <result column="user_code" property="userCode"/>
+        <result column="receive_time" property="receiveTime"/>
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="receive_quantity" property="receiveQuantity"/>
+        <result column="origin_price" property="originPrice"/>
+
+    </resultMap>
+    <select id="receiveSearchAll" resultMap="receiveResultMap">
+        SELECT
+        receive_code
+        , user_code
+        ,receive_time
+        ,prod_option_code
+        ,receive_quantity
+        ,origin_price
+        FROM
+        tbl_receive
+        ORDER BY receive_time desc
+    </select>
+
+    <select id="receiveSearchByCode" resultMap="receiveResultMap">
+        SELECT
+        receive_code
+        , user_code
+        ,receive_time
+        ,prod_option_code
+        ,receive_quantity
+        ,origin_price
+        FROM
+        tbl_receive
+        WHERE
+        receive_code = #{receive_code}
+    </select>
+
+    <select id="receiveSearchByDate" parameterType="map" resultMap="receiveResultMap">
+        SELECT
+        receive_code
+        , user_code
+        ,receive_time
+        ,prod_option_code
+        ,receive_quantity
+        ,origin_price
+        FROM
+        tbl_receive
+        WHERE <![CDATA[ receive_time >= #{startTime}
+        AND receive_time < #{nextDayEndTime} ]]>
+        ORDER BY receive_time desc
+
+    </select>
+
+
+</mapper>
