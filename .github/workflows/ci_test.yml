@@ -55,4 +55,4 @@ jobs:
           DB_PORT: 3306
           DB_USER: ${{ secrets.DATABASEID}}
           DB_PASSWORD: ${{ secrets.DATABASEID}}
-          DB_NAME: test_db
+          DB_NAME: cjadb
