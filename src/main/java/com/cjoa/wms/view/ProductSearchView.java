@@ -1,0 +1,79 @@
+package com.cjoa.wms.view;
+
+import com.cjoa.wms.controller.UserMainController;
+
+import java.util.Scanner;
+
+public class ProductSearchView {
+
+    private UserMainController userMainController = new UserMainController();
+    private Scanner sc = new Scanner(System.in);
+
+    public void productSearchMenu(){
+
+
+        System.out.print("""
+                \n===== 검색 ==================
+                1. 상품 목록 조회
+                2. 카테고리 코드로 상품 조회
+                3. 상품 키워드 검색
+                0. 뒤로가기
+                =============================
+                >> 입력:"""
+        );
+        String menu = sc.nextLine();
+
+        switch (menu){
+            case "1": selectAllProduct(); break;
+            case "2": selectProductByCategory(); break;
+            case "3": selectProductByKeyword(); break;
+            case "0": return;
+            default:
+                System.out.println("메뉴 번호를 잘못 입력하셨습니다😥");
+        }
+
+    }
+
+    public String inputCode(String type){
+        System.out.printf("\n>> %s 입력: ", type);
+        return sc.nextLine();
+    }
+
+    // 상품 조회
+    public void selectAllProduct(){
+        userMainController.selectProductList();
+
+        prodOptionView();
+    }
+
+    // 카테고리 조회
+    public void selectProductByCategory(){
+        userMainController.selectProductListByCategoryCode(inputCode("카테고리코드"));
+        prodOptionView();
+    }
+
+    // 키워드 조회
+    public void selectProductByKeyword() {
+        userMainController.selectProductListByKeyword(inputCode("키워드"));
+        prodOptionView();
+    }
+
+    // 상품 상세 정보 조회
+    public void prodOptionView() {
+        System.out.print("""
+                \n=========================================================================
+                상세 정보를 보고 싶은 상품 번호를 입력하세요 (0을 입력하면 돌아갑니다)
+                =========================================================================
+                >> 입력:"""
+        );
+        String code = sc.nextLine();
+
+        if (code.equals("0")) {
+            return; // 0을 입력하면 돌아갑니다.
+        }
+        userMainController.selectProductOptionByProdCode(code);
+
+    }
+
+
+}
