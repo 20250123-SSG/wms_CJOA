@@ -37,6 +37,8 @@ jobs:
 
       # - name: Build with Gradle
       #   run: ./gradlew build
+      - name: gradlew 권한부여
+        run: chmod +x gradlew
       - name: wrap Gradle
         run: gradle wrapper
       - name: Build With Gradle
