@@ -6,7 +6,7 @@ public class WarehouseManagerView {
     Scanner sc = new Scanner(System.in);
     DeliveryMenuView deliveryMenuView = new DeliveryMenuView();
 
-    public void warehouseMangerMenu(){ // 창고관리자 메뉴화면
+    public void warehouseMangerMenu(int code){ // 창고관리자 메뉴화면
 
         while (true) {
             System.out.print("""
@@ -24,7 +24,7 @@ public class WarehouseManagerView {
                 case "1":
                     break;
                 case "2":
-                    deliveryMenuView.deliveryMenu();
+                    deliveryMenuView.deliveryMenu(code);
                     break;
                 case "3":
                     break;

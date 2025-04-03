@@ -12,9 +12,9 @@ public class DeliveryMenuView {
 
     public static int userCode;
 
-    public void deliveryMenu(){ // 창고관리자 메뉴화면
+    public void deliveryMenu(int code){ // 창고관리자 메뉴화면
 
-        userCode = 4; // 로그인후 계정 코드 불러오기
+        userCode = code; // 로그인후 계정 코드 불러오기
 
         while (true) {
             System.out.print("""
@@ -41,7 +41,7 @@ public class DeliveryMenuView {
         }
     }
 
-    public void checkOrderList(){
+    private void checkOrderList(){
         System.out.println("\n========= 주문확인 및 출고 =========");
         while (true) {
             // 미출고 주문 리스트 호출
