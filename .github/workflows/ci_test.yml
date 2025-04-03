@@ -27,6 +27,10 @@ jobs:
           --health-retries=5
 
     steps:
+      - name: make connection-config.properties
+        run: |
+          mkdir -p ./src/main/resources/config && \
+          echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up JDK 17
