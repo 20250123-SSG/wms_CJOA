@@ -32,6 +32,7 @@ jobs:
         run: |
           mkdir -p ./src/main/resources/config
           touch ./connection-config.properties
+          ls -al
           echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
       - name: Checkout code
         uses: actions/checkout@v4
