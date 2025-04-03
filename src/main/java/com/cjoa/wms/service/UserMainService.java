@@ -22,4 +22,30 @@ public class UserMainService {
         return list;
 
     }
+
+    public List<ProductDto> selectProductListByCategoryCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        List<ProductDto> list = productMapper.selectProductByCategory(code);
+        sqlSession.close();
+        return list;
+    }
+
+    public List<ProductDto> selectProductListByKeyword(String key) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        List<ProductDto> list = productMapper.selectProductByProdKeyword(key);
+        sqlSession.close();
+        return list;
+    }
+
+    public List<ProductDto> selectProductOptionListByProdCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        List<ProductDto> list = productMapper.selectProductOptionListByProdCode(code);
+        sqlSession.close();
+        return list;
+    }
+
+
 }

@@ -14,4 +14,19 @@ public class UserMainController {
         List<ProductDto> list =userMainService.selectProductList();
         ResultMainView.displayProductList(list);
     }
+
+    public void selectProductListByCategoryCode(String code) {
+        List<ProductDto> list = userMainService.selectProductListByCategoryCode(Integer.parseInt(code));
+        ResultMainView.displayProductList(list);
+    }
+
+    public void selectProductListByKeyword(String key) {
+        List<ProductDto> list = userMainService.selectProductListByKeyword(key);
+        ResultMainView.displayProductList(list);
+    }
+
+    public void selectProductOptionByProdCode(String code) {
+        List<ProductDto> list = userMainService.selectProductOptionListByProdCode(Integer.parseInt(code));
+        ResultMainView.displayProductOptionList(list);
+    }
 }

@@ -6,39 +6,57 @@ import java.util.Scanner;
 
 public class UserMainView {
 
-private UserMainController userMainController = new UserMainController();
-private Scanner sc = new Scanner(System.in);
+    private UserMainController userMainController = new UserMainController();
+    private Scanner sc = new Scanner(System.in);
 
-public void userMainView() {
-    while(true){
-        System.out.print("""
-                \n=====================
-                1. 상품 목록 조회
-                2. 카테고리 상품 조회
-                3. 상품 검색
-                4. 장바구니
-                5. 구매 내역 조회
-                6. 개인 정보 조회
-                7. EXIT
-                =====================
-                > 입력:""");
+    public void userMainView() {
+        while(true){
+            System.out.print("""
+                    \n=====================
+                    1. 검색
+                    2. 장바구니
+                    3. 구매 내역 조회
+                    4. 개인 정보 조회
+                    0. EXIT
+                    =====================
+                    > 입력:""");
 
-        String menu = sc.nextLine();
-        switch (menu){
-            case "1": userMainController.selectProductList(); break;
-            case "2": break;
-            case "3": break;
-            case "4": break;
-            case "5": break;
-            case "6": break;
-            case "0": break;
-            default:
-                System.out.println("메뉴 번호를 잘못 입력하셨습니다😥");
+            String menu = sc.nextLine();
+            switch (menu){
+                case "1": new ProductSearchView().productSearchMenu();  break;
+                case "2": break;
+                case "3": break;
+                case "4": break;
+                case "0": return;
+                default:
+                    System.out.println("메뉴 번호를 잘못 입력하셨습니다😥");
+            }
+
         }
-
-
     }
-}
+
+    public void prodOptionView(){}
+
+
+
+    // 상품 상세 옵션 => 장바구니 선택
+    public void prodUpdateInCart() {
+        while (true){
+
+            System.out.print("1.장바구니\t");
+            System.out.print("0.뒤로가기\n");
+            System.out.print(">> 메뉴번호입력:");
+            String num = sc.nextLine();
+            switch (num) {
+                case "1": break;
+                case "0": return;
+            }
+        }
+    }
+
+
+
+
 
 
 }
