@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
@@ -32,10 +33,52 @@ class UserMapperTest {
         UserDto user = new UserDto()
                 .builder()
                 .userId("user1")
-                .password("password123")
+                .userPassword("password123")
                 .build();
-        UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getPassword()));
+        UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getUserPassword()));
         assertThat(userDto).isNotNull();
         assertThat(userDto.getUserId()).isEqualTo(user.getUserId()).isNotNull();
+    }
+
+    @Test
+    void testGetAllUser() {
+        List<UserDto> list = userMapper.getAllUser();
+        assertThat(list)
+                .isNotNull()
+                .isEqualTo(userMapper.getAllUser())
+                .allSatisfy(userDto -> {
+                    assertThat(userDto.getUserId()).isNotNull();
+                    assertThat(userDto.getUserPassword()).isNotNull();
+                    assertThat(userDto.getUserId()).isNotNull();
+                    assertThat(userDto.getUserPassword()).isNotNull();
+                    assertThat(userDto.getUserName()).isNotNull();
+                });
+    }
+
+    @Test
+    void testAddUser() {
+        UserDto user = new UserDto()
+                .builder()
+                .userId("admin2")
+                .userPassword("admin2")
+                .userEmail("email123")
+                .userPhone("phone123")
+                .userAddress("address123")
+                .userType("관리자")
+                .userName("admin")
+                .build();
+
+        UserDto user2 = new UserDto()
+                .builder()
+                .userId("admin")
+                .userPassword("admin")
+                .userEmail("email123")
+                .userPhone("phone123")
+                .userAddress("address123")
+                .userType("관리자")
+                .userName("admin")
+                .build();
+        sqlSession.commit();
+        assertThat(userMapper.addUser(user)).isEqualTo(userMapper.addUser(user2));
     }
 }
