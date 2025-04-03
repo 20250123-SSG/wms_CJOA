@@ -31,7 +31,8 @@ jobs:
     steps:
       - name: make connection-config.properties
         run: |
-          mkdir -p ./src/main/resources/config && \
+          mkdir -p ./src/main/resources/config
+          touch ./connection-config.properties
           echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
       - name: Checkout code
         uses: actions/checkout@v4
