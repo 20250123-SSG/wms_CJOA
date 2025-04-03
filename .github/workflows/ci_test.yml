@@ -35,6 +35,11 @@ jobs:
           ls -al
           pwd
           echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
+          mkdir -p ./src/test/resources/config
+          touch ./src/test/resources/config/connection-config.properties
+          ls -al
+          pwd
+          echo "${{ secrets.CONNECTION }}" > ./src/test/resources/config/connection-config.properties
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Grant execute permission for gradlew
