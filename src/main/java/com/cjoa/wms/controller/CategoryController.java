@@ -1,7 +1,6 @@
 package com.cjoa.wms.controller;
 
 import com.cjoa.wms.dto.CategoryDto;
-import com.cjoa.wms.dto.UserDto;
 import com.cjoa.wms.service.CategoryService;
 
 public class CategoryController {

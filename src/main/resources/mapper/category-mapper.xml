@@ -18,4 +18,12 @@
             #{categoryName}
             )
     </insert>
+    <update id="updateCategoryByCode" parameterType="Category">
+        UPDATE
+            tbl_category
+        SET
+            category_name = #{categoryName}
+        WHERE
+            category_code = #{categoryCode}
+    </update>
 </mapper>

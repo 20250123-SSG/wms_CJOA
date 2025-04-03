@@ -17,10 +17,10 @@ public class CategoryService {
         int result = categoryMapper.addCategory(categoryDto);
         if (result > 0) {
             sqlSession.commit();
-            SuccessView("update");
+            SuccessView("addCategory");
         } else{
             sqlSession.rollback();
-            FailView("update");
+            FailView("addCategory");
         }
         return result;
     }
