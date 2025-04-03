@@ -71,7 +71,7 @@ public class AdminView {
                     categoryController.updateCategoryByCode(inputCategoryCode());
                     break;
                 case "4":
-//                    categoryController.deleteCategoryByCode(inputDeleteCode());
+                    categoryController.deleteCategoryByCode(inputDeleteCategoryCode());
                     break;
                 case "0":
                     return;
@@ -173,5 +173,11 @@ public class AdminView {
         CategoryDto categoryDto = addCategoryForm();
         categoryDto.setCategoryCode(Integer.parseInt(code));
         return categoryDto;
+    }
+
+    private String inputDeleteCategoryCode() {
+        System.out.print("삭제를 원하는 카테고리의 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+        return code;
     }
 }
