@@ -31,8 +31,6 @@ jobs:
     steps:
       - name: make connection-config.properties
         run: |
-          cd ./src/main/resources
-          rm ./application.properties
           mkdir -p ./src/main/resources/config
           touch ./connection-config.properties
           echo "${{ secrets.CONNECTION }}" > ./src/main/resources/config/connection-config.properties
