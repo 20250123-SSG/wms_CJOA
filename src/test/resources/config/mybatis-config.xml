@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+    <properties resource="config/connection-config.properties"/>
+    <typeAliases>
+        <typeAlias type="com.cjoa.wms.dto.UserDto" alias="User"/>
+        <typeAlias type="com.cjoa.wms.dto.OrderDto" alias="Order"/>
+        <typeAlias type="com.cjoa.wms.dto.OrderDeliveryDto" alias="OrderDelivery"/>
+        <typeAlias type="com.cjoa.wms.dto.DeliveryDto" alias="Delivery"/>
+        <typeAlias type="com.cjoa.wms.dto.OrderProdOptionDeliveryDto" alias="OrderProdOptionDelivery"/>
+        <typeAlias type="com.cjoa.wms.dto.CategoryDto" alias="Category"/>
+    </typeAliases>
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/user-mapper.xml"/>
+        <mapper resource="mapper/delivery-mapper.xml"/>
+        <mapper resource="mapper/category-mapper.xml"/>
+    </mappers>
+</configuration>
