@@ -31,7 +31,17 @@ application.yml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
+# Gradle
+.gradle
+/build/
+.gradletasknamecache
+.idea/**/gradle.xml
+.idea/**/libraries
+
 # Gradle
+.gradle/
+build/
+.gradletasknamecache
 .idea/**/gradle.xml
 .idea/**/libraries
 

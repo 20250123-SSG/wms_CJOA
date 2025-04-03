@@ -1,6 +1,8 @@
 package com.cjoa.wms.view;
 
+import com.cjoa.wms.controller.CategoryController;
 import com.cjoa.wms.controller.UserController;
+import com.cjoa.wms.dto.CategoryDto;
 import com.cjoa.wms.dto.UserDto;
 
 import java.util.Scanner;
@@ -9,6 +11,7 @@ public class AdminView {
 
     private UserController userController = new UserController();
     private Scanner sc = new Scanner(System.in);
+    private CategoryController categoryController = new CategoryController();
 
     public void mainView() {
         while (true) {
@@ -59,7 +62,7 @@ public class AdminView {
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
-//                    categoryController.addCategory(addUserForm());
+                    categoryController.addCategory(addCategoryForm());
                     break;
                 case "2":
 //                    categoryController.getAllCategory();
@@ -150,5 +153,17 @@ public class AdminView {
                 .build();
 
         return userDto;
+    }
+
+    private CategoryDto addCategoryForm() {
+        System.out.print("카테고리명 입력: ");
+        String categoryName = sc.nextLine();
+
+        CategoryDto categoryDto = new CategoryDto()
+                .builder()
+                .categoryName(categoryName)
+                .build();
+
+        return categoryDto;
     }
 }
