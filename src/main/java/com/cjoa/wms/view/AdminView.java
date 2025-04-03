@@ -28,7 +28,7 @@ public class AdminView {
                     UserManagerView();
                     break;
                 case "2":
-//                    CategoryManageView();
+                    CategoryManageView();
                     break;
                 case "3":
 //                    ProductManageView();
@@ -38,6 +38,37 @@ public class AdminView {
                     break;
                 case "5":
 //                    RevenueView();
+                    break;
+                case "0":
+                    return;
+            }
+        }
+    }
+
+    private void CategoryManageView() {
+        while (true) {
+            System.out.print("""
+                    \n===============================
+                    1. 카테고리 생성
+                    2. 카테고리 조회
+                    3. 카테고리 수정
+                    4. 카테고리 삭제
+                    0. 이전 메뉴로 돌아가기
+                    ===============================
+                    """);
+            String menu = sc.nextLine();
+            switch (menu) {
+                case "1":
+//                    categoryController.addCategory(addUserForm());
+                    break;
+                case "2":
+//                    categoryController.getAllCategory();
+                    break;
+                case "3":
+//                    categoryController.updateCategoryByCode(inputCode());
+                    break;
+                case "4":
+//                    categoryController.deleteCategoryByCode(inputDeleteCode());
                     break;
                 case "0":
                     return;

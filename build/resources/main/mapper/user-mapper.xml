@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.UserMapper">
+    <resultMap id="userResultMap" type="User">
+        <id column="user_code" property="userCode"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_email" property="userEmail"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_address" property="userAddress"/>
+        <result column="user_type" property="userType"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+    <select id="getUserByUserIdAndPassword" parameterType="map" resultMap="userResultMap">
+        SELECT
+              user_code
+            , user_id
+            , user_password
+            , user_email
+            , user_phone
+            , user_address
+            , user_type
+            , user_name
+        FROM
+            tbl_user
+        WHERE
+            user_id = #{userId}
+            AND user_password = #{userPassword}
+    </select>
+    <select id="getAllUser" resultMap="userResultMap">
+        SELECT
+        user_code
+        , user_id
+        , user_password
+        , user_email
+        , user_phone
+        , user_address
+        , user_type
+        , user_name
+        FROM
+        tbl_user
+    </select>
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="userCode">
+        INSERT INTO
+            tbl_user
+            (
+              user_id
+            , user_password
+            , user_email
+            , user_phone
+            , user_address
+            , user_type
+            , user_name
+            )
+        VALUES
+            (
+              #{userId}
+            , #{userPassword}
+            , #{userEmail}
+            , #{userPhone}
+            , #{userAddress}
+            , #{userType}
+            , #{userName}
+            )
+    </insert>
+
+    <update id="updateUserByCode" parameterType="User">
+        UPDATE
+            tbl_user
+        SET
+              user_id = #{userId}
+            , user_password = #{userPassword}
+            , user_email = #{userEmail}
+            , user_phone = #{userPhone}
+            , user_address = #{userAddress}
+            , user_type = #{userType}
+            , user_name = #{userName}
+        WHERE
+            user_code = #{userCode}
+    </update>
+    <delete id="deleteUserByCode" parameterType="_int">
+        DELETE
+        FROM
+            tbl_user
+        WHERE
+            user_code = #{code}
+    </delete>
+</mapper>
