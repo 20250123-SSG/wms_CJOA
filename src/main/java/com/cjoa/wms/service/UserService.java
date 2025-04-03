@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
+import static com.cjoa.wms.view.ResultView.FailView;
+import static com.cjoa.wms.view.ResultView.SuccessView;
 
 public class UserService {
 
@@ -31,10 +33,10 @@ public class UserService {
         int result = userMapper.addUser(user);
         if (result > 0) {
             sqlSession.commit();
-            System.out.println("completely add user");
+            SuccessView("insert");
         }else {
             sqlSession.rollback();
-            System.out.println("rollback");
+            FailView("insert");
         }
         return result;
     }
@@ -45,10 +47,10 @@ public class UserService {
         int result = userMapper.updateUserByCode(user);
         if (result > 0) {
             sqlSession.commit();
-            System.out.println("completely update user");
+            SuccessView("update");
         } else {
             sqlSession.rollback();
-            System.out.println("rollback");
+            FailView("update");
         }
         return result;
     }
@@ -59,10 +61,10 @@ public class UserService {
         int result = userMapper.deleteUserByCode(code);
         if (result > 0) {
             sqlSession.commit();
-            System.out.println("completely delete user");
+            SuccessView("delete");
         } else {
             sqlSession.rollback();
-            System.out.println("rollback");
+            FailView("delete");
         }
         return result;
     }
