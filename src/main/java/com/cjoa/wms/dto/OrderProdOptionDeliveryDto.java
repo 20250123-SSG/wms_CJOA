@@ -20,4 +20,6 @@ public class OrderProdOptionDeliveryDto {
     private int orderProdOptionQuantity; // 구매수량
     private int stockQuantity; // 재고수량
 
+    private int userCode;
+
 }

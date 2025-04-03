@@ -10,7 +10,12 @@ public class DeliveryMenuView {
     Scanner sc = new Scanner(System.in);
     DeliveryController deliveryController = new DeliveryController();
 
+    public static int userCode;
+
     public void deliveryMenu(){ // 창고관리자 메뉴화면
+
+        userCode = 4; // 로그인후 계정 코드 불러오기
+
         while (true) {
             System.out.print("""
                     \n========= 출고관리 =========
@@ -44,29 +49,25 @@ public class DeliveryMenuView {
             deliveryController.checkOrderList();
 
             System.out.print(">> 출고처리할 주문번호 선택: ");
-            String code = sc.nextLine();
+            String orderCode = sc.nextLine();
 
             // 주문 상세정보 확인
-            System.out.println("\n---- 주문번호 " + code + "번 주문 상세정보 ----");
-            List<OrderProdOptionDeliveryDto> orderDetail = deliveryController.checkOrderDetail(code);
+            System.out.println("\n---- 주문번호 " + orderCode + "번 주문 상세정보 ----");
+            List<OrderProdOptionDeliveryDto> orderDetail = deliveryController.checkOrderDetail(orderCode);
 
-            // 출고처리
-            System.out.println("상품 출고처리 하시겠습니까? (y/n)");
-            System.out.print(">> ");
-            String out = sc.nextLine().toUpperCase();
-            if ("Y".equals(out)) {
-                // 출고 테이블 삽입 (삽입시 정보 입력)
-                int result = deliveryController.insertDeliveryByOrder(orderDetail);
-                if (result > 0) {
-                    System.out.println("성공적으로 출고되었습니다.");
-                    // 주문테이블 상태 변경 (주문확인 -> 출고완료)
+            // 주문번호를 정확히 입력했을 경우 출고처리확인
+            if (!orderDetail.isEmpty()) {
+                System.out.println("상품 출고처리 하시겠습니까? (y/n)");
+                System.out.print(">> ");
+                String out = sc.nextLine().toUpperCase();
 
-                } else {
-                    System.out.println("출고에 실패하였습니다.");
+                if ("Y".equals(out)) {
+                    // 출고 테이블 삽입, 주문테이블 상태 변경, 재고 수량 감소 (트랜잭션)
+                    deliveryController.productDeliveryProcess(orderDetail, userCode, orderCode);
                 }
             }
-                // 뒤로가기
-            System.out.println("상품 출고를 추가로 진행하시겠습니까? (y/n)");
+
+            System.out.println("\n상품 출고를 추가로 진행하시겠습니까? (y/n)");
             System.out.print(">> ");
             String menu = sc.nextLine().toUpperCase();
             switch (menu) {

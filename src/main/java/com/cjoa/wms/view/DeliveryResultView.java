@@ -26,15 +26,27 @@ public class DeliveryResultView {
     }
 
     public static void resultOrderDetail(List<OrderProdOptionDeliveryDto> orderDetail) {
-        for (OrderProdOptionDeliveryDto order : orderDetail) {
-            System.out.printf("[상품상세번호: %d, 상품명: %s, 사이즈: %s, 색상: %s, 수량: %d [상품 현재고: %d]]\n",
-                    order.getProdOptionCode(),
-                    order.getProdName(),
-                    order.getProdSize(),
-                    order.getProdColor(),
-                    order.getOrderProdOptionQuantity(),
-                    order.getStockQuantity()
-            );
+        if (orderDetail.isEmpty()) {
+            System.out.println("없는 주문번호 입니다.");
+        } else {
+            for (OrderProdOptionDeliveryDto order : orderDetail) {
+                System.out.printf("[상품상세번호: %d, 상품명: %s, 사이즈: %s, 색상: %s, 수량: %d [상품 현재고: %d]]\n",
+                        order.getProdOptionCode(),
+                        order.getProdName(),
+                        order.getProdSize(),
+                        order.getProdColor(),
+                        order.getOrderProdOptionQuantity(),
+                        order.getStockQuantity()
+                );
+            }
+        }
+    }
+
+    public static void resultDeliveryProcess(int result) {
+        if (result > 0) {
+            System.out.println("출고가 완료되었습니다.");
+        } else {
+            System.out.println("문제가 발생하였습니다.");
         }
     }
 }

@@ -12,4 +12,8 @@ public interface DeliveryMapper {
     List<OrderProdOptionDeliveryDto> checkOrderDetail(int code);
 
     int insertDeliveryByOrder(List<OrderProdOptionDeliveryDto> orderDetail);
+
+    int updateOrderStatus(int orderCode);
+
+    int updateStockMinus(List<OrderProdOptionDeliveryDto> orderDetail);
 }
