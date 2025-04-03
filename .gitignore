@@ -31,19 +31,15 @@ application.yml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-# Gradle
+# Gradle
 .gradle
 /build/
 .gradletasknamecache
-.idea/**/gradle.xml
-.idea/**/libraries
-
-# Gradle
+.idea//gradle.xml
+.idea//libraries
 .gradle/
 build/
 .gradletasknamecache
-.idea/**/gradle.xml
-.idea/**/libraries
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
