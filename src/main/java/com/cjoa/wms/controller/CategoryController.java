@@ -23,4 +23,8 @@ public class CategoryController {
 
         ResultView.displayData(list);
     }
+
+    public void deleteCategoryByCode(String categoryCode) {
+        int result = categoryService.deleteCategoryByCode(Integer.parseInt(categoryCode));
+    }
 }

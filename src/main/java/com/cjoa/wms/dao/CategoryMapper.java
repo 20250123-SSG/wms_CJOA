@@ -11,4 +11,6 @@ public interface CategoryMapper {
     int updateCategoryByCode(CategoryDto category);
 
     List<CategoryDto> getAllCategory();
+
+    int deleteCategoryByCode(int code);
 }

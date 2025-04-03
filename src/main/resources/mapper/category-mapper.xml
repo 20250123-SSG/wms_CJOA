@@ -33,4 +33,12 @@
         FROM
             tbl_category
     </select>
+
+    <delete id="deleteCategoryByCode" parameterType="_int">
+        DELETE
+        FROM
+            tbl_category
+        WHERE
+            category_code = #{code}
+    </delete>
 </mapper>

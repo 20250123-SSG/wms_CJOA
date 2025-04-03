@@ -54,4 +54,18 @@ public class CategoryService {
         }
         return categoryDtoList;
     }
+
+    public int deleteCategoryByCode(int categoryCode) {
+        sqlSession = getSqlSession();
+        categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        int result = categoryMapper.deleteCategoryByCode(categoryCode);
+        if (result > 0) {
+            sqlSession.commit();
+            SuccessView("deleteCategoryByCode");
+        } else {
+            sqlSession.rollback();
+            FailView("deleteCategoryByCode");
+        }
+        return result;
+    }
 }
