@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cjoa.wms.dao.DeliveryMapper">
+    <resultMap id="resultOrderDeliveryListMap" type="OrderDelivery">
+        <id column="order_code" property="orderCode"/>
+        <result column="user_code" property="userCode"/>
+        <result column="order_pay_type" property="orderPayType"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="order_date" property="orderDate"/>
+        <result column="order_request" property="orderRequest"/>
+        <result column="order_delivery_phone" property="orderDeliveryPhone"/>
+        <result column="order_delivery_address" property="orderDeliveryAddress"/>
+        <result column="order_delivery_name" property="orderDeliveryName"/>
+    </resultMap>
+
+    <resultMap id="resultOrderProdOptionDeliveryMap" type="OrderProdOptionDelivery">
+        <id column="order_prod_option_code" property="orderProdOptionCode"/>
+        <result column="prod_code" property="prodCode"/>
+        <result column="order_code" property="orderCode"/>
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="prod_name" property="prodName"/>
+        <result column="prod_size" property="prodSize"/>
+        <result column="prod_color" property="prodColor"/>
+        <result column="order_prod_option_quantity" property="orderProdOptionQuantity"/>
+        <result column="stock_quantity" property="stockQuantity"/>
+        <result column="user_code" property="userCode"/>
+    </resultMap>
+
+    <select id="checkOrderList" resultMap="resultOrderDeliveryListMap">
+        SELECT
+              o.order_code
+            , o.user_code
+            , o.order_date
+            , d.order_request
+            , d.order_delivery_phone
+            , d.order_delivery_address
+            , d.order_delivery_name
+        FROM
+            tbl_order o
+                JOIN tbl_order_delivery d ON d.order_code = o.order_code
+        WHERE
+            order_status = '주문확인'
+        ORDER BY
+            order_code;
+    </select>
+
+    <select id="checkOrderDetail" parameterType="_int" resultMap="resultOrderProdOptionDeliveryMap">
+        SELECT
+              o.prod_option_code
+            , o.order_code
+            , p.prod_name
+            , po.prod_size
+            , po.prod_color
+            , o.order_prod_option_quantity
+            , s.stock_quantity
+        FROM
+            tbl_order_prod_option o
+                JOIN tbl_prod_option po ON po.prod_option_code = o.prod_option_code
+                JOIN tbl_stock s ON s.stock_option_code = po.prod_option_code
+                JOIN tbl_product p ON p.prod_code = po.prod_code
+        WHERE
+            o.order_prod_option_code = #{code}
+    </select>
+
+    <insert id="insertDeliveryByOrder" parameterType="list">
+        INSERT INTO
+            tbl_delivery
+            (
+              order_code
+            , user_code
+            , prod_option_code
+            , delivery_quantity
+            )
+        VALUES
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.orderCode},
+            #{item.userCode},
+            #{item.prodOptionCode},
+            #{item.orderProdOptionQuantity}
+        </foreach>
+    </insert>
+
+    <update id="updateOrderStatus" parameterType="_int">
+        UPDATE
+            tbl_order
+        SET
+            order_status = "출고완료"
+        WHERE
+            order_code = #{code}
+    </update>
+    
+    <update id="updateStockMinus" parameterType="list">
+        UPDATE
+            tbl_stock
+        SET
+        <foreach collection="list" item="item" >
+            stock_quantity = #{item.stockQuantity}-#{item.orderProdOptionQuantity}
+        WHERE
+            stock_option_code = #{item.prodOptionCode}
+        </foreach>
+    </update>
+</mapper>

@@ -10,6 +10,7 @@ public class LoginView {
     private UserController userController = new UserController();
     private Scanner sc = new Scanner(System.in);
     private AdminView adminView = new AdminView();
+    private WarehouseManagerView warehouseManagerView = new WarehouseManagerView();
 
     public void loginView() {
         while (true) {
@@ -30,7 +31,9 @@ public class LoginView {
                         System.out.println("User Login");
                         break;
                     case "창고관리자":
-                        System.out.println("WareHouse Admin Login");
+                        System.out.println("Warehouse Manager Login");
+                        warehouseManagerView.warehouseMangerMenu(user.getUserCode());
+                        break;
                     default:
                         System.out.println("Invalid User");
                         break;
