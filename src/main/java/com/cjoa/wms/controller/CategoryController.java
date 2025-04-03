@@ -10,4 +10,8 @@ public class CategoryController {
     public void addCategory(CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
     }
+
+    public void updateCategoryByCode(CategoryDto categoryDto) {
+        categoryService.updateCategoryByCode(categoryDto);
+    }
 }

@@ -4,4 +4,5 @@ import com.cjoa.wms.dto.CategoryDto;
 
 public interface CategoryMapper {
     int addCategory(CategoryDto category);
+    int updateCategoryByCode(CategoryDto category);
 }

@@ -11,6 +11,7 @@ import static com.cjoa.wms.view.ResultView.SuccessView;
 public class CategoryService {
     private CategoryMapper categoryMapper;
     private SqlSession sqlSession;
+
     public int addCategory(CategoryDto categoryDto) {
         sqlSession = getSqlSession();
         categoryMapper = sqlSession.getMapper(CategoryMapper.class);
@@ -18,9 +19,24 @@ public class CategoryService {
         if (result > 0) {
             sqlSession.commit();
             SuccessView("addCategory");
-        } else{
+        } else {
             sqlSession.rollback();
             FailView("addCategory");
+        }
+        return result;
+    }
+
+    public int updateCategoryByCode(CategoryDto categoryDto) {
+        sqlSession = getSqlSession();
+        categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        int result = categoryMapper.updateCategoryByCode(categoryDto);
+
+        if (result > 0) {
+            sqlSession.commit();
+            SuccessView("updateCategoryByCode");
+        } else {
+            sqlSession.rollback();
+            FailView("updateCategoryByCode");
         }
         return result;
     }

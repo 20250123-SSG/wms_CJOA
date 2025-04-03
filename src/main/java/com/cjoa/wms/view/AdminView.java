@@ -68,7 +68,7 @@ public class AdminView {
 //                    categoryController.getAllCategory();
                     break;
                 case "3":
-//                    categoryController.updateCategoryByCode(inputCode());
+                    categoryController.updateCategoryByCode(inputCategoryCode());
                     break;
                 case "4":
 //                    categoryController.deleteCategoryByCode(inputDeleteCode());
@@ -164,6 +164,14 @@ public class AdminView {
                 .categoryName(categoryName)
                 .build();
 
+        return categoryDto;
+    }
+
+    private CategoryDto inputCategoryCode() {
+        System.out.print("수정을 원하는 카테고리의 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+        CategoryDto categoryDto = addCategoryForm();
+        categoryDto.setCategoryCode(Integer.parseInt(code));
         return categoryDto;
     }
 }
