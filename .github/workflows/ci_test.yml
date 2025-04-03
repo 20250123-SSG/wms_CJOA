@@ -41,5 +41,10 @@ jobs:
         run: chmod +x gradlew
       - name: Build With Gradle
         run: ./gradlew build
+      - name: Handle build failure
+        if: ${{ failure() }}
+        run: |
+          echo "@@@@show fail log@@@@"
+          cat /home/runner/work/wms_CJOA/wms_CJOA/build/reports/tests/test/index.html
       # - name: Run tests
       #   run: ./gradlew --scan test
