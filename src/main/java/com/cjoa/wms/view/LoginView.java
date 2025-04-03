@@ -11,6 +11,7 @@ public class LoginView {
     private Scanner sc = new Scanner(System.in);
     private AdminView adminView = new AdminView();
     private WarehouseManagerView warehouseManagerView = new WarehouseManagerView();
+    public static int userCode;
 
     public void loginView() {
         while (true) {
@@ -19,6 +20,7 @@ public class LoginView {
             System.out.print("Enter Password: ");
             String password = sc.nextLine();
             UserDto user = userController.getUserByUserIdAndPassword(id, password);
+            userCode = user.getUserCode();
 
             if (user != null) {
                 System.out.println("Login Successful");
