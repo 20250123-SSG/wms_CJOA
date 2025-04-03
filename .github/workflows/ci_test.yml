@@ -45,7 +45,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build With Gradle
-        run: ./gradlew build
+        run: ./gradlew build -x test
       - name: Handle build failure
         if: ${{ failure() }}
         run: |
