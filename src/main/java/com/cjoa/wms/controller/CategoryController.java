@@ -2,6 +2,9 @@ package com.cjoa.wms.controller;
 
 import com.cjoa.wms.dto.CategoryDto;
 import com.cjoa.wms.service.CategoryService;
+import com.cjoa.wms.view.ResultView;
+
+import java.util.List;
 
 public class CategoryController {
 
@@ -13,5 +16,11 @@ public class CategoryController {
 
     public void updateCategoryByCode(CategoryDto categoryDto) {
         categoryService.updateCategoryByCode(categoryDto);
+    }
+
+    public void getAllCategory() {
+        List<CategoryDto> list = categoryService.getAllCategory();
+
+        ResultView.displayData(list);
     }
 }

@@ -4,6 +4,8 @@ import com.cjoa.wms.dao.CategoryMapper;
 import com.cjoa.wms.dto.CategoryDto;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
+
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
 import static com.cjoa.wms.view.ResultView.FailView;
 import static com.cjoa.wms.view.ResultView.SuccessView;
@@ -39,5 +41,17 @@ public class CategoryService {
             FailView("updateCategoryByCode");
         }
         return result;
+    }
+
+    public List<CategoryDto> getAllCategory() {
+        sqlSession = getSqlSession();
+        categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<CategoryDto> categoryDtoList = categoryMapper.getAllCategory();
+        if (categoryDtoList != null && categoryDtoList.size() > 0) {
+            SuccessView("getAllCategory");
+        } else {
+            FailView("getAllCategory");
+        }
+        return categoryDtoList;
     }
 }

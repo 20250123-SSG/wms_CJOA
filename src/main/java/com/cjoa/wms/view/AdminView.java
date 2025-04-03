@@ -65,7 +65,7 @@ public class AdminView {
                     categoryController.addCategory(addCategoryForm());
                     break;
                 case "2":
-//                    categoryController.getAllCategory();
+                    categoryController.getAllCategory();
                     break;
                 case "3":
                     categoryController.updateCategoryByCode(inputCategoryCode());
