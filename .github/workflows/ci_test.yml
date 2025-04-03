@@ -14,7 +14,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql-latest
+        image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.RootPassword }}
           MYSQL_DATABASE: my_database
