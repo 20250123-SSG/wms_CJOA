@@ -26,7 +26,7 @@ public class ResultMainView {
 
 
     public static void displayProductOptionList(List<ProductDto> list){
-
+        /*
         if(list.isEmpty()){
             System.out.println("없는 메뉴 번호입니다☹");
         }else {
@@ -40,6 +40,8 @@ public class ResultMainView {
 
             }
         }
+
+         */
     }
 
 
