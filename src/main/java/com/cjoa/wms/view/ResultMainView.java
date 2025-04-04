@@ -39,7 +39,6 @@ public class ResultMainView {
                 System.out.print(option.getProdSize() + "\t");
                 System.out.println();
             }
-
         }
     }
 

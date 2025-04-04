@@ -6,6 +6,7 @@ public class WarehouseManagerView {
     Scanner sc = new Scanner(System.in);
     DeliveryMenuView deliveryMenuView = new DeliveryMenuView();
     ReceiveMenuView receiveMenuView = new ReceiveMenuView();
+    StockMenuView stockMenuView = new StockMenuView();
 
     public void warehouseMangerMenu(int code){ // 창고관리자 메뉴화면
 
@@ -29,6 +30,7 @@ public class WarehouseManagerView {
                     deliveryMenuView.deliveryMenu(code);
                     break;
                 case "3":
+                    stockMenuView.stockMenu();
                     break;
                 case "0":
                     return;

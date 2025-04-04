@@ -1,5 +1,6 @@
 package com.cjoa.wms.dao;
 
+import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
 import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 
@@ -15,6 +16,10 @@ public interface ProductMapper {
     List<ProductDto> selectProductByCategory(int code);
 
     List<ProductDto> selectProductByProdKeyword(String key);
+
+    List<OrderProdOptionDeliveryDto> selectAllStockList();
+
+    ProductDto checkStockByProdCode(int menu);
 
     ProductDto selectProductOptionListByProdCode(int code);
 
