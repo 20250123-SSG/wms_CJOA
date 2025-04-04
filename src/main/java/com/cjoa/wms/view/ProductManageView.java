@@ -102,28 +102,30 @@ public class ProductManageView {
     }
 
     private void updateProductView() {
-
-        System.out.print("edit Product code: ");
+        System.out.print("수정할 제품 코드: ");
         String prodCode = sc.nextLine();
-        System.out.print("categoryCode: ");
+        System.out.print("카테고리 코드: ");
         String categoryCode = sc.nextLine();
-        System.out.print("productName: ");
+        System.out.print("제품 이름: ");
         String productName = sc.nextLine();
-        System.out.print("price: ");
+        System.out.print("가격: ");
         String price = sc.nextLine();
-        System.out.print("품절유무(Y/N): ");
+        System.out.print("품절 여부 (Y/N): ");
         String yesOrNo = sc.nextLine().toUpperCase();
-        System.out.print("description: ");
+        System.out.print("설명: ");
         String description = sc.nextLine();
-        ProductDto productDto = new ProductDto().builder()
-                .prodCode(Integer.parseInt(prodCode))
-                .categoryCode(Integer.parseInt(categoryCode))
-                .prodName(productName)
-                .prodPrice(Integer.parseInt(price))
-                .soldOut(yesOrNo)
-                .build();
-        userMainController.updateProduct(productDto);
+
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("prodCode", Integer.parseInt(prodCode));
+        productMap.put("categoryCode", Integer.parseInt(categoryCode));
+        productMap.put("prodName", productName);
+        productMap.put("prodPrice", Integer.parseInt(price));
+        productMap.put("soldOut", yesOrNo.equals("Y") ? "Y" : "N"); // 품절 여부 기본값 설정
+        productMap.put("description", description);
+
+        userMainController.updateProduct(productMap);
     }
+
 
     public void addProductView() {
         System.out.print("categoryCode: ");
