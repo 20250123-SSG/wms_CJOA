@@ -1,5 +1,7 @@
 package com.cjoa.wms.view;
 
+import com.cjoa.wms.dao.CartMapper;
+import com.cjoa.wms.dto.CartDto;
 import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 
@@ -24,7 +26,7 @@ public class ResultMainView {
         }
     }
 
-
+    // 상품 상세 정보 뷰
     public static void displayProductOptionList(ProductDto product){
         if(product == null){
             System.out.println("없는 메뉴 번호입니다☹");
@@ -34,12 +36,12 @@ public class ResultMainView {
             System.out.println();
 
             List<ProductOptionDto> list = product.getProductOptionList();
+            int i = 0;
             for (ProductOptionDto option : list) {
-                System.out.print(option.getProdColor() + "\t");
+                System.out.print(++i +": " + option.getProdColor() + "\t");
                 System.out.print(option.getProdSize() + "\t");
                 System.out.println();
             }
-
         }
     }
 

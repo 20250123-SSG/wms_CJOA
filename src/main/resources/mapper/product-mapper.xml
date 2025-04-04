@@ -82,6 +82,7 @@
           , prod_name
           , prod_price
           , category_name
+          , prod_option_code
           , prod_color
           , prod_size
         FROM

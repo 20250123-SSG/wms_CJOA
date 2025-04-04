@@ -1,6 +1,7 @@
 package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.UserMainController;
+import com.cjoa.wms.dto.ProductDto;
 
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class ProductSearchView {
     private Scanner sc = new Scanner(System.in);
 
     public void productSearchMenu(){
+        UserMainView userMainView = new UserMainView();
 
 
         System.out.print("""
@@ -27,7 +29,7 @@ public class ProductSearchView {
             case "1": selectAllProduct(); break;
             case "2": selectProductByCategory(); break;
             case "3": selectProductByKeyword(); break;
-            case "0": return;
+            case "0": userMainView.userMainView();
             default:
                 System.out.println("메뉴 번호를 잘못 입력하셨습니다😥");
         }
@@ -42,24 +44,23 @@ public class ProductSearchView {
     // 상품 조회
     public void selectAllProduct(){
         userMainController.selectProductList();
-
-        prodOptionView();
+        prodOptionView(1);
     }
 
     // 카테고리 조회
     public void selectProductByCategory(){
         userMainController.selectProductListByCategoryCode(inputCode("카테고리코드"));
-        prodOptionView();
+        prodOptionView(2);
     }
 
     // 키워드 조회
     public void selectProductByKeyword() {
         userMainController.selectProductListByKeyword(inputCode("키워드"));
-        prodOptionView();
+        prodOptionView(3);
     }
 
     // 상품 상세 정보 조회
-    public void prodOptionView() {
+    public void prodOptionView(int flag) {
         System.out.print("""
                 \n=========================================================================
                 상세 정보를 보고 싶은 상품 번호를 입력하세요 (0을 입력하면 돌아갑니다)
@@ -71,8 +72,10 @@ public class ProductSearchView {
         if (code.equals("0")) {
             productSearchMenu();// 0을 입력하면 돌아갑니다.
         }else {
-            userMainController.selectProductOptionByProdCode(code);
+            ProductDto product = userMainController.selectProductOptionByProdCode(code);
+            new UserMainView().prodUpdateInCart(product, flag);
         }
+
     }
 
 

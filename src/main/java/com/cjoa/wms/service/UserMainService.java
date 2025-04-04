@@ -1,7 +1,9 @@
 package com.cjoa.wms.service;
 
+import com.cjoa.wms.dao.CartMapper;
 import com.cjoa.wms.dao.ProductMapper;
 import com.cjoa.wms.dao.UserMapper;
+import com.cjoa.wms.dto.CartDto;
 import com.cjoa.wms.dto.ProductDto;
 import org.apache.ibatis.session.SqlSession;
 
@@ -13,6 +15,9 @@ public class UserMainService {
 
     private UserMapper userMapper;
     private ProductMapper productMapper;
+    private CartMapper cartMapper;
+
+
 
     public List<ProductDto> selectProductList() {
         SqlSession sqlSession= getSqlSession();
@@ -47,5 +52,20 @@ public class UserMainService {
         return prod;
     }
 
+    public int insertCart(CartDto cart) {
+        SqlSession sqlSession = getSqlSession();
+        cartMapper = sqlSession.getMapper(CartMapper.class);
 
+        int result = 0;
+        try {
+            result = cartMapper.insertCart(cart);
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqlSession.rollback();
+        }finally {
+            sqlSession.close();
+        }
+        return result;
+    }
 }

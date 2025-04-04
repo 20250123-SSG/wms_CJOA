@@ -12,13 +12,13 @@
         <result column="soldout_yn" property="soldOut"/>
         <result column="prod_desc" property="prodDesc"/>
         
-        <association property="productOptionDto" javaType="ProductOption" >
+        <collection property="productOptionList" ofType="ProductOption" >
             <result column="prod_option_code" property="prodOptionCode"/>
             <result column="prod_size" property="prodSize"/>
             <result column="prod_color" property="prodColor"/>
             <result column="prod_option_soldout_yn" property="optionSoldOut"/>
             <result column="stock_quantity" property="quantity"/>
-        </association>
+        </collection>
     </resultMap>
 
     
@@ -76,12 +76,13 @@
             prod_name LIKE CONCAT ('%' , #{key}, '%')
     </select>
     
-    <select id="selectProductOptionListByProdCode" resultMap="prodResultMap">
+    <select id="selectProductOptionListByProdCode" parameterType="_int" resultMap="prodResultMap">
         SELECT
-            prod_option_code
+            p.prod_code
           , prod_name
           , prod_price
           , category_name
+          , prod_option_code
           , prod_color
           , prod_size
         FROM
