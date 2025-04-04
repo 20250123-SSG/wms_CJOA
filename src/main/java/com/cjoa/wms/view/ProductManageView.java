@@ -34,7 +34,7 @@ public class ProductManageView {
                     productSearchView.productSearchMenu();
                     break;
                 case "3":
-                    updateProductView();
+                    updateProductMenuView();
                     break;
                 case "4":
 //                    deleteProductView();
@@ -72,6 +72,53 @@ public class ProductManageView {
                     break;
             }
         }
+    }
+
+    private void updateProductOptionView() {
+        System.out.print("edit prod code : ");
+        String code = sc.nextLine();
+        System.out.print("size: ");
+        String size = sc.nextLine();
+        System.out.print("color: ");
+        String color = sc.nextLine();
+        String optionyesOrNo = sc.nextLine().toUpperCase();
+        if (!optionyesOrNo.equals("Y")) {
+            optionyesOrNo = "N";
+        }
+        ProductOptionDto productOptionDto = new ProductOptionDto().builder()
+                .prodCode(Integer.parseInt(code))
+                .prodSize(size)
+                .prodColor(color)
+                .optionSoldOut(optionyesOrNo)
+                .build();
+        userMainController.updateProductOption(productOptionDto);
+    }
+
+    private void updateProductView() {
+
+        System.out.print("edit Product code: ");
+        String prodCode = sc.nextLine();
+        System.out.print("categoryCode: ");
+        String categoryCode = sc.nextLine();
+        System.out.print("productName: ");
+        String productName = sc.nextLine();
+        System.out.print("price: ");
+        String price = sc.nextLine();
+        System.out.print("품절유무(Y/N): ");
+        String yesOrNo = sc.nextLine().toUpperCase();
+        if (!yesOrNo.equals("Y")) {
+            yesOrNo = "N";
+        }
+        System.out.print("description: ");
+        String description = sc.nextLine();
+        ProductDto productDto = new ProductDto().builder()
+                .prodCode(Integer.parseInt(prodCode))
+                .categoryCode(Integer.parseInt(categoryCode))
+                .prodName(productName)
+                .prodPrice(Integer.parseInt(price))
+                .soldOut(yesOrNo)
+                .build();
+        userMainController.updateProduct(productDto);
     }
 
     public void addProductView() {

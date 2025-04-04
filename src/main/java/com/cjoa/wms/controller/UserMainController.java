@@ -42,7 +42,7 @@ public class UserMainController {
         userMainService.updateProduct(productDto);
     }
 
-    public void updateProductOptionByProdCode(ProductOptionDto productOptionDto) {
+    public void updateProductOption(ProductOptionDto productOptionDto) {
         userMainService.updateProductOption(productOptionDto);
     }
 }
