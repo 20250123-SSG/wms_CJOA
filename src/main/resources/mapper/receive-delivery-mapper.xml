@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cjoa.wms.dao.ReceiveDeliveryMapper">
+    <resultMap id="receiveDeliveryResultMap" type="com.cjoa.wms.dto.ReceiveDeliveryDto">
+        <result column="type" property="type"/>
+        <result column="time" property="time"/>
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="quantity" property="quantity"/>
+    </resultMap>
+
+    <select id="receiveDeliverySearchAll" resultMap="receiveDeliveryResultMap">
+        SELECT
+        '입고' AS type,
+        r.receive_time AS time,
+        r.prod_option_code,
+        r.receive_quantity AS quantity
+        FROM tbl_receive r
+
+        UNION ALL
+
+        SELECT
+        '출고' AS type,
+        d.delivery_time AS time,
+        d.prod_option_code,
+        d.delivery_quantity AS quantity
+        FROM tbl_delivery d
+
+        ORDER BY time DESC
+    </select>
+
+    <select id="receiveDeliverySearchByDate" parameterType="map" resultMap="receiveDeliveryResultMap">
+        SELECT
+        '입고' AS type,
+        r.receive_time AS time,
+        r.prod_option_code,
+        r.receive_quantity AS quantity
+        FROM tbl_receive r
+        WHERE <![CDATA[ receive_time >= #{startTime}
+        AND receive_time < #{nextDayEndTime} ]]>
+
+        UNION ALL
+
+        SELECT
+        '출고' AS type,
+        d.delivery_time AS time,
+        d.prod_option_code,
+        d.delivery_quantity AS quantity
+        FROM tbl_delivery d
+        WHERE <![CDATA[ delivery_time >= #{startTime}
+        AND delivery_time < #{nextDayEndTime} ]]>
+
+        ORDER BY time DESC
+    </select>
+
+
+
+</mapper>
