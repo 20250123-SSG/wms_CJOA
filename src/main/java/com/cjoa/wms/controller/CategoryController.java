@@ -49,7 +49,7 @@ public class CategoryController {
 
 
     public void getAllCategory() {
-        
+
         List<CategoryDto> list = categoryService.getAllCategory();
 
         ResultView.displayData(list);

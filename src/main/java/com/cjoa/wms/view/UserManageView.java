@@ -3,6 +3,8 @@ package com.cjoa.wms.view;
 import com.cjoa.wms.controller.UserController;
 import com.cjoa.wms.dto.UserDto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class UserManageView {
@@ -42,22 +44,23 @@ public class UserManageView {
         }
     }
 
-    private UserDto inputCode() {
-        System.out.print("수정을 원하는 유저의 코드를 입력해주세요 : ");
+    private Map<String, Object> inputCode() {
+        System.out.print("수정을 원하는 유저의 코드를 입력해주세요: ");
         String code = sc.nextLine();
-        UserDto userDto = addUserForm();
-        userDto.setUserCode(Integer.parseInt(code));
-        return userDto;
+
+        Map<String, Object> userMap = addUserForm();
+        userMap.put("userCode", Integer.parseInt(code));
+
+        return userMap;
     }
 
-
     private int inputDeleteCode() {
-        System.out.print("삭제를 원하는 유저의 코드를 입력해주세요 : ");
+        System.out.print("삭제를 원하는 유저의 코드를 입력해주세요: ");
         String code = sc.nextLine();
         return Integer.parseInt(code);
     }
 
-    private UserDto addUserForm() {
+    private Map<String, Object> addUserForm() {
         System.out.print("유저 아이디 입력: ");
         String userId = sc.nextLine();
         System.out.print("유저 비밀번호 입력: ");
@@ -73,17 +76,15 @@ public class UserManageView {
         System.out.print("유저 이름 입력: ");
         String userName = sc.nextLine();
 
-        UserDto userDto = new UserDto()
-                .builder()
-                .userId(userId)
-                .userPassword(password)
-                .userEmail(email)
-                .userPhone(phone)
-                .userAddress(address)
-                .userType(userType)
-                .userName(userName)
-                .build();
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("userId", userId);
+        userMap.put("userPassword", password);
+        userMap.put("userEmail", email);
+        userMap.put("userPhone", phone);
+        userMap.put("userAddress", address);
+        userMap.put("userType", userType);
+        userMap.put("userName", userName);
 
-        return userDto;
+        return userMap;
     }
 }
