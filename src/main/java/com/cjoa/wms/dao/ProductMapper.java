@@ -9,5 +9,5 @@ public interface ProductMapper {
     List<ProductDto> selectAllProduct();
     List<ProductDto> selectProductByCategory(int code);
     List<ProductDto> selectProductByProdKeyword(String key);
-    List<ProductDto> selectProductOptionListByProdCode(int code);
+    ProductDto  selectProductOptionListByProdCode(int code);
 }

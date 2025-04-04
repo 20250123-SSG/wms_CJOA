@@ -26,7 +26,7 @@ public class UserMainController {
     }
 
     public void selectProductOptionByProdCode(String code) {
-        List<ProductDto> list = userMainService.selectProductOptionListByProdCode(Integer.parseInt(code));
-        ResultMainView.displayProductOptionList(list);
+        ProductDto prod = userMainService.selectProductOptionListByProdCode(Integer.parseInt(code));
+        ResultMainView.displayProductOptionList(prod);
     }
 }
