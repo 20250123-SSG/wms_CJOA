@@ -77,7 +77,12 @@ public class ProductManageView {
                     .optionSoldOut(optionyesOrNo)
                     .build();
             productOptionDtoList.add(productOptionDto);
+            System.out.print("더 입력하시겠습니까?: ");
+            String input = sc.nextLine().toUpperCase();
+            if (!input.equals("Y")) {
+                break;
+            }
         }
-        
+//        productDto.setProductOptionDto(productOptionDtoList);
     }
 }
