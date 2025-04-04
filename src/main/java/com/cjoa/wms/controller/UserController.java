@@ -13,27 +13,59 @@ public class UserController {
     private UserService userService = new UserService();
 
     public UserDto getUserByUserIdAndPassword(String id, String password) {
+        if (id == null || password == null) {
+            throw new IllegalArgumentException("유저 아이디와 비밀번호를 입력해야 합니다.");
+        }
+
         return userService.getUserByUserIdAndPassword(Map.of("userId", id, "userPassword", password));
     }
 
     public void getAllUser() {
         ResultView.displayData(userService.getAllUser());
-        return;
     }
 
-    public void addUser(UserDto user) {
-        ResultView.displayData(userService.addUser(user));
-        return;
+    public void addUser(Map<String, Object> userMap) {
+        if (userMap.get("userId") == null || userMap.get("userPassword") == null) {
+            throw new IllegalArgumentException("유저 아이디와 비밀번호를 입력해야 합니다.");
+        }
+
+        UserDto userDto = UserDto.builder()
+                .userId((String) userMap.get("userId"))
+                .userPassword((String) userMap.get("userPassword"))
+                .userEmail((String) userMap.get("userEmail"))
+                .userPhone((String) userMap.get("userPhone"))
+                .userAddress((String) userMap.get("userAddress"))
+                .userType((String) userMap.get("userType"))
+                .userName((String) userMap.get("userName"))
+                .build();
+
+        userService.addUser(userDto);
     }
 
+    public void updateUserByCode(Map<String, Object> userMap) {
+        if (userMap.get("userCode") == null || userMap.get("userId") == null) {
+            throw new IllegalArgumentException("유저 코드와 유저 아이디를 모두 입력해야 합니다.");
+        }
 
-    public void updateUserByCode(UserDto user) {
-        userService.updateUserByCode(user);
-        return;
+        UserDto userDto = UserDto.builder()
+                .userCode((Integer) userMap.get("userCode"))
+                .userId((String) userMap.get("userId"))
+                .userPassword((String) userMap.get("userPassword"))
+                .userEmail((String) userMap.get("userEmail"))
+                .userPhone((String) userMap.get("userPhone"))
+                .userAddress((String) userMap.get("userAddress"))
+                .userType((String) userMap.get("userType"))
+                .userName((String) userMap.get("userName"))
+                .build();
+
+        userService.updateUserByCode(userDto);
     }
 
     public void deleteUserByCode(int code) {
+        if (code <= 0) {
+            throw new IllegalArgumentException("삭제할 유저 코드를 입력해야 합니다.");
+        }
+
         userService.deleteUserByCode(code);
-        return;
     }
 }

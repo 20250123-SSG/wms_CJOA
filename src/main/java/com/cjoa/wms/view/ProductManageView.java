@@ -5,9 +5,7 @@ import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 import com.cjoa.wms.service.UserMainService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductManageView {
     Scanner sc = new Scanner(System.in);
@@ -74,108 +72,107 @@ public class ProductManageView {
                 case "0":
                     return;
                 default:
-                    System.out.println("wrong menu, input again");
+                    System.out.println("메뉴를 잘못 입력하셨습니다, 다시 입력해주세요");
                     break;
             }
         }
     }
 
     private void updateProductOptionView() {
-        System.out.print("edit prod code : ");
+        System.out.print("수정할 제품 코드: ");
         String code = sc.nextLine();
-        System.out.print("size: ");
+        System.out.print("사이즈: ");
         String size = sc.nextLine();
-        System.out.print("color: ");
+        System.out.print("색상: ");
         String color = sc.nextLine();
+        System.out.print("품절 여부 (Y/N): ");
         String optionyesOrNo = sc.nextLine().toUpperCase();
+
         if (!optionyesOrNo.equals("Y")) {
             optionyesOrNo = "N";
         }
-        ProductOptionDto productOptionDto = new ProductOptionDto().builder()
-                .prodCode(Integer.parseInt(code))
-                .prodSize(size)
-                .prodColor(color)
-                .optionSoldOut(optionyesOrNo)
-                .build();
-        userMainController.updateProductOption(productOptionDto);
+
+        Map<String, Object> productOptionMap = new HashMap<>();
+        productOptionMap.put("prodCode", Integer.parseInt(code));
+        productOptionMap.put("prodSize", size);
+        productOptionMap.put("prodColor", color);
+        productOptionMap.put("optionSoldOut", optionyesOrNo);
+
+        userMainController.updateProductOption(productOptionMap);
     }
 
     private void updateProductView() {
-
-        System.out.print("edit Product code: ");
+        System.out.print("수정할 제품 코드: ");
         String prodCode = sc.nextLine();
-        System.out.print("categoryCode: ");
+        System.out.print("카테고리 코드: ");
         String categoryCode = sc.nextLine();
-        System.out.print("productName: ");
+        System.out.print("제품 이름: ");
         String productName = sc.nextLine();
-        System.out.print("price: ");
+        System.out.print("가격: ");
         String price = sc.nextLine();
-        System.out.print("품절유무(Y/N): ");
+        System.out.print("품절 여부 (Y/N): ");
         String yesOrNo = sc.nextLine().toUpperCase();
-        if (!yesOrNo.equals("Y")) {
-            yesOrNo = "N";
-        }
-        System.out.print("description: ");
+        System.out.print("설명: ");
         String description = sc.nextLine();
-        ProductDto productDto = new ProductDto().builder()
-                .prodCode(Integer.parseInt(prodCode))
-                .categoryCode(Integer.parseInt(categoryCode))
-                .prodName(productName)
-                .prodPrice(Integer.parseInt(price))
-                .soldOut(yesOrNo)
-                .build();
-        userMainController.updateProduct(productDto);
+
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("prodCode", Integer.parseInt(prodCode));
+        productMap.put("categoryCode", Integer.parseInt(categoryCode));
+        productMap.put("prodName", productName);
+        productMap.put("prodPrice", Integer.parseInt(price));
+        productMap.put("soldOut", yesOrNo.equals("Y") ? "Y" : "N");
+        productMap.put("description", description);
+
+        userMainController.updateProduct(productMap);
     }
 
     public void addProductView() {
-        System.out.print("categoryCode: ");
+        System.out.print("카테고리 코드: ");
         String categoryCode = sc.nextLine();
-        System.out.print("productName: ");
+        System.out.print("제품 이름: ");
         String productName = sc.nextLine();
-        System.out.print("price: ");
+        System.out.print("가격: ");
         String price = sc.nextLine();
-        System.out.print("품절유무(Y/N): ");
+        System.out.print("품절 여부 (Y/N): ");
         String yesOrNo = sc.nextLine().toUpperCase();
-        if (!yesOrNo.equals("Y")) {
-            yesOrNo = "N";
-        }
-        System.out.print("description: ");
+        System.out.print("설명: ");
         String description = sc.nextLine();
-        ProductDto productDto = new ProductDto().builder()
-                .categoryCode(Integer.parseInt(categoryCode))
-                .prodName(productName)
-                .prodPrice(Integer.parseInt(price))
-                .soldOut(yesOrNo)
-                .prodDesc(description)
-                .build();
-        List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
+
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("categoryCode", Integer.parseInt(categoryCode));
+        productMap.put("prodName", productName);
+        productMap.put("prodPrice", Integer.parseInt(price));
+        productMap.put("soldOut", yesOrNo.equals("Y") ? "Y" : "N");
+        productMap.put("prodDesc", description);
+
+        List<Map<String, Object>> productOptionList = new ArrayList<>();
         while (true) {
             System.out.println("======================");
             System.out.println("옵션 입력");
-            System.out.print("size: ");
+            System.out.print("사이즈: ");
             String size = sc.nextLine();
-            System.out.print("color: ");
+            System.out.print("색상: ");
             String color = sc.nextLine();
-            System.out.print("옵션 품절 여부(Y/N): ");
-            String optionyesOrNo = sc.nextLine().toUpperCase();
-            if (!optionyesOrNo.equals("Y")) {
-                optionyesOrNo = "N";
-            }
-            ProductOptionDto productOptionDto = new ProductOptionDto().builder()
-                    .prodCode(productDto.getProdCode())
-                    .prodSize(size)
-                    .prodColor(color)
-                    .optionSoldOut(optionyesOrNo)
-                    .build();
-            productOptionDtoList.add(productOptionDto);
-            System.out.print("더 입력하시겠습니까?: ");
+            System.out.print("옵션 품절 여부 (Y/N): ");
+            String optionYesOrNo = sc.nextLine().toUpperCase();
+
+            Map<String, Object> productOptionMap = new HashMap<>();
+            productOptionMap.put("prodCode", productMap.get("prodCode"));
+            productOptionMap.put("prodSize", size);
+            productOptionMap.put("prodColor", color);
+            productOptionMap.put("optionSoldOut", optionYesOrNo.equals("Y") ? "Y" : "N");
+
+            productOptionList.add(productOptionMap);
+
+            System.out.print("더 입력하시겠습니까? (Y/N): ");
             String input = sc.nextLine().toUpperCase();
             if (!input.equals("Y")) {
                 System.out.println("======================");
                 break;
             }
         }
-        productDto.setProductOptionList(productOptionDtoList);
-        userMainController.addProduct(productDto);
+
+        productMap.put("productOptionList", productOptionList);
+        userMainController.addProduct(productMap);
     }
 }
