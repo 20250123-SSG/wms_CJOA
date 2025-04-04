@@ -3,11 +3,15 @@ package com.cjoa.wms.service;
 import com.cjoa.wms.dao.ProductMapper;
 import com.cjoa.wms.dao.UserMapper;
 import com.cjoa.wms.dto.ProductDto;
+import com.cjoa.wms.dto.ProductOptionDto;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
+import static com.cjoa.wms.view.ResultView.FailView;
+import static com.cjoa.wms.view.ResultView.SuccessView;
 
 public class UserMainService {
 
@@ -15,7 +19,7 @@ public class UserMainService {
     private ProductMapper productMapper;
 
     public List<ProductDto> selectProductList() {
-        SqlSession sqlSession= getSqlSession();
+        SqlSession sqlSession = getSqlSession();
         productMapper = sqlSession.getMapper(ProductMapper.class);
         List<ProductDto> list = productMapper.selectAllProduct();
         sqlSession.close();
@@ -48,4 +52,18 @@ public class UserMainService {
     }
 
 
+    public int addProduct(ProductDto productDto) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        int result = productMapper.addProduct(productDto);
+        List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
+        if (result > 0) {
+            SuccessView("addProduct");
+        } else {
+            sqlSession.rollback();
+            FailView("addProduct");
+        }
+        sqlSession.close();
+        return result;
+    }
 }

@@ -6,6 +6,9 @@ import com.cjoa.wms.view.ResultMainView;
 
 import java.util.List;
 
+import static com.cjoa.wms.view.ResultView.FailView;
+import static com.cjoa.wms.view.ResultView.SuccessView;
+
 public class UserMainController {
 
     private UserMainService userMainService = new UserMainService();
@@ -28,5 +31,9 @@ public class UserMainController {
     public void selectProductOptionByProdCode(String code) {
         List<ProductDto> list = userMainService.selectProductOptionListByProdCode(Integer.parseInt(code));
         ResultMainView.displayProductOptionList(list);
+    }
+
+    public void addProduct(ProductDto productDto) {
+        int result = userMainService.addProduct(productDto);
     }
 }

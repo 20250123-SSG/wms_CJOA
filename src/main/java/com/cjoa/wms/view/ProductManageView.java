@@ -1,7 +1,9 @@
 package com.cjoa.wms.view;
 
+import com.cjoa.wms.controller.UserMainController;
 import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
+import com.cjoa.wms.service.UserMainService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.Scanner;
 public class ProductManageView {
     Scanner sc = new Scanner(System.in);
     ProductSearchView productSearchView = new ProductSearchView();
+    UserMainController userMainController = new UserMainController();
+
     public void mainView() {
         while (true) {
             System.out.print("""
@@ -37,6 +41,9 @@ public class ProductManageView {
                     break;
                 case "0":
                     return;
+                default:
+                    System.out.println("wrong menu, input again");
+                    break;
             }
         }
     }
@@ -62,7 +69,7 @@ public class ProductManageView {
                 .soldOut(yesOrNo)
                 .build();
         List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
-        while(true) {
+        while (true) {
             System.out.print("size: ");
             String size = sc.nextLine();
             System.out.print("color: ");
