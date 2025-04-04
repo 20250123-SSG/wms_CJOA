@@ -154,4 +154,12 @@
         WHERE
             prod_code = #{prodCode}
     </update>
+
+    <delete id="deleteProd" parameterType="_int">
+        DELETE
+        FROM
+            tbl_product
+        WHERE
+            prod_code = #{code}
+    </delete>
 </mapper>
