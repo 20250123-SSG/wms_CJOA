@@ -101,7 +101,6 @@ public class ProductManageView {
         userMainController.updateProductOption(productOptionMap);
     }
 
-
     private void updateProductView() {
 
         System.out.print("edit Product code: ");

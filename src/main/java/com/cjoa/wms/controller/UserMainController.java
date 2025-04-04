@@ -6,6 +6,7 @@ import com.cjoa.wms.service.UserMainService;
 import com.cjoa.wms.view.ResultMainView;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.cjoa.wms.view.ResultView.FailView;
 import static com.cjoa.wms.view.ResultView.SuccessView;
@@ -62,9 +63,24 @@ public class UserMainController {
         userMainService.updateProduct(productDto);
     }
 
-    public void updateProductOption(ProductOptionDto productOptionDto) {
+    public void updateProductOption(Map<String, Object> productOptionMap) {
+        if (productOptionMap.get("prodCode") == null ||
+                productOptionMap.get("prodSize") == null ||
+                productOptionMap.get("prodColor") == null ||
+                productOptionMap.get("optionSoldOut") == null) {
+            throw new IllegalArgumentException("모든 필드를 올바르게 입력해야 합니다.");
+        }
+
+        ProductOptionDto productOptionDto = ProductOptionDto.builder()
+                .prodCode((Integer) productOptionMap.get("prodCode"))
+                .prodSize((String) productOptionMap.get("prodSize"))
+                .prodColor((String) productOptionMap.get("prodColor"))
+                .optionSoldOut((String) productOptionMap.get("optionSoldOut"))
+                .build();
+
         userMainService.updateProductOption(productOptionDto);
     }
+
 
     public void deleteProduct(int code) {
         int result = userMainService.deleteProduct(code);
