@@ -55,7 +55,7 @@ public class ResultView {
                     list.getProdCode(),
                     list.getProdName()
             );
-            for (ProductOptionDto product : list.getProductOptionDto()) {
+            for (ProductOptionDto product : list.getProductOptionList()) {
                 System.out.printf("\t└[제품상세번호: %d, 사이즈: %s, 색상: %s][재고수량: %d 재고금액: %d]\n",
                         product.getProdOptionCode(),
                         product.getProdSize(),
