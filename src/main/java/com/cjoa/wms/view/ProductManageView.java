@@ -146,6 +146,7 @@ public class ProductManageView {
                 .prodName(productName)
                 .prodPrice(Integer.parseInt(price))
                 .soldOut(yesOrNo)
+                .prodDesc(description)
                 .build();
         List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
         while (true) {
