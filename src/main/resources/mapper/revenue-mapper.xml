@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.RevenueMapper">
+
+    <select id="calculateTotalSales" resultType="_int">
+        SELECT SUM(d.delivery_quantity * p.prod_price)
+        FROM tbl_delivery d
+        JOIN tbl_prod_option o ON d.prod_option_code = o.prod_option_code
+        JOIN tbl_product p ON o.prod_code = p.prod_code
+    </select>
+
+    <select id="calculateTotalPurchaseCost" resultType="_int">
+        SELECT SUM(r.receive_quantity * r.origin_price)
+        FROM tbl_receive r
+    </select>
+
+    <select id="calculateTotalMarginCost" resultType="_int">
+        SELECT SUM(d.delivery_quantity*(p.prod_price-r.origin_price)) AS margin
+        FROM tbl_delivery d
+        JOIN tbl_prod_option o ON d.prod_option_code = o.prod_option_code
+        JOIN tbl_receive r ON r.prod_option_code = o.option_code
+        JOIN tbl_product p ON o.prod_code = p.prod_code
+
+    </select>
+
+</mapper>
