@@ -59,6 +59,14 @@ public class UserMainService {
         List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
         if (result > 0) {
             SuccessView("addProduct");
+            int optionResult = productMapper.addProductOption(productOptionDtoList);
+            if (optionResult == productOptionDtoList.size()) {
+                SuccessView("addProductOptions");
+                sqlSession.commit();
+            } else {
+                FailView("addProductOptions");
+                sqlSession.rollback();
+            }
         } else {
             sqlSession.rollback();
             FailView("addProduct");
