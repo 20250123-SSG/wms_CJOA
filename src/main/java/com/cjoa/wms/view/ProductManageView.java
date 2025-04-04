@@ -5,9 +5,7 @@ import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 import com.cjoa.wms.service.UserMainService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductManageView {
     Scanner sc = new Scanner(System.in);
@@ -74,31 +72,35 @@ public class ProductManageView {
                 case "0":
                     return;
                 default:
-                    System.out.println("wrong menu, input again");
+                    System.out.println("메뉴를 잘못 입력하셨습니다, 다시 입력해주세요");
                     break;
             }
         }
     }
 
     private void updateProductOptionView() {
-        System.out.print("edit prod code : ");
+        System.out.print("수정할 제품 코드: ");
         String code = sc.nextLine();
-        System.out.print("size: ");
+        System.out.print("사이즈: ");
         String size = sc.nextLine();
-        System.out.print("color: ");
+        System.out.print("색상: ");
         String color = sc.nextLine();
+        System.out.print("품절 여부 (Y/N): ");
         String optionyesOrNo = sc.nextLine().toUpperCase();
+
         if (!optionyesOrNo.equals("Y")) {
             optionyesOrNo = "N";
         }
-        ProductOptionDto productOptionDto = new ProductOptionDto().builder()
-                .prodCode(Integer.parseInt(code))
-                .prodSize(size)
-                .prodColor(color)
-                .optionSoldOut(optionyesOrNo)
-                .build();
-        userMainController.updateProductOption(productOptionDto);
+
+        Map<String, Object> productOptionMap = new HashMap<>();
+        productOptionMap.put("prodCode", Integer.parseInt(code));
+        productOptionMap.put("prodSize", size);
+        productOptionMap.put("prodColor", color);
+        productOptionMap.put("optionSoldOut", optionyesOrNo);
+
+        userMainController.updateProductOption(productOptionMap);
     }
+
 
     private void updateProductView() {
 
