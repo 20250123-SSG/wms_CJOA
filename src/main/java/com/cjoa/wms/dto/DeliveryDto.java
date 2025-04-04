@@ -6,7 +6,6 @@ import lombok.*;
 @AllArgsConstructor
 @Setter
 @Getter
-@ToString
 @Builder
 public class DeliveryDto {
 
@@ -16,5 +15,13 @@ public class DeliveryDto {
     private String deliveryTime;
     private int prodOptionCode;
     private int deliveryQuantity;
+    @Override
+    public String toString() {
+        return String.format(
+                "출고코드: %d | 주문코드: %d | 유저코드: %d | 출고날짜: %s | 상품옵션코드: %d | 출고량: %d",
+                deliveryCode, orderCode, userCode, deliveryTime, prodOptionCode, deliveryQuantity
+        );
+    }
+
 
 }

@@ -18,7 +18,7 @@ public class ReceiveDto {
     @Override
     public String toString() {
         return String.format(
-                "입고코드: %d | 유저코드: %d | 날짜: %s | 옵션코드: %d | 수량: %d | 원가: %d",
+                "입고코드: %d | 유저코드: %d | 입고날짜: %s | 상품옵션코드: %d | 입고량: %d | 원가: %d",
                 receiveCode, userCode, receiveTime, prodOptionCode, receiveQuantity, originPrice
         );
     }
