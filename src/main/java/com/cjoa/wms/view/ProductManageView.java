@@ -1,5 +1,10 @@
 package com.cjoa.wms.view;
 
+import com.cjoa.wms.dto.ProductDto;
+import com.cjoa.wms.dto.ProductOptionDto;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ProductManageView {
@@ -19,20 +24,60 @@ public class ProductManageView {
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
-                    categoryController.addCategory(addCategoryForm());
+                    addProductView();
                     break;
                 case "2":
                     productSearchView.productSearchMenu();
                     break;
                 case "3":
-                    categoryController.updateCategoryByCode(inputCategoryCode());
+//                    updateProductView();
                     break;
                 case "4":
-                    categoryController.deleteCategoryByCode(inputDeleteCategoryCode());
+//                    deleteProductView();
                     break;
                 case "0":
                     return;
             }
         }
+    }
+
+    public void addProductView() {
+        System.out.print("categoryCode: ");
+        String categoryCode = sc.nextLine();
+        System.out.print("productName: ");
+        String productName = sc.nextLine();
+        System.out.print("price: ");
+        String price = sc.nextLine();
+        System.out.print("품절유무(Y/N): ");
+        String yesOrNo = sc.nextLine().toUpperCase();
+        if (!yesOrNo.equals("Y")) {
+            yesOrNo = "N";
+        }
+        System.out.print("description: ");
+        String description = sc.nextLine();
+        ProductDto productDto = new ProductDto().builder()
+                .categoryCode(Integer.parseInt(categoryCode))
+                .prodName(productName)
+                .prodPrice(Integer.parseInt(price))
+                .soldOut(yesOrNo)
+                .build();
+        List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
+        while(true) {
+            System.out.print("size: ");
+            String size = sc.nextLine();
+            System.out.print("color: ");
+            String color = sc.nextLine();
+            String optionyesOrNo = sc.nextLine().toUpperCase();
+            if (!optionyesOrNo.equals("Y")) {
+                optionyesOrNo = "N";
+            }
+            ProductOptionDto productOptionDto = new ProductOptionDto().builder()
+                    .prodSize(size)
+                    .prodColor(color)
+                    .optionSoldOut(optionyesOrNo)
+                    .build();
+            productOptionDtoList.add(productOptionDto);
+        }
+        
     }
 }
