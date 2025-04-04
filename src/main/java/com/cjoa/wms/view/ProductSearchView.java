@@ -69,10 +69,10 @@ public class ProductSearchView {
         String code = sc.nextLine();
 
         if (code.equals("0")) {
-            return; // 0을 입력하면 돌아갑니다.
+            productSearchMenu();// 0을 입력하면 돌아갑니다.
+        }else {
+            userMainController.selectProductOptionByProdCode(code);
         }
-        userMainController.selectProductOptionByProdCode(code);
-
     }
 
 

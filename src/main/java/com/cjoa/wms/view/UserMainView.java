@@ -35,10 +35,6 @@ public class UserMainView {
         }
     }
 
-    public void prodOptionView(){}
-
-
-
     // 상품 상세 옵션 => 장바구니 선택
     public void prodUpdateInCart() {
         while (true){
