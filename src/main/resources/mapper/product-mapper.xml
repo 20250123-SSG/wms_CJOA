@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.ProductMapper">
+    <resultMap id="prodResultMap" type="Product">
+        <id column="prod_code" property="prodCode"/>
+        <result column="category_code" property="categoryCode"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="prod_name" property="prodName"/>
+        <result column="prod_price" property="prodPrice"/>
+        <result column="soldout_yn" property="soldOut"/>
+        <result column="prod_desc" property="prodDesc"/>
+        
+        <association property="productOptionDto" javaType="ProductOption" >
+            <result column="prod_option_code" property="prodOptionCode"/>
+            <result column="prod_size" property="prodSize"/>
+            <result column="prod_color" property="prodColor"/>
+            <result column="prod_option_soldout_yn" property="optionSoldOut"/>
+            <result column="stock_quantity" property="quantity"/>
+        </association>
+    </resultMap>
+
+    
+    <select id="selectAllProduct" resultMap="prodResultMap">
+        SELECT
+            prod_code
+          , c.category_code
+          , category_name
+          , prod_name
+          , prod_price
+          , soldout_yn
+          , prod_desc
+        FROM
+            tbl_product p
+                JOIN tbl_category c ON c.category_code = p.category_code
+        WHERE
+            soldout_yn = 'N'
+        ORDER BY
+            prod_code ASC
+    </select>
+
+    <select id="selectProductByCategory" resultMap="prodResultMap">
+        SELECT
+            prod_code
+          , c.category_code
+          , category_name
+          , prod_name
+          , prod_price
+          , soldout_yn
+          , prod_desc
+        FROM
+            tbl_product p
+                JOIN tbl_category c ON c.category_code = p.category_code
+        WHERE
+            soldout_yn = 'N'
+        AND
+            c.category_code = #{code}
+    </select>
+
+    <select id="selectProductByProdKeyword" resultMap="prodResultMap">
+        SELECT
+            prod_code
+          , c.category_code
+          , category_name
+          , prod_name
+          , prod_price
+          , soldout_yn
+          , prod_desc
+        FROM
+            tbl_product p
+                JOIN tbl_category c ON c.category_code = p.category_code
+        WHERE
+            soldout_yn = 'N'
+        AND
+            prod_name LIKE CONCAT ('%' , #{key}, '%')
+    </select>
+    
+    <select id="selectProductOptionListByProdCode" resultMap="prodResultMap">
+        SELECT
+            prod_option_code
+          , prod_name
+          , prod_price
+          , category_name
+          , prod_color
+          , prod_size
+        FROM
+            tbl_product p
+                JOIN tbl_category c ON c.category_code = p.category_code
+                JOIN tbl_prod_option po ON po.prod_code = p.prod_code
+        WHERE
+            soldout_yn = 'N'
+        AND p.prod_code = #{code}
+    </select>
+
+
+</mapper>

@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class WarehouseManagerView {
     Scanner sc = new Scanner(System.in);
     DeliveryMenuView deliveryMenuView = new DeliveryMenuView();
+    ReceiveMenuView receiveMenuView = new ReceiveMenuView();
 
     public void warehouseMangerMenu(int code){ // 창고관리자 메뉴화면
 
@@ -22,6 +23,7 @@ public class WarehouseManagerView {
 
             switch (menu) {
                 case "1":
+                    receiveMenuView.receiveMenu();
                     break;
                 case "2":
                     deliveryMenuView.deliveryMenu(code);

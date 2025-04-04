@@ -10,8 +10,22 @@
         <result column="prod_option_code" property="prodOptionCode"/>
         <result column="receive_quantity" property="receiveQuantity"/>
         <result column="origin_price" property="originPrice"/>
-
     </resultMap>
+
+    <resultMap id="resultOrderProdOptionDeliveryMap" type="OrderProdOptionDelivery">
+        <id column="order_prod_option_code" property="orderProdOptionCode"/>
+        <result column="prod_code" property="prodCode"/>
+        <result column="order_code" property="orderCode"/>
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="prod_name" property="prodName"/>
+        <result column="prod_size" property="prodSize"/>
+        <result column="prod_color" property="prodColor"/>
+        <result column="order_prod_option_quantity" property="orderProdOptionQuantity"/>
+        <result column="stock_quantity" property="stockQuantity"/>
+        <result column="user_code" property="userCode"/>
+        <result column="prod_price" property="prodPrice"/>
+    </resultMap>
+
     <select id="receiveSearchAll" resultMap="receiveResultMap">
         SELECT
         receive_code
@@ -52,8 +66,47 @@
         WHERE <![CDATA[ receive_time >= #{startTime}
         AND receive_time < #{nextDayEndTime} ]]>
         ORDER BY receive_time desc
-
     </select>
 
+    <select id="checkProductByOptionCode" parameterType="_int" resultMap="resultOrderProdOptionDeliveryMap">
+        SELECT
+              o.prod_option_code
+            , p.prod_name
+            , o.prod_size
+            , o.prod_color
+            , s.stock_quantity
+        FROM
+            tbl_prod_option o
+            JOIN tbl_stock s ON s.stock_option_code = o.prod_option_code
+            JOIN tbl_product p ON p.prod_code = o.prod_code
+        WHERE
+            o.prod_option_code = #{code}
+    </select>
 
+    <insert id="insertReceive" parameterType="OrderProdOptionDelivery">
+        INSERT INTO
+            tbl_receive
+            (
+              user_code
+            , prod_option_code
+            , receive_quantity
+            , origin_price
+            )
+        VALUES
+            (
+              #{userCode}
+            , #{prodOptionCode}
+            , #{orderProdOptionQuantity}
+            , #{prodPrice}
+            )
+    </insert>
+
+    <update id="updateStockPlus" parameterType="OrderProdOptionDelivery">
+        UPDATE
+            tbl_stock
+        SET
+            stock_quantity = #{stockQuantity} + #{orderProdOptionQuantity}
+        WHERE
+            stock_option_code = #{prodOptionCode}
+    </update>
 </mapper>
