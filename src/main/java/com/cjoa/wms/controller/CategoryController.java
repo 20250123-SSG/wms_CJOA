@@ -12,6 +12,7 @@ public class CategoryController {
     private CategoryService categoryService = new CategoryService();
 
     public void addCategory(Map<String, Object> categoryMap) {
+
         if (categoryMap.get("categoryName") == null) {
             throw new IllegalArgumentException("카테고리명을 입력해야 합니다.");
         }
@@ -24,6 +25,7 @@ public class CategoryController {
     }
 
     public void updateCategoryByCode(Map<String, Object> categoryMap) {
+
         if (categoryMap.get("categoryCode") == null || categoryMap.get("categoryName") == null) {
             throw new IllegalArgumentException("카테고리 코드와 이름을 모두 입력해야 합니다.");
         }
@@ -37,6 +39,7 @@ public class CategoryController {
     }
 
     public void deleteCategoryByCode(String categoryCode) {
+
         if (categoryCode == null || categoryCode.isEmpty()) {
             throw new IllegalArgumentException("삭제할 카테고리 코드를 입력해야 합니다.");
         }
@@ -44,4 +47,11 @@ public class CategoryController {
         int result = categoryService.deleteCategoryByCode(Integer.parseInt(categoryCode));
     }
 
+
+    public void getAllCategory() {
+        
+        List<CategoryDto> list = categoryService.getAllCategory();
+
+        ResultView.displayData(list);
+    }
 }
