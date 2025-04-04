@@ -56,12 +56,30 @@ public class UserMainController {
         int result = userMainService.addProduct(productDto);
     }
 
-    public void updateProduct(ProductDto productDto) {
-        if (!productDto.getSoldOut().equals("Y")) {
-            productDto.setSoldOut("N");
+    public void updateProduct(Map<String, Object> productMap) {
+        // 입력값 검증
+        if (productMap.get("prodCode") == null ||
+                productMap.get("categoryCode") == null ||
+                productMap.get("prodName") == null ||
+                productMap.get("prodPrice") == null ||
+                productMap.get("soldOut") == null ||
+                productMap.get("description") == null) {
+            throw new IllegalArgumentException("모든 필드를 올바르게 입력해야 합니다.");
         }
+
+        // 모델에 담기
+        ProductDto productDto = ProductDto.builder()
+                .prodCode((Integer) productMap.get("prodCode"))
+                .categoryCode((Integer) productMap.get("categoryCode"))
+                .prodName((String) productMap.get("prodName"))
+                .prodPrice((Integer) productMap.get("prodPrice"))
+                .soldOut((String) productMap.get("soldOut"))
+                .prodDesc((String) productMap.get("description")) // 설명 추가
+                .build();
+
         userMainService.updateProduct(productDto);
     }
+
 
     public void updateProductOption(Map<String, Object> productOptionMap) {
         if (productOptionMap.get("prodCode") == null ||
