@@ -1,16 +1,21 @@
 package com.cjoa.wms.service;
 
 import com.cjoa.wms.dao.DeliveryMapper;
+import com.cjoa.wms.dao.ReceiveMapper;
+import com.cjoa.wms.dto.DeliveryDto;
 import com.cjoa.wms.dto.OrderDeliveryDto;
 import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
+import com.cjoa.wms.dto.ReceiveDto;
 import org.apache.ibatis.session.SqlSession;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
 
 public class DeliveryService {
-    DeliveryMapper deliveryMapper;
+    private DeliveryMapper deliveryMapper;
 
     public List<OrderDeliveryDto> checkOrderList() {
         SqlSession sqlSession = getSqlSession();
@@ -45,4 +50,33 @@ public class DeliveryService {
         sqlSession.close();
         return result;
     }
+
+
+    public List<DeliveryDto> deliverySearchAll(){
+        SqlSession sqlSession = getSqlSession();
+        deliveryMapper = sqlSession.getMapper(DeliveryMapper.class);
+        return deliveryMapper.deliverySearchAll();
+    }
+
+    public  List<DeliveryDto> deliverySearchByCode(int deliveryCode){
+        SqlSession sqlSession = getSqlSession();
+        deliveryMapper = sqlSession.getMapper(DeliveryMapper.class);
+        return deliveryMapper.deliverySearchByCode(deliveryCode);
+    }
+    public List<DeliveryDto> deliverySearchByDate(String startTime, String endTime){
+        SqlSession sqlSession = getSqlSession();
+        deliveryMapper = sqlSession.getMapper(DeliveryMapper.class);
+        LocalDate end = LocalDate.parse(endTime);
+        LocalDate nextDay = end.plusDays(1);
+        String nextDayEndTime = nextDay.toString(); // "2025-04-04" 형태
+
+        Map<String, String> param = Map.of(
+                "startTime", startTime,
+                "nextDayEndTime", nextDayEndTime
+        );
+        return deliveryMapper.deliverySearchByDate(param);
+
+
+}
+
 }

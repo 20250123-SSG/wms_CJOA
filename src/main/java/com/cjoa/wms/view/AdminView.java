@@ -1,11 +1,15 @@
 package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.CategoryController;
+import com.cjoa.wms.controller.DeliveryController;
 import com.cjoa.wms.controller.ReceiveController;
 import com.cjoa.wms.controller.UserController;
 import com.cjoa.wms.dto.CategoryDto;
 import com.cjoa.wms.dto.UserDto;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class AdminView {
@@ -14,6 +18,7 @@ public class AdminView {
     private Scanner sc = new Scanner(System.in);
     private CategoryController categoryController = new CategoryController();
     private ReceiveController receiveController = new ReceiveController();
+    private DeliveryController deliveryController = new DeliveryController();
     public void mainView() {
         while (true) {
             System.out.print("""
@@ -116,7 +121,7 @@ public class AdminView {
                     \n===============================
                     1. 입고 조회
                     2. 출고 조회
-                    3. 재고 조회
+                    3. 입출고 조회
                     0. 이전 메뉴로 돌아가기
                     ===============================
                     """);
@@ -124,9 +129,15 @@ public class AdminView {
             switch (menu) {
                 case "1":
                     ReceiveView();
+                    break;
+                case "2":
+                    DeliveryView();
+                     break;
+                case "3":
 
-
-
+                    break;
+                case "0":
+                    return;
 
             }
         }
@@ -158,18 +169,109 @@ public class AdminView {
         }
     }
 
+
+    private void DeliveryView(){
+        while (true) {
+            System.out.print("""
+                    \n===============================
+                    1. 전체 내역 조회
+                    2. 출고 코드로 조회
+                    3. 날짜로 조회
+                    0. 이전 메뉴로 돌아가기
+                    ===============================
+                    """);
+            String menu = sc.nextLine();
+            switch (menu) {
+                case "1":
+                    deliveryController.deliverySearchAll();
+                    break;
+                case "2":
+                    deliveryController.deliverySearchByCode(deliveryCode());
+                    break;
+                case "3":
+                    deliveryDate();
+                    break;
+                case "0":
+                    return;
+
+            }
+        }
+    }
+
+    private int deliveryCode(){
+        System.out.println("조회하고자 하는 출고 내역의 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+        return Integer.parseInt(code);
+    }
+
+
     private int receiveCode(){
         System.out.println("조회하고자 하는 입고 내역의 코드를 입력해주세요 : ");
         String code = sc.nextLine();
         return Integer.parseInt(code);
     }
 
-    private void receiveDate(){
-        System.out.print("조회 시작 날짜 입력(0000-00-00): ");
-        String start = sc.nextLine();
-        System.out.print("조회 종료 날짜 입력(0000-00-00): ");
-        String end = sc.nextLine();
-        receiveController.receiveSearchByDate(start, end);
+    private void receiveDate() {
+        String start = null;
+        String end = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (true) {
+            try {
+                System.out.print("조회 시작 날짜 입력(0000-00-00): ");
+                start = sc.nextLine();
+                startDate = LocalDate.parse(start, formatter);
+
+                System.out.print("조회 종료 날짜 입력(0000-00-00): ");
+                end = sc.nextLine();
+                endDate = LocalDate.parse(end, formatter);
+
+                //시작 날짜가 종료날짜보다 이후 인 경우
+                if (startDate.isAfter(endDate)) {
+                    System.out.println("조회 시작일은 종료일보다 이전이어야 합니다.");
+                    continue;
+                }
+                receiveController.receiveSearchByDate(start, end);
+                break;
+            }catch (DateTimeParseException e){
+                System.out.println("날짜 형식이 잘못되었습니다. '0000-00-00' 형식으로 입력해주세요.");
+
+            }
+
+        }
+    }
+    private void deliveryDate(){
+        String start = null;
+        String end = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (true) {
+            try {
+                System.out.print("조회 시작 날짜 입력(0000-00-00): ");
+                start = sc.nextLine();
+                startDate = LocalDate.parse(start, formatter);
+
+                System.out.print("조회 종료 날짜 입력(0000-00-00): ");
+                end = sc.nextLine();
+                endDate = LocalDate.parse(end, formatter);
+
+                //시작 날짜가 종료날짜보다 이후 인 경우
+                if (startDate.isAfter(endDate)) {
+                    System.out.println("조회 시작일은 종료일보다 이전이어야 합니다.");
+                    continue;
+                }
+                deliveryController.deliverySearchByDate(start, end);
+                break;
+            }catch (DateTimeParseException e){
+                System.out.println("날짜 형식이 잘못되었습니다. '0000-00-00' 형식으로 입력해주세요.");
+
+            }
+
+        }
     }
 
 
