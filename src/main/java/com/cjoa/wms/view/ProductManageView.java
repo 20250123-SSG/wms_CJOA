@@ -175,5 +175,4 @@ public class ProductManageView {
         productMap.put("productOptionList", productOptionList);
         userMainController.addProduct(productMap);
     }
-
 }

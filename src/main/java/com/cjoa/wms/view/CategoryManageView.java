@@ -3,6 +3,8 @@ package com.cjoa.wms.view;
 import com.cjoa.wms.controller.CategoryController;
 import com.cjoa.wms.dto.CategoryDto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CategoryManageView {
@@ -41,29 +43,28 @@ public class CategoryManageView {
         }
     }
 
-    private CategoryDto addCategoryForm() {
+    private Map<String, Object> addCategoryForm() {
         System.out.print("카테고리명 입력: ");
         String categoryName = sc.nextLine();
 
-        CategoryDto categoryDto = new CategoryDto()
-                .builder()
-                .categoryName(categoryName)
-                .build();
+        Map<String, Object> categoryMap = new HashMap<>();
+        categoryMap.put("categoryName", categoryName);
 
-        return categoryDto;
+        return categoryMap;
     }
 
-    private CategoryDto inputCategoryCode() {
-        System.out.print("수정을 원하는 카테고리의 코드를 입력해주세요 : ");
+    private Map<String, Object> inputCategoryCode() {
+        System.out.print("수정을 원하는 카테고리의 코드를 입력해주세요: ");
         String code = sc.nextLine();
-        CategoryDto categoryDto = addCategoryForm();
-        categoryDto.setCategoryCode(Integer.parseInt(code));
-        return categoryDto;
+
+        Map<String, Object> categoryMap = addCategoryForm();
+        categoryMap.put("categoryCode", Integer.parseInt(code));
+
+        return categoryMap;
     }
 
     private String inputDeleteCategoryCode() {
-        System.out.print("삭제를 원하는 카테고리의 코드를 입력해주세요 : ");
-        String code = sc.nextLine();
-        return code;
+        System.out.print("삭제를 원하는 카테고리의 코드를 입력해주세요: ");
+        return sc.nextLine();
     }
 }
