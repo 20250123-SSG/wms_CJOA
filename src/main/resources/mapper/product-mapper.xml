@@ -93,5 +93,41 @@
         AND p.prod_code = #{code}
     </select>
 
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="prodCode">
+        INSERT INTO
+            tbl_product
+            (
+              category_code
+            , prod_name
+            , prod_price
+            , soldout_yn
+            , prod_desc
+            )
+        VALUES
+            (
+              #{categoryCode}
+            , #{prodName}
+            , #{prodPrice}
+            , #{soldOut}
+            , #{prodDesc}
+            )
+    </insert>
 
+    <insert id="addProductOption" parameterType="Product" useGeneratedKeys="true">
+        INSERT INTO
+        tbl_product
+        (
+          prod_code
+        , prod_size
+        , prod_color
+        , prod_option_soldout_yn
+        )
+        VALUES
+        <foreach collection="prodOptionList" item="option" open="(" separator="," close=")">
+          #{prodCode}
+        , #{option.prodSize}
+        , #{option.prodColor}
+        , #{option.optionSoldOut}
+        </foreach>
+    </insert>
 </mapper>

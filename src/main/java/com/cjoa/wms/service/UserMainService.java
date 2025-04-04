@@ -56,17 +56,16 @@ public class UserMainService {
         SqlSession sqlSession = getSqlSession();
         productMapper = sqlSession.getMapper(ProductMapper.class);
         int result = productMapper.addProduct(productDto);
-        List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
         if (result > 0) {
             SuccessView("addProduct");
-            int optionResult = productMapper.addProductOption(productOptionDtoList);
-            if (optionResult == productOptionDtoList.size()) {
-                SuccessView("addProductOptions");
-                sqlSession.commit();
-            } else {
-                FailView("addProductOptions");
-                sqlSession.rollback();
-            }
+            int optionResult = productMapper.addProductOption(productDto);
+//            if (optionResult == productDto.getProductOptionDto.size()) {
+//                SuccessView("addProductOptions");
+//                sqlSession.commit();
+//            } else {
+//                FailView("addProductOptions");
+//                sqlSession.rollback();
+//            }
         } else {
             sqlSession.rollback();
             FailView("addProduct");

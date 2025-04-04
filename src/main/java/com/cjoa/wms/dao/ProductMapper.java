@@ -1,6 +1,7 @@
 package com.cjoa.wms.dao;
 
 import com.cjoa.wms.dto.ProductDto;
+import com.cjoa.wms.dto.ProductOptionDto;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface ProductMapper {
 
     int addProduct(ProductDto productDto);
 
+    int addProductOption(ProductDto productDto);
 }
