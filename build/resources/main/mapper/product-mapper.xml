@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.cjoa.wms.dao.ProductMapper">
     <resultMap id="prodResultMap" type="Product">
         <id column="prod_code" property="prodCode"/>
@@ -13,7 +12,7 @@
         <result column="soldout_yn" property="soldOut"/>
         <result column="prod_desc" property="prodDesc"/>
         
-        <collection property="productOptionDto" ofType="ProductOption" >
+        <collection property="productOptionList" ofType="ProductOption" >
             <result column="prod_option_code" property="prodOptionCode"/>
             <result column="prod_size" property="prodSize"/>
             <result column="prod_color" property="prodColor"/>
@@ -55,6 +54,22 @@
             prod_code ASC
     </select>
 
+    <select id="selectAllProductForAdmin" resultMap="prodResultMap">
+        SELECT
+        prod_code
+        , c.category_code
+        , category_name
+        , prod_name
+        , prod_price
+        , soldout_yn
+        , prod_desc
+        FROM
+        tbl_product p
+        JOIN tbl_category c ON c.category_code = p.category_code
+        ORDER BY
+        prod_code ASC
+    </select>
+
     <select id="selectProductByCategory" resultMap="prodResultMap">
         SELECT
             prod_code
@@ -91,9 +106,9 @@
             prod_name LIKE CONCAT ('%' , #{key}, '%')
     </select>
     
-    <select id="selectProductOptionListByProdCode" resultMap="prodResultMap">
+    <select id="selectProductOptionListByProdCode" parameterType="_int" resultMap="prodResultMap">
         SELECT
-            prod_option_code
+            p.prod_code
           , prod_name
           , prod_price
           , category_name
@@ -142,4 +157,71 @@
             p.prod_code = #{code}
     </select>
 
+
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="prodCode">
+        INSERT INTO
+            tbl_product
+            (
+              category_code
+            , prod_name
+            , prod_price
+            , soldout_yn
+            , prod_desc
+            )
+        VALUES
+            (
+              #{categoryCode}
+            , #{prodName}
+            , #{prodPrice}
+            , #{soldOut}
+            , #{prodDesc}
+            )
+    </insert>
+
+    <insert id="addProductOption" parameterType="map" useGeneratedKeys="true">
+        INSERT INTO
+        tbl_prod_option
+        (prod_code, prod_size, prod_color, prod_option_soldout_yn)
+        VALUES
+            <foreach collection="list" item="option" separator=", ">
+                (
+                  #{option.prodCode}
+                , #{option.prodSize}
+                , #{option.prodColor}
+                , #{option.optionSoldOut}
+                )
+            </foreach>
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE
+            tbl_product
+        SET
+              category_code = #{categoryCode}
+            , prod_name = #{prodName}
+            , prod_price = #{prodPrice}
+            , soldout_yn = #{soldOut}
+            , prod_desc = #{prodDesc}
+        WHERE
+            prod_code = #{prodCode}
+    </update>
+
+    <update id="updateProductOption" parameterType="ProductOption">
+        UPDATE
+            tbl_prod_option
+        SET
+              prod_size = #{prodSize}
+            , prod_color = #{prodColor}
+            , prod_option_soldout_yn = #{optionSoldOut}
+        WHERE
+            prod_code = #{prodCode}
+    </update>
+
+    <delete id="deleteProduct" parameterType="_int">
+        DELETE
+        FROM
+            tbl_product
+        WHERE
+            prod_code = #{code}
+    </delete>
 </mapper>

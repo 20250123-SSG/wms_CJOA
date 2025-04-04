@@ -1,9 +1,6 @@
 package com.cjoa.wms.view;
 
-import com.cjoa.wms.controller.CategoryController;
-import com.cjoa.wms.controller.DeliveryController;
-import com.cjoa.wms.controller.ReceiveController;
-import com.cjoa.wms.controller.UserController;
+import com.cjoa.wms.controller.*;
 import com.cjoa.wms.dto.CategoryDto;
 import com.cjoa.wms.dto.UserDto;
 
@@ -19,6 +16,8 @@ public class AdminView {
     private CategoryController categoryController = new CategoryController();
     private ReceiveController receiveController = new ReceiveController();
     private DeliveryController deliveryController = new DeliveryController();
+    private ProductManageView productManageView = new ProductManageView();
+    private ReceiveDeliveryController receiveDeliveryController = new ReceiveDeliveryController();
     public void mainView() {
         while (true) {
             System.out.print("""
@@ -40,7 +39,7 @@ public class AdminView {
                     CategoryManageView();
                     break;
                 case "3":
-//                    ProductManageView();
+                    productManageView.mainView();
                     break;
                 case "4":
                     StockView();
@@ -121,7 +120,7 @@ public class AdminView {
                     \n===============================
                     1. 입고 조회
                     2. 출고 조회
-                    3. 입출고 조회
+                    3. 재고 조회
                     0. 이전 메뉴로 돌아가기
                     ===============================
                     """);
@@ -134,7 +133,7 @@ public class AdminView {
                     DeliveryView();
                      break;
                 case "3":
-
+                    ReceiveDeliveryView();
                     break;
                 case "0":
                     return;
@@ -197,6 +196,29 @@ public class AdminView {
             }
         }
     }
+    private void ReceiveDeliveryView(){
+        while (true) {
+            System.out.print("""
+                    \n===============================
+                    1. 전체 내역 조회
+                    2. 날짜로 조회
+                    0. 이전 메뉴로 돌아가기
+                    ===============================
+                    """);
+            String menu = sc.nextLine();
+            switch (menu) {
+                case "1":
+                    receiveDeliveryController.receiveDeliverySearchAll();
+                    break;
+                case "2":
+                    receiveDeliveryDate();
+                    break;
+                case "0":
+                    return;
+        }
+    }
+    }
+
 
     private int deliveryCode(){
         System.out.println("조회하고자 하는 출고 내역의 코드를 입력해주세요 : ");
@@ -265,6 +287,37 @@ public class AdminView {
                     continue;
                 }
                 deliveryController.deliverySearchByDate(start, end);
+                break;
+            }catch (DateTimeParseException e){
+                System.out.println("날짜 형식이 잘못되었습니다. '0000-00-00' 형식으로 입력해주세요.");
+
+            }
+
+        }
+    }
+    private void receiveDeliveryDate() {
+        String start = null;
+        String end = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (true) {
+            try {
+                System.out.print("조회 시작 날짜 입력(0000-00-00): ");
+                start = sc.nextLine();
+                startDate = LocalDate.parse(start, formatter);
+
+                System.out.print("조회 종료 날짜 입력(0000-00-00): ");
+                end = sc.nextLine();
+                endDate = LocalDate.parse(end, formatter);
+
+                //시작 날짜가 종료날짜보다 이후 인 경우
+                if (startDate.isAfter(endDate)) {
+                    System.out.println("조회 시작일은 종료일보다 이전이어야 합니다.");
+                    continue;
+                }
+                receiveDeliveryController.receiveDeliverySearchByDate(start, end);
                 break;
             }catch (DateTimeParseException e){
                 System.out.println("날짜 형식이 잘못되었습니다. '0000-00-00' 형식으로 입력해주세요.");

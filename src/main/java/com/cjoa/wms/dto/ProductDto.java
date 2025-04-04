@@ -22,6 +22,7 @@ public class ProductDto {
     private String prodDesc;
 
 
-    private List<ProductOptionDto> productOptionDto;
+    private List<ProductOptionDto> productOptionList;
+
 
 }

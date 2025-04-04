@@ -11,6 +11,7 @@ import lombok.*;
 public class ProductOptionDto {
 
     private int prodOptionCode;
+    private int prodCode;
     private String prodSize;
     private String prodColor;
     private String optionSoldOut;
