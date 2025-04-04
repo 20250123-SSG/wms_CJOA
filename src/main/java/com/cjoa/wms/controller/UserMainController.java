@@ -5,6 +5,7 @@ import com.cjoa.wms.dto.ProductOptionDto;
 import com.cjoa.wms.service.UserMainService;
 import com.cjoa.wms.view.ResultMainView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,24 +41,53 @@ public class UserMainController {
         ResultMainView.displayProductOptionList(prod);
     }
 
-    public void addProduct(ProductDto productDto) {
+    public void addProduct(Map<String, Object> productMap) {
+        if (productMap.get("categoryCode") == null ||
+                productMap.get("prodName") == null ||
+                productMap.get("prodPrice") == null ||
+                productMap.get("soldOut") == null ||
+                productMap.get("prodDesc") == null) {
+            throw new IllegalArgumentException("모든 필드를 올바르게 입력해야 합니다.");
+        }
+
+        ProductDto productDto = ProductDto.builder()
+                .categoryCode((Integer) productMap.get("categoryCode"))
+                .prodName((String) productMap.get("prodName"))
+                .prodPrice((Integer) productMap.get("prodPrice"))
+                .soldOut((String) productMap.get("soldOut"))
+                .prodDesc((String) productMap.get("prodDesc"))
+                .build();
+
+        List<Map<String, Object>> optionList = (List<Map<String, Object>>) productMap.get("productOptionList");
+        List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
+
+        for (Map<String, Object> optionMap : optionList) {
+            ProductOptionDto productOptionDto = ProductOptionDto.builder()
+                    .prodCode(productDto.getProdCode()) // prodCode는 나중에 설정해야 함
+                    .prodSize((String) optionMap.get("prodSize"))
+                    .prodColor((String) optionMap.get("prodColor"))
+                    .optionSoldOut((String) optionMap.get("optionSoldOut"))
+                    .build();
+            productOptionDtoList.add(productOptionDto);
+        }
+
+        productDto.setProductOptionList(productOptionDtoList);
+
         if (!productDto.getSoldOut().equals("Y")) {
             productDto.setSoldOut("N");
         }
-        List<ProductOptionDto> list = productDto.getProductOptionList();
-        for (int i = 0; i < list.size(); i++) {
-            ProductOptionDto productOptionDto = list.get(i);
-            if(!productOptionDto.getOptionSoldOut().equals("Y")) {
-                productOptionDto.setOptionSoldOut("N");
+
+        for (ProductOptionDto option : productOptionDtoList) {
+            if (!option.getOptionSoldOut().equals("Y")) {
+                option.setOptionSoldOut("N");
             }
-            list.set(i, productOptionDto);
         }
-        productDto.setProductOptionList(list);
-        int result = userMainService.addProduct(productDto);
+
+        userMainService.addProduct(productDto);
     }
 
+
     public void updateProduct(Map<String, Object> productMap) {
-        // 입력값 검증
         if (productMap.get("prodCode") == null ||
                 productMap.get("categoryCode") == null ||
                 productMap.get("prodName") == null ||
@@ -67,7 +97,6 @@ public class UserMainController {
             throw new IllegalArgumentException("모든 필드를 올바르게 입력해야 합니다.");
         }
 
-        // 모델에 담기
         ProductDto productDto = ProductDto.builder()
                 .prodCode((Integer) productMap.get("prodCode"))
                 .categoryCode((Integer) productMap.get("categoryCode"))
