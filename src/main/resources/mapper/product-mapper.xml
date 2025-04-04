@@ -115,19 +115,43 @@
 
     <insert id="addProductOption" parameterType="Product" useGeneratedKeys="true">
         INSERT INTO
-        tbl_product
-        (
-          prod_code
-        , prod_size
-        , prod_color
-        , prod_option_soldout_yn
-        )
+            tbl_product
+            (
+              prod_code
+            , prod_size
+            , prod_color
+            , prod_option_soldout_yn
+            )
         VALUES
-        <foreach collection="prodOptionList" item="option" open="(" separator="," close=")">
-          #{prodCode}
-        , #{option.prodSize}
-        , #{option.prodColor}
-        , #{option.optionSoldOut}
-        </foreach>
+            <foreach collection="prodOptionList" item="option" open="(" separator="," close=")">
+              #{prodCode}
+            , #{option.prodSize}
+            , #{option.prodColor}
+            , #{option.optionSoldOut}
+            </foreach>
     </insert>
+
+    <update id="updateProd" parameterType="Product">
+        UPDATE
+            tbl_product
+        SET
+              category_code = #{categoryCode}
+            , prod_name = #{prodName}
+            , prod_price = #{prodPrice}
+            , soldout_yn = #{soldOut}
+            , prod_desc = #{prodDesc}
+        WHERE
+            prod_code = #{prodCode}
+    </update>
+
+    <update id="updateProdOption" parameterType="ProductOption">
+        UPDATE
+            tbl_prod_option
+        SET
+              prod_size = #{prodSize}
+            , prod_color = #{prodColor}
+            , prod_option_soldout_yn = #{optionSoldOut}
+        WHERE
+            prod_code = #{prodCode}
+    </update>
 </mapper>

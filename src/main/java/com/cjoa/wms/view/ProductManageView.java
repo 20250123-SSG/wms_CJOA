@@ -34,10 +34,36 @@ public class ProductManageView {
                     productSearchView.productSearchMenu();
                     break;
                 case "3":
-//                    updateProductView();
+                    updateProductView();
                     break;
                 case "4":
 //                    deleteProductView();
+                    break;
+                case "0":
+                    return;
+                default:
+                    System.out.println("wrong menu, input again");
+                    break;
+            }
+        }
+    }
+
+    private void updateProductMenuView() {
+        while(true) {
+            System.out.print("""
+                    \n===============================
+                    1. 상품 수정
+                    2. 상품 옵션 수정
+                    0. 이전 메뉴로 돌아가기
+                    ===============================
+                    """);
+            String menu = sc.nextLine();
+            switch (menu) {
+                case "1":
+                    updateProductView();
+                    break;
+                case "2":
+                    updateProductOptionView();
                     break;
                 case "0":
                     return;

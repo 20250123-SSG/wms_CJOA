@@ -1,6 +1,7 @@
 package com.cjoa.wms.controller;
 
 import com.cjoa.wms.dto.ProductDto;
+import com.cjoa.wms.dto.ProductOptionDto;
 import com.cjoa.wms.service.UserMainService;
 import com.cjoa.wms.view.ResultMainView;
 
@@ -35,5 +36,13 @@ public class UserMainController {
 
     public void addProduct(ProductDto productDto) {
         int result = userMainService.addProduct(productDto);
+    }
+
+    public void updateProduct(ProductDto productDto) {
+        userMainService.updateProduct(productDto);
+    }
+
+    public void updateProductOptionByProdCode(ProductOptionDto productOptionDto) {
+        userMainService.updateProductOption(productOptionDto);
     }
 }

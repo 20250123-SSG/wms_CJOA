@@ -73,4 +73,32 @@ public class UserMainService {
         sqlSession.close();
         return result;
     }
+
+    public int updateProduct(ProductDto productDto) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        int result = productMapper.updateProduct(productDto);
+        if (result > 0) {
+            SuccessView("updateProduct");
+            sqlSession.commit();
+        } else {
+            FailView("updateProduct");
+            sqlSession.rollback();
+        }
+        return result;
+    }
+
+    public int updateProductOption(ProductOptionDto productOptionDto) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        int result = productMapper.updateProductOption(productOptionDto);
+        if (result > 0) {
+            SuccessView("updateProductOption");
+            sqlSession.commit();
+        } else {
+            FailView("updateProductOption");
+            sqlSession.rollback();
+        }
+        return result;
+    }
 }
