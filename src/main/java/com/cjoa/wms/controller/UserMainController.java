@@ -45,4 +45,8 @@ public class UserMainController {
     public void updateProductOption(ProductOptionDto productOptionDto) {
         userMainService.updateProductOption(productOptionDto);
     }
+
+    public void deleteProduct(int code) {
+        int result = userMainService.deleteProduct(code);
+    }
 }

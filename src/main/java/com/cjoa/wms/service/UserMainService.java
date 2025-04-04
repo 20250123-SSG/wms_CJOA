@@ -101,4 +101,18 @@ public class UserMainService {
         }
         return result;
     }
+
+    public int deleteProduct(int code) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        int result = productMapper.deleteProduct(code);
+        if (result > 0) {
+            SuccessView("deleteProduct");
+            sqlSession.commit();
+        } else {
+            FailView("deleteProduct");
+            sqlSession.rollback();
+        }
+        return result;
+    }
 }

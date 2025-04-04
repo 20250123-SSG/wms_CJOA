@@ -37,7 +37,7 @@ public class ProductManageView {
                     updateProductMenuView();
                     break;
                 case "4":
-//                    deleteProductView();
+                    deleteProductView();
                     break;
                 case "0":
                     return;
@@ -46,6 +46,12 @@ public class ProductManageView {
                     break;
             }
         }
+    }
+
+    private void deleteProductView() {
+        System.out.print("수정할 상품 코드 입력: ");
+        String productId = sc.nextLine();
+        userMainController.deleteProduct(Integer.parseInt(productId));
     }
 
     private void updateProductMenuView() {
