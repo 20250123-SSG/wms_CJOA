@@ -3,7 +3,6 @@ package com.cjoa.wms.view;
 import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultMainView {
@@ -32,13 +31,13 @@ public class ResultMainView {
         }else {
             System.out.print(product.getProdName() + "\t");
             System.out.print(product.getProdPrice());
-            System.out.println("");
+            System.out.println();
 
             List<ProductOptionDto> list = product.getProductOptionList();
             for (ProductOptionDto option : list) {
                 System.out.print(option.getProdColor() + "\t");
                 System.out.print(option.getProdSize() + "\t");
-                System.out.println("");
+                System.out.println();
             }
 
         }
