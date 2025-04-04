@@ -22,14 +22,12 @@ public class UserController {
     }
 
     public void addUser(UserDto user) {
-        ResultView.displayData(userService.addUser(user));
-        return;
+        userService.addUser(user);
     }
 
 
     public void updateUserByCode(UserDto user) {
         userService.updateUserByCode(user);
-        return;
     }
 
     public void deleteUserByCode(int code) {

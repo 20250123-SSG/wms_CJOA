@@ -13,13 +13,13 @@ public class AdminView {
 
     private Scanner sc = new Scanner(System.in);
 
-    private UserController userController = new UserController();
     private ReceiveController receiveController = new ReceiveController();
     private DeliveryController deliveryController = new DeliveryController();
     private ReceiveDeliveryController receiveDeliveryController = new ReceiveDeliveryController();
 
     private ProductManageView productManageView = new ProductManageView();
     private CategoryManageView categoryManageView = new CategoryManageView();
+    private UserManageView userManageView = new UserManageView();
 
     private RevenueController revenueController = new RevenueController();
     public void mainView() {
@@ -37,7 +37,7 @@ public class AdminView {
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
-                    UserManagerView();
+                    userManageView.mainView();
                     break;
                 case "2":
                     categoryManageView.mainView();
@@ -50,37 +50,6 @@ public class AdminView {
                     break;
                 case "5":
                     RevenueView();
-                    break;
-                case "0":
-                    return;
-            }
-        }
-    }
-
-    private void UserManagerView() {
-        while (true) {
-            System.out.print("""
-                    \n===============================
-                    1. 회원 생성
-                    2. 회원 조회
-                    3. 회원 수정
-                    4. 회원 삭제
-                    0. 이전 메뉴로 돌아가기
-                    ===============================
-                    """);
-            String menu = sc.nextLine();
-            switch (menu) {
-                case "1":
-                    userController.addUser(addUserForm());
-                    break;
-                case "2":
-                    userController.getAllUser();
-                    break;
-                case "3":
-                    userController.updateUserByCode(inputCode());
-                    break;
-                case "4":
-                    userController.deleteUserByCode(inputDeleteCode());
                     break;
                 case "0":
                     return;
@@ -105,7 +74,7 @@ public class AdminView {
                     break;
                 case "2":
                     DeliveryView();
-                     break;
+                    break;
                 case "3":
                     ReceiveDeliveryView();
                     break;

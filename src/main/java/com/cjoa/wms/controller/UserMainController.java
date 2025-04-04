@@ -40,10 +40,25 @@ public class UserMainController {
     }
 
     public void addProduct(ProductDto productDto) {
+        if (!productDto.getSoldOut().equals("Y")) {
+            productDto.setSoldOut("N");
+        }
+        List<ProductOptionDto> list = productDto.getProductOptionList();
+        for (int i = 0; i < list.size(); i++) {
+            ProductOptionDto productOptionDto = list.get(i);
+            if(!productOptionDto.getOptionSoldOut().equals("Y")) {
+                productOptionDto.setOptionSoldOut("N");
+            }
+            list.set(i, productOptionDto);
+        }
+        productDto.setProductOptionList(list);
         int result = userMainService.addProduct(productDto);
     }
 
     public void updateProduct(ProductDto productDto) {
+        if (!productDto.getSoldOut().equals("Y")) {
+            productDto.setSoldOut("N");
+        }
         userMainService.updateProduct(productDto);
     }
 

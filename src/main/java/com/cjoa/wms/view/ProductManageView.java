@@ -112,9 +112,6 @@ public class ProductManageView {
         String price = sc.nextLine();
         System.out.print("품절유무(Y/N): ");
         String yesOrNo = sc.nextLine().toUpperCase();
-        if (!yesOrNo.equals("Y")) {
-            yesOrNo = "N";
-        }
         System.out.print("description: ");
         String description = sc.nextLine();
         ProductDto productDto = new ProductDto().builder()
@@ -136,9 +133,6 @@ public class ProductManageView {
         String price = sc.nextLine();
         System.out.print("품절유무(Y/N): ");
         String yesOrNo = sc.nextLine().toUpperCase();
-        if (!yesOrNo.equals("Y")) {
-            yesOrNo = "N";
-        }
         System.out.print("description: ");
         String description = sc.nextLine();
         ProductDto productDto = new ProductDto().builder()
@@ -158,9 +152,6 @@ public class ProductManageView {
             String color = sc.nextLine();
             System.out.print("옵션 품절 여부(Y/N): ");
             String optionyesOrNo = sc.nextLine().toUpperCase();
-            if (!optionyesOrNo.equals("Y")) {
-                optionyesOrNo = "N";
-            }
             ProductOptionDto productOptionDto = new ProductOptionDto().builder()
                     .prodCode(productDto.getProdCode())
                     .prodSize(size)
