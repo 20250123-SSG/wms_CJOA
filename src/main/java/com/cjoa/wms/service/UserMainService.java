@@ -39,12 +39,12 @@ public class UserMainService {
         return list;
     }
 
-    public List<ProductDto> selectProductOptionListByProdCode(int code) {
+    public ProductDto selectProductOptionListByProdCode(int code) {
         SqlSession sqlSession = getSqlSession();
         productMapper = sqlSession.getMapper(ProductMapper.class);
-        List<ProductDto> list = productMapper.selectProductOptionListByProdCode(code);
+        ProductDto prod = productMapper.selectProductOptionListByProdCode(code);
         sqlSession.close();
-        return list;
+        return prod;
     }
 
 
