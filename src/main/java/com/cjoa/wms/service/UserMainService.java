@@ -6,8 +6,9 @@ import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.cjoa.wms.config.MyBatisConfig.getSqlSession;
 import static com.cjoa.wms.view.ResultView.FailView;
@@ -15,7 +16,6 @@ import static com.cjoa.wms.view.ResultView.SuccessView;
 
 public class UserMainService {
 
-    private UserMapper userMapper;
     private ProductMapper productMapper;
 
     public List<ProductDto> selectProductList() {
@@ -25,6 +25,14 @@ public class UserMainService {
         sqlSession.close();
         return list;
 
+    }
+
+    public List<ProductDto> selectProductListByAdmin() {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        List<ProductDto> list = productMapper.selectAllProductForAdmin();
+        sqlSession.close();
+        return list;
     }
 
     public List<ProductDto> selectProductListByCategoryCode(int code) {
@@ -58,14 +66,20 @@ public class UserMainService {
         int result = productMapper.addProduct(productDto);
         if (result > 0) {
             SuccessView("addProduct");
-            int optionResult = productMapper.addProductOption(productDto);
-//            if (optionResult == productDto.getProductOptionDto.size()) {
-//                SuccessView("addProductOptions");
-//                sqlSession.commit();
-//            } else {
-//                FailView("addProductOptions");
-//                sqlSession.rollback();
-//            }
+            List<ProductOptionDto> list = productDto.getProductOptionList();
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setProdCode(productDto.getProdCode());
+                System.out.println(list.get(i).toString());
+
+            }
+            int optionResult = productMapper.addProductOption(Map.of("list", list));
+            if (optionResult == productDto.getProductOptionList().size()) {
+                SuccessView("addProductOptions");
+                sqlSession.commit();
+            } else {
+                FailView("addProductOptions");
+                sqlSession.rollback();
+            }
         } else {
             sqlSession.rollback();
             FailView("addProduct");

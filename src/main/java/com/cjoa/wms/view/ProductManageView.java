@@ -31,7 +31,7 @@ public class ProductManageView {
                     addProductView();
                     break;
                 case "2":
-                    productSearchView.productSearchMenu();
+                    productSearchView.selectAllProductByAdmin();
                     break;
                 case "3":
                     updateProductMenuView();
@@ -49,7 +49,7 @@ public class ProductManageView {
     }
 
     private void deleteProductView() {
-        System.out.print("수정할 상품 코드 입력: ");
+        System.out.print("삭제 상품 코드 입력: ");
         String productId = sc.nextLine();
         userMainController.deleteProduct(Integer.parseInt(productId));
     }
@@ -149,15 +149,19 @@ public class ProductManageView {
                 .build();
         List<ProductOptionDto> productOptionDtoList = new ArrayList<>();
         while (true) {
+            System.out.println("======================");
+            System.out.println("옵션 입력");
             System.out.print("size: ");
             String size = sc.nextLine();
             System.out.print("color: ");
             String color = sc.nextLine();
+            System.out.print("옵션 품절 여부(Y/N): ");
             String optionyesOrNo = sc.nextLine().toUpperCase();
             if (!optionyesOrNo.equals("Y")) {
                 optionyesOrNo = "N";
             }
             ProductOptionDto productOptionDto = new ProductOptionDto().builder()
+                    .prodCode(productDto.getProdCode())
                     .prodSize(size)
                     .prodColor(color)
                     .optionSoldOut(optionyesOrNo)
@@ -166,9 +170,11 @@ public class ProductManageView {
             System.out.print("더 입력하시겠습니까?: ");
             String input = sc.nextLine().toUpperCase();
             if (!input.equals("Y")) {
+                System.out.println("======================");
                 break;
             }
         }
-//        productDto.setProductOptionDto(productOptionDtoList);
+        productDto.setProductOptionList(productOptionDtoList);
+        userMainController.addProduct(productDto);
     }
 }
