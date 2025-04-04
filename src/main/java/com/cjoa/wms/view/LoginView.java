@@ -36,7 +36,7 @@ public class LoginView {
                         break;
                     case "창고관리자":
                         System.out.println("Warehouse Manager Login");
-                        warehouseManagerView.warehouseMangerMenu(user.getUserCode());
+                        warehouseManagerView.warehouseMangerMenu();
                         break;
                     default:
                         System.out.println("Invalid User");

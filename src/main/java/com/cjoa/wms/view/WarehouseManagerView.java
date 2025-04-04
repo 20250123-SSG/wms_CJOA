@@ -8,7 +8,7 @@ public class WarehouseManagerView {
     ReceiveMenuView receiveMenuView = new ReceiveMenuView();
     StockMenuView stockMenuView = new StockMenuView();
 
-    public void warehouseMangerMenu(int code){ // 창고관리자 메뉴화면
+    public void warehouseMangerMenu(){ // 창고관리자 메뉴화면
 
         while (true) {
             System.out.print("""
@@ -27,7 +27,7 @@ public class WarehouseManagerView {
                     receiveMenuView.receiveMenu();
                     break;
                 case "2":
-                    deliveryMenuView.deliveryMenu(code);
+                    deliveryMenuView.deliveryMenu();
                     break;
                 case "3":
                     stockMenuView.stockMenu();

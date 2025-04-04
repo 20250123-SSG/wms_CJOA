@@ -31,14 +31,14 @@
     </resultMap>
 
 
-        <resultMap id="deliveryResultMap" type="Delivery">
-            <id column="delivery_code" property="deliveryCode"/>
-            <result column="order_code" property="orderCode"/>
-            <result column="user_code" property="userCode"/>
-            <result column="delivery_time" property="deliveryTime"/>
-            <result column="prod_option_code" property="prodOptionCode"/>
-            <result column="delivery_quantity" property="deliveryQuantity"/>
-        </resultMap>
+    <resultMap id="deliveryResultMap" type="Delivery">
+        <id column="delivery_code" property="deliveryCode"/>
+        <result column="order_code" property="orderCode"/>
+        <result column="user_code" property="userCode"/>
+        <result column="delivery_time" property="deliveryTime"/>
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="delivery_quantity" property="deliveryQuantity"/>
+    </resultMap>
 
 
     <select id="checkOrderList" resultMap="resultOrderDeliveryListMap">
@@ -157,5 +157,15 @@
     WHERE <![CDATA[ delivery_time >= #{startTime}
         AND delivery_time < #{nextDayEndTime} ]]>
     ORDER BY delivery_time desc
-</select>
+    </select>
+
+    <update id="updateOptionSoldout" parameterType="_int">
+        UPDATE
+            tbl_prod_option
+        SET
+            prod_option_soldout_yn = 'Y'
+        WHERE
+            prod_option_code = #{prodOptionCode}
+    </update>
+
 </mapper>
