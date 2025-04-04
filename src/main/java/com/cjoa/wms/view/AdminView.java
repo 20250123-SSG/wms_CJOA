@@ -40,7 +40,7 @@ public class AdminView {
                     UserManagerView();
                     break;
                 case "2":
-                    categoryManageView.categoryMainView();
+                    categoryManageView.mainView();
                     break;
                 case "3":
                     productManageView.mainView();

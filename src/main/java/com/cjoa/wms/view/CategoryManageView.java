@@ -10,7 +10,7 @@ public class CategoryManageView {
     private Scanner sc = new Scanner(System.in);
     private CategoryController categoryController = new CategoryController();
 
-    public void categoryMainView() {
+    public void mainView() {
         while (true) {
             System.out.print("""
                     \n===============================
