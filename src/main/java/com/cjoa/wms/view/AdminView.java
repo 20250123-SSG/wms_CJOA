@@ -19,6 +19,7 @@ public class AdminView {
     private CategoryController categoryController = new CategoryController();
     private ReceiveController receiveController = new ReceiveController();
     private DeliveryController deliveryController = new DeliveryController();
+    private ProductManageView productManageView = new ProductManageView();
     public void mainView() {
         while (true) {
             System.out.print("""
@@ -40,7 +41,7 @@ public class AdminView {
                     CategoryManageView();
                     break;
                 case "3":
-                    ProductManageView.mainView();
+                    productManageView.mainView();
                     break;
                 case "4":
                     StockView();
@@ -121,7 +122,7 @@ public class AdminView {
                     \n===============================
                     1. 입고 조회
                     2. 출고 조회
-                    3. 입출고 조회
+                    3. 재고 조회
                     0. 이전 메뉴로 돌아가기
                     ===============================
                     """);

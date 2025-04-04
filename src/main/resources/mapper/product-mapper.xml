@@ -40,6 +40,22 @@
             prod_code ASC
     </select>
 
+    <select id="selectAllProductForAdmin" resultMap="prodResultMap">
+        SELECT
+        prod_code
+        , c.category_code
+        , category_name
+        , prod_name
+        , prod_price
+        , soldout_yn
+        , prod_desc
+        FROM
+        tbl_product p
+        JOIN tbl_category c ON c.category_code = p.category_code
+        ORDER BY
+        prod_code ASC
+    </select>
+
     <select id="selectProductByCategory" resultMap="prodResultMap">
         SELECT
             prod_code
@@ -93,6 +109,8 @@
         AND p.prod_code = #{code}
     </select>
 
+
+
     <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="prodCode">
         INSERT INTO
             tbl_product
@@ -113,25 +131,22 @@
             )
     </insert>
 
-    <insert id="addProductOption" parameterType="Product" useGeneratedKeys="true">
+    <insert id="addProductOption" parameterType="map" useGeneratedKeys="true">
         INSERT INTO
-            tbl_product
-            (
-              prod_code
-            , prod_size
-            , prod_color
-            , prod_option_soldout_yn
-            )
+        tbl_prod_option
+        (prod_code, prod_size, prod_color, prod_option_soldout_yn)
         VALUES
-            <foreach collection="prodOptionList" item="option" open="(" separator="," close=")">
-              #{prodCode}
-            , #{option.prodSize}
-            , #{option.prodColor}
-            , #{option.optionSoldOut}
+            <foreach collection="list" item="option" separator=", ">
+                (
+                  #{option.prodCode}
+                , #{option.prodSize}
+                , #{option.prodColor}
+                , #{option.optionSoldOut}
+                )
             </foreach>
     </insert>
 
-    <update id="updateProd" parameterType="Product">
+    <update id="updateProduct" parameterType="Product">
         UPDATE
             tbl_product
         SET
@@ -144,7 +159,7 @@
             prod_code = #{prodCode}
     </update>
 
-    <update id="updateProdOption" parameterType="ProductOption">
+    <update id="updateProductOption" parameterType="ProductOption">
         UPDATE
             tbl_prod_option
         SET
@@ -155,7 +170,7 @@
             prod_code = #{prodCode}
     </update>
 
-    <delete id="deleteProd" parameterType="_int">
+    <delete id="deleteProduct" parameterType="_int">
         DELETE
         FROM
             tbl_product

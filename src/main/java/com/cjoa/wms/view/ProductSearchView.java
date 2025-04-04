@@ -46,6 +46,12 @@ public class ProductSearchView {
         prodOptionView();
     }
 
+    public void selectAllProductByAdmin(){
+        userMainController.selectProductListByAdmin();
+
+        prodOptionView();
+    }
+
     // 카테고리 조회
     public void selectProductByCategory(){
         userMainController.selectProductListByCategoryCode(inputCode("카테고리코드"));
