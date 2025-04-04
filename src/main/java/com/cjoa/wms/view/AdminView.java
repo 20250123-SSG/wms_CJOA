@@ -1,6 +1,7 @@
 package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.CategoryController;
+import com.cjoa.wms.controller.ReceiveController;
 import com.cjoa.wms.controller.UserController;
 import com.cjoa.wms.dto.CategoryDto;
 import com.cjoa.wms.dto.UserDto;
@@ -12,7 +13,7 @@ public class AdminView {
     private UserController userController = new UserController();
     private Scanner sc = new Scanner(System.in);
     private CategoryController categoryController = new CategoryController();
-
+    private ReceiveController receiveController = new ReceiveController();
     public void mainView() {
         while (true) {
             System.out.print("""
@@ -37,7 +38,7 @@ public class AdminView {
 //                    ProductManageView();
                     break;
                 case "4":
-//                    StockView();
+                    StockView();
                     break;
                 case "5":
 //                    RevenueView();
@@ -109,6 +110,70 @@ public class AdminView {
             }
         }
     }
+    private void StockView(){
+        while (true) {
+            System.out.print("""
+                    \n===============================
+                    1. 입고 조회
+                    2. 출고 조회
+                    3. 재고 조회
+                    0. 이전 메뉴로 돌아가기
+                    ===============================
+                    """);
+            String menu = sc.nextLine();
+            switch (menu) {
+                case "1":
+                    ReceiveView();
+
+
+
+
+            }
+        }
+    }
+    private void ReceiveView() {
+        while (true) {
+            System.out.print("""
+                    \n===============================
+                    1. 전체 내역 조회
+                    2. 입고 코드로 조회
+                    3. 날짜로 조회
+                    0. 이전 메뉴로 돌아가기
+                    ===============================
+                    """);
+            String menu = sc.nextLine();
+            switch (menu) {
+                case "1":
+                    receiveController.receiveSearchAll();
+                    break;
+                case "2":
+                    receiveController.receiveSearchByCode(receiveCode());
+                    break;
+                case "3":
+                    receiveDate();
+                    break;
+                case "0":
+                    return;
+            }
+        }
+    }
+
+    private int receiveCode(){
+        System.out.println("조회하고자 하는 입고 내역의 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+        return Integer.parseInt(code);
+    }
+
+    private void receiveDate(){
+        System.out.print("조회 시작 날짜 입력(0000-00-00): ");
+        String start = sc.nextLine();
+        System.out.print("조회 종료 날짜 입력(0000-00-00): ");
+        String end = sc.nextLine();
+        receiveController.receiveSearchByDate(start, end);
+    }
+
+
+
 
     private UserDto inputCode() {
         System.out.print("수정을 원하는 유저의 코드를 입력해주세요 : ");
