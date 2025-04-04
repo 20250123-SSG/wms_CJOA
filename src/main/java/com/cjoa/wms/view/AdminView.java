@@ -11,13 +11,16 @@ import java.util.Scanner;
 
 public class AdminView {
 
-    private UserController userController = new UserController();
     private Scanner sc = new Scanner(System.in);
-    private CategoryController categoryController = new CategoryController();
+
+    private UserController userController = new UserController();
     private ReceiveController receiveController = new ReceiveController();
     private DeliveryController deliveryController = new DeliveryController();
-    private ProductManageView productManageView = new ProductManageView();
     private ReceiveDeliveryController receiveDeliveryController = new ReceiveDeliveryController();
+
+    private ProductManageView productManageView = new ProductManageView();
+    private CategoryManageView categoryManageView = new CategoryManageView();
+
     private RevenueController revenueController = new RevenueController();
     public void mainView() {
         while (true) {
@@ -37,7 +40,7 @@ public class AdminView {
                     UserManagerView();
                     break;
                 case "2":
-                    CategoryManageView();
+                    categoryManageView.categoryMainView();
                     break;
                 case "3":
                     productManageView.mainView();
@@ -47,37 +50,6 @@ public class AdminView {
                     break;
                 case "5":
                     RevenueView();
-                    break;
-                case "0":
-                    return;
-            }
-        }
-    }
-
-    private void CategoryManageView() {
-        while (true) {
-            System.out.print("""
-                    \n===============================
-                    1. 카테고리 생성
-                    2. 카테고리 조회
-                    3. 카테고리 수정
-                    4. 카테고리 삭제
-                    0. 이전 메뉴로 돌아가기
-                    ===============================
-                    """);
-            String menu = sc.nextLine();
-            switch (menu) {
-                case "1":
-                    categoryController.addCategory(addCategoryForm());
-                    break;
-                case "2":
-                    categoryController.getAllCategory();
-                    break;
-                case "3":
-                    categoryController.updateCategoryByCode(inputCategoryCode());
-                    break;
-                case "4":
-                    categoryController.deleteCategoryByCode(inputDeleteCategoryCode());
                     break;
                 case "0":
                     return;
@@ -115,7 +87,8 @@ public class AdminView {
             }
         }
     }
-    private void StockView(){
+
+    private void StockView() {
         while (true) {
             System.out.print("""
                     \n===============================
@@ -142,6 +115,7 @@ public class AdminView {
             }
         }
     }
+
     private void ReceiveView() {
         while (true) {
             System.out.print("""
@@ -170,7 +144,7 @@ public class AdminView {
     }
 
 
-    private void DeliveryView(){
+    private void DeliveryView() {
         while (true) {
             System.out.print("""
                     \n===============================
@@ -197,7 +171,8 @@ public class AdminView {
             }
         }
     }
-    private void ReceiveDeliveryView(){
+
+    private void ReceiveDeliveryView() {
         while (true) {
             System.out.print("""
                     \n===============================
@@ -216,8 +191,8 @@ public class AdminView {
                     break;
                 case "0":
                     return;
+            }
         }
-    }
     }
 
     private void RevenueView(){
@@ -338,8 +313,6 @@ public class AdminView {
 
 
 
-
-
     private UserDto inputCode() {
         System.out.print("수정을 원하는 유저의 코드를 입력해주세요 : ");
         String code = sc.nextLine();
@@ -383,31 +356,5 @@ public class AdminView {
                 .build();
 
         return userDto;
-    }
-
-    private CategoryDto addCategoryForm() {
-        System.out.print("카테고리명 입력: ");
-        String categoryName = sc.nextLine();
-
-        CategoryDto categoryDto = new CategoryDto()
-                .builder()
-                .categoryName(categoryName)
-                .build();
-
-        return categoryDto;
-    }
-
-    private CategoryDto inputCategoryCode() {
-        System.out.print("수정을 원하는 카테고리의 코드를 입력해주세요 : ");
-        String code = sc.nextLine();
-        CategoryDto categoryDto = addCategoryForm();
-        categoryDto.setCategoryCode(Integer.parseInt(code));
-        return categoryDto;
-    }
-
-    private String inputDeleteCategoryCode() {
-        System.out.print("삭제를 원하는 카테고리의 코드를 입력해주세요 : ");
-        String code = sc.nextLine();
-        return code;
     }
 }
