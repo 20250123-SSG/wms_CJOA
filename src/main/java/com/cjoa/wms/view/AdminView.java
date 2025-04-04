@@ -35,7 +35,7 @@ public class AdminView {
                     CategoryManageView();
                     break;
                 case "3":
-//                    ProductManageView();
+                    ProductManageView.mainView();
                     break;
                 case "4":
                     StockView();
