@@ -30,6 +30,17 @@
         <result column="user_code" property="userCode"/>
     </resultMap>
 
+
+        <resultMap id="deliveryResultMap" type="Delivery">
+            <id column="delivery_code" property="deliveryCode"/>
+            <result column="order_code" property="orderCode"/>
+            <result column="user_code" property="userCode"/>
+            <result column="delivery_time" property="deliveryTime"/>
+            <result column="prod_option_code" property="prodOptionCode"/>
+            <result column="delivery_quantity" property="deliveryQuantity"/>
+        </resultMap>
+
+
     <select id="checkOrderList" resultMap="resultOrderDeliveryListMap">
         SELECT
               o.order_code
@@ -103,4 +114,48 @@
             stock_option_code = #{item.prodOptionCode}
         </foreach>
     </update>
+
+    <select id = "deliverySearchAll" resultMap="deliveryResultMap">
+        SELECT
+        delivery_code
+        , order_code
+        ,user_code
+        ,delivery_time
+        ,prod_option_code
+        ,delivery_quantity
+        FROM
+        tbl_delivery
+        ORDER BY delivery_time desc
+
+    </select>
+
+    <select id = "deliverySearchByCode" parameterType="_int" resultMap="deliveryResultMap">
+        SELECT
+        delivery_code
+        , order_code
+        ,user_code
+        ,delivery_time
+        ,prod_option_code
+        ,delivery_quantity
+        FROM
+        tbl_delivery
+        WHERE delivery_code = #{delivery_code}
+        ORDER BY delivery_time desc
+
+    </select>
+
+    <select id = "deliverySearchByDate" parameterType="map" resultMap="deliveryResultMap">
+    SELECT
+    delivery_code
+    , order_code
+    ,user_code
+    ,delivery_time
+    ,prod_option_code
+    ,delivery_quantity
+    FROM
+    tbl_delivery
+    WHERE <![CDATA[ delivery_time >= #{startTime}
+        AND delivery_time < #{nextDayEndTime} ]]>
+    ORDER BY delivery_time desc
+</select>
 </mapper>
