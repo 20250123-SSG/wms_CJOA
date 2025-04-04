@@ -29,5 +29,6 @@
         <mapper resource="mapper/delivery-mapper.xml"/>
         <mapper resource="mapper/category-mapper.xml"/>
         <mapper resource="mapper/product-mapper.xml"/>
+        <mapper resource="mapper/receive-mapper.xml"/>
     </mappers>
 </configuration>
