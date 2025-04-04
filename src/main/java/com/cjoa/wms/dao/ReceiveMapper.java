@@ -20,5 +20,8 @@ public interface ReceiveMapper {
     int insertReceive(OrderProdOptionDeliveryDto prodInfo);
 
     int updateStockPlus(OrderProdOptionDeliveryDto prodInfo);
-  
+
+    String checkProdOptionSoldout(int code);
+
+    int updateProdOptionSoldout(int code);
 }

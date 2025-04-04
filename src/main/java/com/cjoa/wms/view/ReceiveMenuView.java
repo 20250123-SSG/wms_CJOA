@@ -40,18 +40,19 @@ public class ReceiveMenuView {
 
             // 해당상품 조회 후 yes or no
             OrderProdOptionDeliveryDto prodInfo = receiveController.checkProductByOptionCode(prodOptionCode);
-            System.out.print("해당 상품을 입고 하시겠습니까? (y/n)\n>> ");
-            String receive = sc.nextLine().toUpperCase();
+            if (prodInfo != null) {
+                System.out.print("해당 상품을 입고 하시겠습니까? (y/n)\n>> ");
+                String receive = sc.nextLine().toUpperCase();
 
-            if ("Y".equals(receive)) {
-                // 입고수량 입력 후 입고처리 및 재고수량증가 (트랜잭션)
-                System.out.print("입고 수량 입력 >>");
-                String receiveNum = sc.nextLine();
-                System.out.print("상품 원가 입력 >>");
-                String originPrice = sc.nextLine();
-                receiveController.receiveProcess(receiveNum, prodInfo, originPrice);
+                if ("Y".equals(receive)) {
+                    // 입고수량 입력 후 입고처리 및 재고수량증가 (트랜잭션)
+                    System.out.print("입고 수량 입력 >>");
+                    String receiveNum = sc.nextLine();
+                    System.out.print("상품 원가 입력 >>");
+                    String originPrice = sc.nextLine();
+                    receiveController.receiveProcess(receiveNum, prodInfo, originPrice);
+                }
             }
-
             System.out.print("\n입고를 계속 진행하시겠습니까? (y/n)\n>> ");
             String menu = sc.nextLine().toUpperCase();
             if (!"Y".equals(menu)) {
