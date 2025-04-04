@@ -2,12 +2,15 @@ package com.cjoa.wms.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 @Builder
-public class DeliveryDto {
+public class DeliveryDto{
 
     private int deliveryCode;
     private int orderCode;
@@ -22,6 +25,11 @@ public class DeliveryDto {
                 deliveryCode, orderCode, userCode, deliveryTime, prodOptionCode, deliveryQuantity
         );
     }
+
+
+
+
+
 
 
 }

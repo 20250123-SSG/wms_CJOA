@@ -55,13 +55,17 @@ public class DeliveryService {
     public List<DeliveryDto> deliverySearchAll(){
         SqlSession sqlSession = getSqlSession();
         deliveryMapper = sqlSession.getMapper(DeliveryMapper.class);
-        return deliveryMapper.deliverySearchAll();
+        List<DeliveryDto> list = deliveryMapper.deliverySearchAll();
+        sqlSession.close();
+        return list;
     }
 
     public  List<DeliveryDto> deliverySearchByCode(int deliveryCode){
         SqlSession sqlSession = getSqlSession();
         deliveryMapper = sqlSession.getMapper(DeliveryMapper.class);
-        return deliveryMapper.deliverySearchByCode(deliveryCode);
+        List<DeliveryDto> list = deliveryMapper.deliverySearchByCode(deliveryCode);
+        sqlSession.close();
+        return list;
     }
     public List<DeliveryDto> deliverySearchByDate(String startTime, String endTime){
         SqlSession sqlSession = getSqlSession();
@@ -74,7 +78,9 @@ public class DeliveryService {
                 "startTime", startTime,
                 "nextDayEndTime", nextDayEndTime
         );
-        return deliveryMapper.deliverySearchByDate(param);
+        List<DeliveryDto> list = deliveryMapper.deliverySearchByDate(param);
+        sqlSession.close();
+        return list;
 
 
 }

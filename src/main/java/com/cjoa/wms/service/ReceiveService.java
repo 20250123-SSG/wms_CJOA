@@ -19,12 +19,16 @@ public class ReceiveService {
     public List<ReceiveDto> receiveSearchAll(){
         SqlSession sqlSession = getSqlSession();
         receiveMapper = sqlSession.getMapper(ReceiveMapper.class);
-        return receiveMapper.receiveSearchAll();
+        List<ReceiveDto> list = receiveMapper.receiveSearchAll();
+        sqlSession.close();
+        return list;
     }
     public List<ReceiveDto> receiveSearchByCode(int receiveCode){
         SqlSession sqlSession = getSqlSession();
         receiveMapper = sqlSession.getMapper(ReceiveMapper.class);
-        return receiveMapper.receiveSearchByCode(receiveCode);
+        List<ReceiveDto> list = receiveMapper.receiveSearchByCode(receiveCode);
+        sqlSession.close();
+        return list;
     }
     public List<ReceiveDto> receiveSearchByDate(String startTime, String endTime){
         SqlSession sqlSession = getSqlSession();
@@ -37,7 +41,9 @@ public class ReceiveService {
                 "startTime", startTime,
                 "nextDayEndTime", nextDayEndTime
         );
-        return receiveMapper.receiveSearchByDate(param);
+        List<ReceiveDto> list = receiveMapper.receiveSearchByDate(param);
+        sqlSession.close();
+        return list;
     }
 
     public OrderProdOptionDeliveryDto checkProductByOptionCode(int optionCode) {
