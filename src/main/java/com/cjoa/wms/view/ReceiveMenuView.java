@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class ReceiveMenuView {
     Scanner sc = new Scanner(System.in);
-    ReceiveController receiveController = new ReceiveController();
+    private ReceiveController receiveController = new ReceiveController();
+    private ReceiveView receiveView = new ReceiveView();
 
     public void receiveMenu(){
 
@@ -24,7 +25,7 @@ public class ReceiveMenuView {
 
         switch (menu) {
             case "1": insertReceive(); break;
-            case "2":  break;
+            case "2": receiveView.mainView(); break;
             case "0": return;
             default:
                 System.out.println("메뉴 번호를 다시 입력해주세요.");
