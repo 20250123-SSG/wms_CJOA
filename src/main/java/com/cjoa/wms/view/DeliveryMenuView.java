@@ -10,7 +10,8 @@ import static com.cjoa.wms.view.LoginView.userCode;
 
 public class DeliveryMenuView {
     Scanner sc = new Scanner(System.in);
-    DeliveryController deliveryController = new DeliveryController();
+    private DeliveryController deliveryController = new DeliveryController();
+    private DeliveryView deliveryView = new DeliveryView();
 
     public void deliveryMenu(){ // 창고관리자 메뉴화면
 
@@ -29,7 +30,8 @@ public class DeliveryMenuView {
                 case "1":
                     checkOrderList();
                     break;
-                case "2": /*승주님이 만드시는 내역조회 호출?*/
+                case "2":
+                    deliveryView.mainView();
                     break;
                 case "0":
                     return;

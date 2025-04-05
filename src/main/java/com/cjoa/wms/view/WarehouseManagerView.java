@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class WarehouseManagerView {
     Scanner sc = new Scanner(System.in);
-    DeliveryMenuView deliveryMenuView = new DeliveryMenuView();
-    ReceiveMenuView receiveMenuView = new ReceiveMenuView();
-    StockMenuView stockMenuView = new StockMenuView();
+    private DeliveryMenuView deliveryMenuView = new DeliveryMenuView();
+    private ReceiveMenuView receiveMenuView = new ReceiveMenuView();
+    private StockMenuView stockMenuView = new StockMenuView();
 
     public void warehouseMangerMenu(){ // 창고관리자 메뉴화면
 
