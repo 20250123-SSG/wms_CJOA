@@ -75,13 +75,4 @@ public class UserController {
     }
 
 
-    public void updateUserByUser(Map<String, String> requestParam) {
-        UserDto user = UserDto.builder()
-                .userEmail(requestParam.get("userEmail"))
-                .userPhone(requestParam.get("userPhone"))
-                .userAddress(requestParam.get("userAddress"))
-                .userName(requestParam.get("userName"))
-                .build();
-        userService.updateUserByUser(user);
-    }
 }

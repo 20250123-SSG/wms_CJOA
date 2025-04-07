@@ -33,7 +33,7 @@ public class UserMainView {
             switch (menu){
                 case "1": new ProductSearchView().productSearchMenu();  break;
                 case "2": cartController.selectCartProductList(userCode); break;
-                case "3": userController.updateUserByUser(userCode); break;
+                case "3": break;
                 case "4": userController.getUserByUserCode(userCode); break;
                 case "0": return;
                 default:
@@ -42,7 +42,7 @@ public class UserMainView {
         }
     }
 
-    private void modifyMenuForm() {
+    private void updateUserByUserForm() {
         System.out.println("\n~~~~ 수정할 메뉴 정보를 입력해주세요 ~~~");
         System.out.println("> 이메일: ");
         String userEmail = sc.nextLine();
@@ -60,7 +60,6 @@ public class UserMainView {
                 "userName", userName
         );
 
-        userController.updateUserByUser(requestParam);
     }
 
 

@@ -77,22 +77,4 @@ public class UserService {
         return user;
     }
 
-    public void updateUserByUser(UserDto user) {
-        SqlSession sqlSession = getSqlSession();
-        userMapper = sqlSession.getMapper(UserMapper.class);
-
-        int result = 0;
-
-        try {
-            result = userMapper.updateUserByCode(user);
-            sqlSession.commit();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-            sqlSession.rollback();
-        }finally {
-            sqlSession.close();
-        }
-
-        return result;
-    }
 }

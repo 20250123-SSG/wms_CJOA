@@ -103,6 +103,5 @@
         WHERE
             user_code = #{userCode}
     </select>
-    
-    <update id=""
+
 </mapper>
