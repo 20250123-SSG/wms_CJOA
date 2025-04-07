@@ -32,4 +32,6 @@ public interface ProductMapper {
     int updateProductOption(ProductOptionDto productOptionDto);
 
     int deleteProduct(int code);
+
+    List<ProductOptionDto> getProductOptionByCode(int code);
 }
