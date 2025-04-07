@@ -181,8 +181,13 @@
 
     <insert id="addProductOption" parameterType="map" useGeneratedKeys="true">
         INSERT INTO
-        tbl_prod_option
-        (prod_code, prod_size, prod_color, prod_option_soldout_yn)
+            tbl_prod_option
+            (
+              prod_code
+            , prod_size
+            , prod_color
+            , prod_option_soldout_yn
+            )
         VALUES
             <foreach collection="list" item="option" separator=", ">
                 (
