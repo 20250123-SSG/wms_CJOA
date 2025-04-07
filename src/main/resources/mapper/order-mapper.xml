@@ -48,7 +48,7 @@
         )
         VALUES
         (
-        #{orderCode}
+          #{orderCode}
         , #{orderRequest}
         , #{orderDeliveryPhone}
         , #{orderDeliveryAddress}
@@ -66,11 +66,11 @@
         )
         SELECT
         c.cart_quantity,
-        #{order_code},      -- 주문 테이블 insert 후 생성된 key
+        #{orderCode},      -- 주문 테이블 insert 후 생성된 key
         po.prod_option_code
         FROM tbl_prod_option po
         JOIN tbl_cart c ON po.prod_option_code = c.prod_option_code
-        WHERE c.user_id = #{user_id}
+        WHERE c.user_id = #{userId}
     </insert>
 
 

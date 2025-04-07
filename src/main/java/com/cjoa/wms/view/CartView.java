@@ -39,7 +39,7 @@ public class CartView {
             String menu = sc.nextLine();
             switch (menu){
                 case "1" : modifyOptionInCart(list); break;
-                case "2" : new OrderView().purchaseProduct(total,list);/* 구매하기 기능 추가*/break;
+                case "2" : new OrderView().purchaseProduct(total);/* 구매하기 기능 추가*/break;
                 case "0" : new UserMainView().userMainView();
                 default:
                     System.out.println("메뉴 번호를 잘못누르셨습니다.");

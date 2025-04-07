@@ -2,6 +2,7 @@ package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.OrderController;
 import com.cjoa.wms.dto.CartDto;
+import com.cjoa.wms.dto.OrderDeliveryDto;
 import com.cjoa.wms.dto.UserDto;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class OrderView {
     OrderController orderController = new OrderController();
 
     // 구매 뷰
-    public void purchaseProduct(int total, List<CartDto> list){
+    public void purchaseProduct(int total){
         System.out.println("카드 / 현금: ");
         String payType = sc.nextLine();
         System.out.println("1. 집으로 배송\t 2. 배송지 입력");
@@ -46,6 +47,7 @@ public class OrderView {
         System.out.println("요청사항을 입력: ");
         String request = sc.nextLine();
 
+        OrderDeliveryDto orderdelivery = new OrderDeliveryDto();
         Map<String, String> requestParam = Map.of(
                 "orderPrice", String.valueOf(total),
                 "orderPayType", payType,

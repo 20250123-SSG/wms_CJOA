@@ -18,6 +18,7 @@ public class OrderController {
 
     public void insertOrderInfo(Map<String, String> requestParam) {
         OrderDeliveryDto orderDelivery = OrderDeliveryDto.builder()
+                .orderCode(Integer.parseInt(requestParam.get("orderCode")))
                 .orderPrice( Integer.parseInt(requestParam.get("orderPrice")) )
                 .orderPayType(requestParam.get("orderPayType"))
                 .orderDeliveryPhone(requestParam.get("orderDeliveryPhone"))
@@ -29,6 +30,6 @@ public class OrderController {
 
         orderService.insertOrderInfo(orderDelivery);
         orderService.insertOrderDeliveryInfo(orderDelivery);
-        orderService.insertOrderProdOption(orderDelivery);
+        //orderService.insertOrderProdOption(orderDelivery);
     }
 }

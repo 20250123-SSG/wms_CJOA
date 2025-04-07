@@ -89,6 +89,7 @@
     </delete>
     
     <delete id="dropCart" parameterType="_int">
+        DELETE
 
     </delete>
 
