@@ -99,7 +99,6 @@ public class UserMainService {
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).setProdCode(productDto.getProdCode());
                 System.out.println(list.get(i).toString());
-
             }
             int optionResult = productMapper.addProductOption(Map.of("list", list));
             if (optionResult == productDto.getProductOptionList().size()) {
@@ -155,6 +154,18 @@ public class UserMainService {
         } else {
             FailView("deleteProduct");
             sqlSession.rollback();
+        }
+        return result;
+    }
+
+    public List<ProductOptionDto> getProductOptionByCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        List<ProductOptionDto> result = productMapper.getProductOptionByCode(code);
+        if (result != null || result.size() > 0) {
+            SuccessView("getProductOptionByCode");
+        } else {
+            FailView("getProductOptionByCode");
         }
         return result;
     }
