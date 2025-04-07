@@ -1,10 +1,7 @@
 package com.cjoa.wms.view;
 
 
-import com.cjoa.wms.dto.CartDto;
-import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
-import com.cjoa.wms.dto.ProductDto;
-import com.cjoa.wms.dto.ProductOptionDto;
+import com.cjoa.wms.dto.*;
 
 import java.util.List;
 
@@ -68,4 +65,20 @@ public class ResultView {
             }
         }
     }
+
+    public static void userInfoView(UserDto user) {
+        if(user == null){
+            System.out.println("😂조회된 메뉴가 없습니다😂");
+        }else{
+            System.out.println("~~~~~~ 메뉴 정보 ~~~~~~");
+            System.out.println("Name: " + user.getUserName());
+            System.out.println("ID: " + user.getUserId());
+            System.out.println("Password: " + user.getUserPassword());
+            System.out.println("Email: " + user.getUserEmail());
+            System.out.println("Phone: " + user.getUserPhone());
+            System.out.println("Address: " + user.getUserAddress());
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+    }
+
 }

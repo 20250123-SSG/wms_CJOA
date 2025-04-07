@@ -68,4 +68,9 @@ public class UserController {
 
         userService.deleteUserByCode(code);
     }
+
+    public void getUserByUserCode(int userCode) {
+        UserDto user = userService.getUserByUserCode(userCode);
+        ResultView.userInfoView(user);
+    }
 }

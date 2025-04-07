@@ -19,7 +19,6 @@
             <result column="prod_option_soldout_yn" property="optionSoldOut"/>
             <result column="stock_quantity" property="quantity"/>
         </collection>
-
     </resultMap>
 
     <resultMap id="resultOrderProdOptionDeliveryMap" type="OrderProdOptionDelivery">
@@ -34,7 +33,6 @@
         <result column="stock_quantity" property="stockQuantity"/>
         <result column="user_code" property="userCode"/>
         <result column="prod_price" property="prodPrice"/>
-
     </resultMap>
 
     

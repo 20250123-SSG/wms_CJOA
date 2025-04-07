@@ -15,4 +15,6 @@ public interface UserMapper {
     int updateUserByCode(UserDto user);
 
     int deleteUserByCode(int code);
+
+    UserDto getUserByUserCode(int code);
 }
