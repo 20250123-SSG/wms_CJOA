@@ -42,27 +42,6 @@ public class UserMainView {
         }
     }
 
-    private void updateUserByUserForm() {
-        System.out.println("\n~~~~ 수정할 메뉴 정보를 입력해주세요 ~~~");
-        System.out.println("> 이메일: ");
-        String userEmail = sc.nextLine();
-        System.out.println("> 전화번호: ");
-        String userPhone = sc.nextLine();
-        System.out.println("> 주소: ");
-        String userAddress= sc.nextLine();
-        System.out.println("> 이름: ");
-        String userName = sc.nextLine();
-
-        Map<String, String> requestParam = Map.of(
-                "userEmail", userEmail,
-                "userPhone", userPhone,
-                "userAddress", userAddress,
-                "userName", userName
-        );
-
-    }
-
-
 
 
     // 상품 상세 옵션 => 장바구니 선택

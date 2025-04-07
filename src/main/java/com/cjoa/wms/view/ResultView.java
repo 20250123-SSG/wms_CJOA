@@ -68,7 +68,7 @@ public class ResultView {
 
     public static void userInfoView(UserDto user) {
         if(user == null){
-            System.out.println("😂조회된 메뉴가 없습니다😂");
+            System.out.println("조회된 메뉴가 없습니다");
         }else{
             System.out.println("~~~~~~ 메뉴 정보 ~~~~~~");
             System.out.println("Name: " + user.getUserName());
