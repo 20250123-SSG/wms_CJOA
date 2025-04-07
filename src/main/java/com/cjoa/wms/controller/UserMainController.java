@@ -10,11 +10,9 @@ import com.cjoa.wms.view.ResultView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map;
 
 import static com.cjoa.wms.view.ResultView.FailView;
 import static com.cjoa.wms.view.ResultView.SuccessView;
-
 
 public class UserMainController {
 
@@ -101,7 +99,8 @@ public class UserMainController {
                 productMap.get("prodName") == null ||
                 productMap.get("prodPrice") == null ||
                 productMap.get("soldOut") == null ||
-                productMap.get("description") == null) {
+                productMap.get("description") == null
+        ) {
             throw new IllegalArgumentException("모든 필드를 올바르게 입력해야 합니다.");
         }
 
@@ -122,11 +121,13 @@ public class UserMainController {
         if (productOptionMap.get("prodCode") == null ||
                 productOptionMap.get("prodSize") == null ||
                 productOptionMap.get("prodColor") == null ||
-                productOptionMap.get("optionSoldOut") == null) {
+                productOptionMap.get("optionSoldOut") == null ||
+                productOptionMap.get("code") == null) {
             throw new IllegalArgumentException("모든 필드를 올바르게 입력해야 합니다.");
         }
 
         ProductOptionDto productOptionDto = ProductOptionDto.builder()
+                .prodOptionCode((Integer) productOptionMap.get("code"))
                 .prodCode((Integer) productOptionMap.get("prodCode"))
                 .prodSize((String) productOptionMap.get("prodSize"))
                 .prodColor((String) productOptionMap.get("prodColor"))
@@ -155,6 +156,10 @@ public class UserMainController {
             ResultView.FailView("장바구니등록");
         }
     }
-  
+
+
+    public List<ProductOptionDto> getProductOptionByCode(String code) {
+        return userMainService.getProductOptionByCode(Integer.parseInt(code));
+    }
 }
 
