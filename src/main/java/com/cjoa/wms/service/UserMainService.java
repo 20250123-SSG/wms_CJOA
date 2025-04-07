@@ -56,11 +56,19 @@ public class UserMainService {
         SqlSession sqlSession = getSqlSession();
         cartMapper = sqlSession.getMapper(CartMapper.class);
 
+        // 조회 데이터가 있으면 업데이트 없으면 인서트
+        int count = cartMapper.checkCartProduct(cart);
         int result = 0;
         try {
-            result = cartMapper.insertCart(cart);
+            if (count > 0) {
+                // 수량 증가 update
+                result = cartMapper.insertSameProductCart(cart);
+            } else {
+                // insert
+                result = cartMapper.insertCart(cart);
+            }
             sqlSession.commit();
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
             sqlSession.rollback();
         }finally {

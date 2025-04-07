@@ -1,7 +1,5 @@
 package com.cjoa.wms.view;
 
-import com.cjoa.wms.dao.CartMapper;
-import com.cjoa.wms.dto.CartDto;
 import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 
@@ -10,7 +8,7 @@ import java.util.List;
 public class ResultMainView {
 
     // 상품 리스트 뷰
-    public static void displayProductList(List<ProductDto> list) {
+    public void displayProductList(List<ProductDto> list) {
         if(list.isEmpty()){
             System.out.println("조회된 메뉴가 없습니다😥");
         }else {
@@ -27,7 +25,7 @@ public class ResultMainView {
     }
 
     // 상품 상세 정보 뷰
-    public static void displayProductOptionList(ProductDto product){
+    public void displayProductOptionList(ProductDto product){
         if(product == null){
             System.out.println("없는 메뉴 번호입니다☹");
         }else {

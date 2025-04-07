@@ -2,11 +2,8 @@ package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.CartController;
 import com.cjoa.wms.controller.UserMainController;
-import com.cjoa.wms.dto.CartDto;
 import com.cjoa.wms.dto.ProductDto;
-import com.cjoa.wms.dto.ProductOptionDto;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 

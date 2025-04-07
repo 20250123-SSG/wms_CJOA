@@ -12,27 +12,28 @@ import java.util.Map;
 public class UserMainController {
 
     private UserMainService userMainService = new UserMainService();
+    private ResultMainView resultMainView = new ResultMainView();
 
 
 
     public void selectProductList() {
         List<ProductDto> list =userMainService.selectProductList();
-        ResultMainView.displayProductList(list);
+        resultMainView.displayProductList(list);
     }
 
     public void selectProductListByCategoryCode(String code) {
         List<ProductDto> list = userMainService.selectProductListByCategoryCode(Integer.parseInt(code));
-        ResultMainView.displayProductList(list);
+        resultMainView.displayProductList(list);
     }
 
     public void selectProductListByKeyword(String key) {
         List<ProductDto> list = userMainService.selectProductListByKeyword(key);
-        ResultMainView.displayProductList(list);
+        resultMainView.displayProductList(list);
     }
 
     public ProductDto selectProductOptionByProdCode(String code) {
         ProductDto prod = userMainService.selectProductOptionListByProdCode(Integer.parseInt(code));
-        ResultMainView.displayProductOptionList(prod);
+        resultMainView.displayProductOptionList(prod);
         return prod;
     }
 
@@ -50,7 +51,4 @@ public class UserMainController {
             ResultView.FailView("장바구니등록");
         }
     }
-
-
-
 }
