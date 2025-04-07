@@ -22,7 +22,6 @@ public class UserMainService {
     private CartMapper cartMapper;
 
 
-
     public List<ProductDto> selectProductList() {
         SqlSession sqlSession = getSqlSession();
         productMapper = sqlSession.getMapper(ProductMapper.class);
@@ -67,6 +66,26 @@ public class UserMainService {
     public int insertCart(CartDto cart) {
         SqlSession sqlSession = getSqlSession();
         cartMapper = sqlSession.getMapper(CartMapper.class);
+        // 조회 데이터가 있으면 업데이트 없으면 인서트
+        int count = cartMapper.checkCartProduct(cart);
+        int result = 0;
+        try {
+            if (count > 0) {
+                // 수량 증가 update
+                result = cartMapper.insertSameProductCart(cart);
+            } else {
+                // insert
+                result = cartMapper.insertCart(cart);
+            }
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return result;
+    }
 
     public int addProduct(ProductDto productDto) {
         SqlSession sqlSession = getSqlSession();
@@ -137,24 +156,5 @@ public class UserMainService {
         }
         return result;
     }
-        // 조회 데이터가 있으면 업데이트 없으면 인서트
-        int count = cartMapper.checkCartProduct(cart);
-        int result = 0;
-        try {
-            if (count > 0) {
-                // 수량 증가 update
-                result = cartMapper.insertSameProductCart(cart);
-            } else {
-                // insert
-                result = cartMapper.insertCart(cart);
-            }
-            sqlSession.commit();
-        } catch (Exception e){
-            e.printStackTrace();
-            sqlSession.rollback();
-        }finally {
-            sqlSession.close();
-        }
-        return result;
-    }
 }
+
