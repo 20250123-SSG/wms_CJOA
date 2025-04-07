@@ -81,6 +81,10 @@ public class ProductManageView {
     private void updateProductOptionView() {
         System.out.print("수정할 제품 코드: ");
         String code = sc.nextLine();
+        List<ProductOptionDto> list = userMainController.getProductOptionByCode(code);
+        ResultView.displayData(list);
+        System.out.print("수정할 제품 옵션 코드: ");
+        String optionCode = sc.nextLine();
         System.out.print("사이즈: ");
         String size = sc.nextLine();
         System.out.print("색상: ");
@@ -93,6 +97,7 @@ public class ProductManageView {
         }
 
         Map<String, Object> productOptionMap = new HashMap<>();
+        productOptionMap.put("code", Integer.parseInt(optionCode));
         productOptionMap.put("prodCode", Integer.parseInt(code));
         productOptionMap.put("prodSize", size);
         productOptionMap.put("prodColor", color);

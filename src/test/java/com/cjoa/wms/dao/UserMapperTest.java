@@ -28,17 +28,21 @@ class UserMapperTest {
         sqlSession.close();
     }
 
-//    @Test
-//    void getUserByUserIdAndPassword() {
-//        UserDto user = new UserDto()
-//                .builder()
-//                .userId("user1")
-//                .userPassword("password123")
-//                .build();
-//        UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "password", user.getUserPassword()));
-//        assertThat(userDto).isNotNull();
-//        assertThat(userDto.getUserId()).isEqualTo(user.getUserId()).isNotNull();
-//    }
+    @Test
+    void getUserByUserIdAndPassword() {
+        UserDto user = new UserDto()
+                .builder()
+                .userId("givenId")
+                .userPassword("givenPassword")
+                .userName("user1")
+                .userType("회원")
+                .userAddress("1234")
+                .userEmail("1234")
+                .userPhone("1234")
+                .build();
+        UserDto userDto = userMapper.getUserByUserIdAndPassword(Map.of("userId", user.getUserId(), "userPassword", user.getUserPassword()));
+        assertThat(userDto.getUserId()).isEqualTo(user.getUserId()).isNotNull() ;
+    }
 
     @Test
     void testGetAllUser() {
