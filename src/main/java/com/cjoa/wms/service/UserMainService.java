@@ -157,5 +157,17 @@ public class UserMainService {
         }
         return result;
     }
+
+    public List<ProductOptionDto> getProductOptionByCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        productMapper = sqlSession.getMapper(ProductMapper.class);
+        List<ProductOptionDto> result = productMapper.getProductOptionByCode(code);
+        if (result != null || result.size() > 0) {
+            SuccessView("getProductOptionByCode");
+        } else {
+            FailView("getProductOptionByCode");
+        }
+        return result;
+    }
 }
 

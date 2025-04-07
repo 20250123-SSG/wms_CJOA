@@ -22,6 +22,14 @@
 
     </resultMap>
 
+    <resultMap id="productOptionResultMap" type="ProductOption" >
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="prod_size" property="prodSize"/>
+        <result column="prod_color" property="prodColor"/>
+        <result column="prod_option_soldout_yn" property="optionSoldOut"/>
+        <result column="stock_quantity" property="quantity"/>
+    </resultMap>
+
     <resultMap id="resultOrderProdOptionDeliveryMap" type="OrderProdOptionDelivery">
         <id column="order_prod_option_code" property="orderProdOptionCode"/>
         <result column="prod_code" property="prodCode"/>
@@ -183,8 +191,13 @@
 
     <insert id="addProductOption" parameterType="map" useGeneratedKeys="true">
         INSERT INTO
-        tbl_prod_option
-        (prod_code, prod_size, prod_color, prod_option_soldout_yn)
+            tbl_prod_option
+            (
+              prod_code
+            , prod_size
+            , prod_color
+            , prod_option_soldout_yn
+            )
         VALUES
             <foreach collection="list" item="option" separator=", ">
                 (
@@ -208,7 +221,18 @@
         WHERE
             prod_code = #{prodCode}
     </update>
-
+    <select id="getProductOptionByCode" parameterType="_int" resultMap="productOptionResultMap">
+        SELECT
+            prod_option_code
+            , prod_code
+            , prod_size
+            , prod_color
+            , prod_option_soldout_yn
+        FROM
+            tbl_prod_option
+        WHERE
+            prod_code = #{code}
+    </select>
     <update id="updateProductOption" parameterType="ProductOption">
         UPDATE
             tbl_prod_option
@@ -218,6 +242,7 @@
             , prod_option_soldout_yn = #{optionSoldOut}
         WHERE
             prod_code = #{prodCode}
+            AND prod_option_code = #{prodOptionCode}
     </update>
 
     <delete id="deleteProduct" parameterType="_int">
