@@ -17,4 +17,7 @@ public class OrderDto {
     private String orderStatus;
     private String orderDate;
 
+    // 제거해도 될듯?
+
+
 }

@@ -50,7 +50,7 @@ public class ProductSearchView {
     public void selectAllProductByAdmin(){
         userMainController.selectProductListByAdmin();
 
-        prodOptionView();
+        prodOptionViewByAdmin();
     }
 
     // 카테고리 조회
@@ -80,6 +80,23 @@ public class ProductSearchView {
         }else {
             ProductDto product = userMainController.selectProductOptionByProdCode(code);
             new UserMainView().prodUpdateInCart(product, flag);
+        }
+
+    }
+
+    public void prodOptionViewByAdmin() {
+        System.out.print("""
+                \n=========================================================================
+                상세 정보를 보고 싶은 상품 번호를 입력하세요 (0을 입력하면 돌아갑니다)
+                =========================================================================
+                >> 입력:"""
+        );
+        String code = sc.nextLine();
+
+        if (code.equals("0")) {
+            productSearchMenu();// 0을 입력하면 돌아갑니다.
+        }else {
+            userMainController.selectProductOptionByProdCode(code);
         }
 
     }

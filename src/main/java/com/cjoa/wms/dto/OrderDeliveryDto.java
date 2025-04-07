@@ -2,6 +2,8 @@ package com.cjoa.wms.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,5 +22,7 @@ public class OrderDeliveryDto {
     private String orderDeliveryPhone;
     private String orderDeliveryAddress;
     private String orderDeliveryName;
+
+    private List<CartDto> cartList;
 
 }

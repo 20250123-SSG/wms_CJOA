@@ -15,8 +15,6 @@
         <typeAlias type="com.cjoa.wms.dto.ProductOptionDto" alias="ProductOption"/>
         <typeAlias type="com.cjoa.wms.dto.CartDto"  alias="Cart"/>
         <typeAlias type="com.cjoa.wms.dto.ReceiveDeliveryDto" alias="ReceiveDelivery"/>
-
-        <typeAlias type="com.cjoa.wms.dto.CartDto"  alias="Cart"/>
     </typeAliases>
     <environments default="dev">
         <environment id="dev">
@@ -39,5 +37,6 @@
         <mapper resource="mapper/receive-delivery-mapper.xml"/>
         <mapper resource="mapper/revenue-mapper.xml"/>
         <mapper resource="mapper/cart-mapper.xml"/>
+        <mapper resource="mapper/order-mapper.xml"/>
     </mappers>
 </configuration>
