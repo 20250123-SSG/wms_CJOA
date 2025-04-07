@@ -66,6 +66,7 @@ public class UserMainService {
     public int insertCart(CartDto cart) {
         SqlSession sqlSession = getSqlSession();
         cartMapper = sqlSession.getMapper(CartMapper.class);
+
         // 조회 데이터가 있으면 업데이트 없으면 인서트
         int count = cartMapper.checkCartProduct(cart);
         int result = 0;
@@ -86,6 +87,7 @@ public class UserMainService {
         }
         return result;
     }
+
 
     public int addProduct(ProductDto productDto) {
         SqlSession sqlSession = getSqlSession();
