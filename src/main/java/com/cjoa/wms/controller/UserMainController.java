@@ -10,6 +10,7 @@ import com.cjoa.wms.view.ResultView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map;
 
 import static com.cjoa.wms.view.ResultView.FailView;
 import static com.cjoa.wms.view.ResultView.SuccessView;
@@ -46,21 +47,6 @@ public class UserMainController {
         ProductDto prod = userMainService.selectProductOptionListByProdCode(Integer.parseInt(code));
         resultMainView.displayProductOptionList(prod);
         return prod;
-    }
-
-    public void insertCart(Map<String, Integer> requestParam) {
-        CartDto cart = CartDto.builder()
-                .prodOptionCode( (requestParam.get("optionCode")) )
-                .userCode( requestParam.get("userCode") )
-                .cartQuantity( requestParam.get("quantity") )
-                .build();
-
-        int result = userMainService.insertCart(cart);
-        if(result > 0) {
-            ResultView.SuccessView("장바구니등록");
-        } else {
-            ResultView.FailView("장바구니등록");
-        }
     }
 
     public void addProduct(Map<String, Object> productMap) {
@@ -154,5 +140,21 @@ public class UserMainController {
     public void deleteProduct(int code) {
         int result = userMainService.deleteProduct(code);
     }
+
+    public void insertCart(Map<String, Integer> requestParam) {
+        CartDto cart = CartDto.builder()
+                .prodOptionCode( (requestParam.get("optionCode")) )
+                .userCode( requestParam.get("userCode") )
+                .cartQuantity( requestParam.get("quantity") )
+                .build();
+
+        int result = userMainService.insertCart(cart);
+        if(result > 0) {
+            ResultView.SuccessView("장바구니등록");
+        } else {
+            ResultView.FailView("장바구니등록");
+        }
+    }
+  
 }
 

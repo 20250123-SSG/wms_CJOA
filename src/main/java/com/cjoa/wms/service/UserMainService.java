@@ -22,7 +22,6 @@ public class UserMainService {
     private CartMapper cartMapper;
 
 
-
     public List<ProductDto> selectProductList() {
         SqlSession sqlSession = getSqlSession();
         productMapper = sqlSession.getMapper(ProductMapper.class);
@@ -68,7 +67,6 @@ public class UserMainService {
         SqlSession sqlSession = getSqlSession();
         cartMapper = sqlSession.getMapper(CartMapper.class);
 
-
         // 조회 데이터가 있으면 업데이트 없으면 인서트
         int count = cartMapper.checkCartProduct(cart);
         int result = 0;
@@ -81,11 +79,15 @@ public class UserMainService {
                 result = cartMapper.insertCart(cart);
             }
             sqlSession.commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             sqlSession.rollback();
-        }finally {
+        } finally {
             sqlSession.close();
+        }
+        return result;
+    }
+
 
     public int addProduct(ProductDto productDto) {
         SqlSession sqlSession = getSqlSession();
@@ -157,3 +159,4 @@ public class UserMainService {
         return result;
     }
 }
+
