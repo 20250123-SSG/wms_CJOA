@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.CartMapper">
+    <resultMap id="cartResultMap" type="Cart">
+        <id column="prod_option_code" property="prodOptionCode"/>
+        <result column="prod_code" property="prodCode"/>
+        <result column="user_code" property="userCode"/>
+        <result column="cart_quantity" property="cartQuantity"/>
+        <result column="cart_datetime" property="cartDatetime"/>
+        <result column="prod_name"  property="prodName"/>
+        <result column="prod_color" property="prodColor"/>
+        <result column="prod_size" property="prodSize"/>
+        <result column="prod_price" property="prodPrice"/>
+    </resultMap>
+
+    <insert id="insertCart" parameterType="Cart" useGeneratedKeys="true" keyProperty="prodOptionCode">
+        INSERT INTO
+            tbl_cart
+            (
+              prod_option_code
+            , user_code
+            , cart_quantity
+            )
+        VALUES
+            (
+              #{prodOptionCode}
+            , #{userCode}
+            , #{cartQuantity}
+            )
+    </insert>
+
+    <select id="checkCartProduct" resultType="_int">
+        SELECT
+            COUNT(*)
+        FROM
+            tbl_cart
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </select>
+
+    <select id="selectCartProduct" resultMap="cartResultMap">
+        SELECT
+            p.prod_code
+          , prod_name
+          , prod_color
+          , prod_size
+          , prod_price
+          , cart_quantity
+          , c.prod_option_code
+        FROM
+            tbl_product p
+                JOIN tbl_prod_option po ON po.prod_code = p.prod_code
+                JOIN tbl_cart c ON c.prod_option_code = po.prod_option_code
+                JOIN tbl_user u ON u.user_code = c.user_code
+        WHERE
+            c.user_code = #{userCode}
+    </select>
+
+    <update id="insertSameProductCart" parameterType="Cart">
+        UPDATE
+            tbl_cart
+        SET
+            cart_quantity = cart_quantity + #{cartQuantity}
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </update>
+
+
+    <update id="modifyCart" parameterType="Cart">
+        UPDATE
+            tbl_cart
+        SET
+            cart_quantity = #{cartQuantity}
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </update>
+
+    <delete id="deleteCart" parameterType="_int">
+        DELETE
+            FROM tbl_cart
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </delete>
+
+
+
+</mapper>

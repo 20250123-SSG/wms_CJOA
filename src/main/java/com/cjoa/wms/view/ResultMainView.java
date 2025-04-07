@@ -8,7 +8,7 @@ import java.util.List;
 public class ResultMainView {
 
     // 상품 리스트 뷰
-    public static void displayProductList(List<ProductDto> list) {
+    public void displayProductList(List<ProductDto> list) {
         if(list.isEmpty()){
             System.out.println("조회된 메뉴가 없습니다😥");
         }else {
@@ -24,8 +24,8 @@ public class ResultMainView {
         }
     }
 
-
-    public static void displayProductOptionList(ProductDto product){
+    // 상품 상세 정보 뷰
+    public void displayProductOptionList(ProductDto product){
         if(product == null){
             System.out.println("없는 메뉴 번호입니다☹");
         }else {
@@ -34,8 +34,9 @@ public class ResultMainView {
             System.out.println();
 
             List<ProductOptionDto> list = product.getProductOptionList();
+            int i = 0;
             for (ProductOptionDto option : list) {
-                System.out.print(option.getProdColor() + "\t");
+                System.out.print(++i +": " + option.getProdColor() + "\t");
                 System.out.print(option.getProdSize() + "\t");
                 System.out.println();
             }
