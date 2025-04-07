@@ -33,14 +33,34 @@ public class UserMainView {
             switch (menu){
                 case "1": new ProductSearchView().productSearchMenu();  break;
                 case "2": cartController.selectCartProductList(userCode); break;
-                case "3": break;
+                case "3": userController.updateUserByUser(userCode); break;
                 case "4": userController.getUserByUserCode(userCode); break;
                 case "0": return;
                 default:
                     System.out.println("메뉴 번호를 잘못 입력하셨습니다😥");
             }
-
         }
+    }
+
+    private void modifyMenuForm() {
+        System.out.println("\n~~~~ 수정할 메뉴 정보를 입력해주세요 ~~~");
+        System.out.println("> 이메일: ");
+        String userEmail = sc.nextLine();
+        System.out.println("> 전화번호: ");
+        String userPhone = sc.nextLine();
+        System.out.println("> 주소: ");
+        String userAddress= sc.nextLine();
+        System.out.println("> 이름: ");
+        String userName = sc.nextLine();
+
+        Map<String, String> requestParam = Map.of(
+                "userEmail", userEmail,
+                "userPhone", userPhone,
+                "userAddress", userAddress,
+                "userName", userName
+        );
+
+        userController.updateUserByUser(requestParam);
     }
 
 

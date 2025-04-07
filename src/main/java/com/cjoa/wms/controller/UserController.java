@@ -73,4 +73,15 @@ public class UserController {
         UserDto user = userService.getUserByUserCode(userCode);
         ResultView.userInfoView(user);
     }
+
+
+    public void updateUserByUser(Map<String, String> requestParam) {
+        UserDto user = UserDto.builder()
+                .userEmail(requestParam.get("userEmail"))
+                .userPhone(requestParam.get("userPhone"))
+                .userAddress(requestParam.get("userAddress"))
+                .userName(requestParam.get("userName"))
+                .build();
+        userService.updateUserByUser(user);
+    }
 }
