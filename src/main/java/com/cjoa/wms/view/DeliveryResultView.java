@@ -44,6 +44,8 @@ public class DeliveryResultView {
     public static void resultDeliveryProcess(int result) {
         if (result > 0) {
             System.out.println("출고가 완료되었습니다.");
+        } else if (result == -1) {
+            System.out.println("재고수량이 부족합니다.");
         } else {
             System.out.println("문제가 발생하였습니다.");
         }

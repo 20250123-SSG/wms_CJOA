@@ -2,6 +2,9 @@ package com.cjoa.wms.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,5 +25,8 @@ public class ReceiveDto {
                 receiveCode, userCode, receiveTime, prodOptionCode, receiveQuantity, originPrice
         );
     }
+
+
+
 
 }

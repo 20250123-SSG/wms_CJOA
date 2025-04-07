@@ -6,15 +6,14 @@ import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.cjoa.wms.view.LoginView.userCode;
+
 public class DeliveryMenuView {
     Scanner sc = new Scanner(System.in);
-    DeliveryController deliveryController = new DeliveryController();
+    private DeliveryController deliveryController = new DeliveryController();
+    private DeliveryView deliveryView = new DeliveryView();
 
-    public static int userCode;
-
-    public void deliveryMenu(int code){ // 창고관리자 메뉴화면
-
-        userCode = code; // 로그인후 계정 코드 불러오기
+    public void deliveryMenu(){ // 창고관리자 메뉴화면
 
         while (true) {
             System.out.print("""
@@ -31,7 +30,8 @@ public class DeliveryMenuView {
                 case "1":
                     checkOrderList();
                     break;
-                case "2": /*승주님이 만드시는 내역조회 호출?*/
+                case "2":
+                    deliveryView.mainView();
                     break;
                 case "0":
                     return;

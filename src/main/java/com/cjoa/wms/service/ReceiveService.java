@@ -19,12 +19,16 @@ public class ReceiveService {
     public List<ReceiveDto> receiveSearchAll(){
         SqlSession sqlSession = getSqlSession();
         receiveMapper = sqlSession.getMapper(ReceiveMapper.class);
-        return receiveMapper.receiveSearchAll();
+        List<ReceiveDto> list = receiveMapper.receiveSearchAll();
+        sqlSession.close();
+        return list;
     }
     public List<ReceiveDto> receiveSearchByCode(int receiveCode){
         SqlSession sqlSession = getSqlSession();
         receiveMapper = sqlSession.getMapper(ReceiveMapper.class);
-        return receiveMapper.receiveSearchByCode(receiveCode);
+        List<ReceiveDto> list = receiveMapper.receiveSearchByCode(receiveCode);
+        sqlSession.close();
+        return list;
     }
     public List<ReceiveDto> receiveSearchByDate(String startTime, String endTime){
         SqlSession sqlSession = getSqlSession();
@@ -37,7 +41,9 @@ public class ReceiveService {
                 "startTime", startTime,
                 "nextDayEndTime", nextDayEndTime
         );
-        return receiveMapper.receiveSearchByDate(param);
+        List<ReceiveDto> list = receiveMapper.receiveSearchByDate(param);
+        sqlSession.close();
+        return list;
     }
 
     public OrderProdOptionDeliveryDto checkProductByOptionCode(int optionCode) {
@@ -53,8 +59,18 @@ public class ReceiveService {
         receiveMapper = sqlSession.getMapper(ReceiveMapper.class);
         int result1 = receiveMapper.insertReceive(prodInfo);
         int result2 = receiveMapper.updateStockPlus(prodInfo);
+        int result3 = 0;
+        // 품절검사후 N으로 전환
+        int code = prodInfo.getProdOptionCode();
+        String soldout = receiveMapper.checkProdOptionSoldout(code);
+        if ("Y".equals(soldout)) {
+            result3 = receiveMapper.updateProdOptionSoldout(code);
+        } else {
+            result3 = 1;
+        }
+
         int result = 0;
-        if (result1 > 0 && result2 > 0) {
+        if (result1 > 0 && result2 > 0 && result3 > 0) {
             sqlSession.commit();
             result = 1;
         } else {

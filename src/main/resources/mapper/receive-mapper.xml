@@ -109,4 +109,23 @@
         WHERE
             stock_option_code = #{prodOptionCode}
     </update>
+
+    <select id="checkProdOptionSoldout" parameterType="_int" resultType="string">
+        SELECT
+            prod_option_soldout_yn
+        FROM
+            tbl_prod_option
+        WHERE
+            prod_option_code = #{optionCode}
+    </select>
+
+    <update id="updateProdOptionSoldout" parameterType="_int">
+        UPDATE
+            tbl_prod_option
+        SET
+            prod_option_soldout_yn = 'N'
+        WHERE
+            prod_option_code = #{optionCode}
+    </update>
+
 </mapper>

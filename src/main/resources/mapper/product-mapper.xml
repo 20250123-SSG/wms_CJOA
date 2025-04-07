@@ -21,6 +21,20 @@
         </collection>
     </resultMap>
 
+    <resultMap id="resultOrderProdOptionDeliveryMap" type="OrderProdOptionDelivery">
+        <id column="order_prod_option_code" property="orderProdOptionCode"/>
+        <result column="prod_code" property="prodCode"/>
+        <result column="order_code" property="orderCode"/>
+        <result column="prod_option_code" property="prodOptionCode"/>
+        <result column="prod_name" property="prodName"/>
+        <result column="prod_size" property="prodSize"/>
+        <result column="prod_color" property="prodColor"/>
+        <result column="order_prod_option_quantity" property="orderProdOptionQuantity"/>
+        <result column="stock_quantity" property="stockQuantity"/>
+        <result column="user_code" property="userCode"/>
+        <result column="prod_price" property="prodPrice"/>
+    </resultMap>
+
     
     <select id="selectAllProduct" resultMap="prodResultMap">
         SELECT
@@ -38,6 +52,22 @@
             soldout_yn = 'N'
         ORDER BY
             prod_code ASC
+    </select>
+
+    <select id="selectAllProductForAdmin" resultMap="prodResultMap">
+        SELECT
+        prod_code
+        , c.category_code
+        , category_name
+        , prod_name
+        , prod_price
+        , soldout_yn
+        , prod_desc
+        FROM
+        tbl_product p
+        JOIN tbl_category c ON c.category_code = p.category_code
+        ORDER BY
+        prod_code ASC
     </select>
 
     <select id="selectProductByCategory" resultMap="prodResultMap">
@@ -94,5 +124,105 @@
         AND p.prod_code = #{code}
     </select>
 
+    <select id="selectAllStockList" resultMap="resultOrderProdOptionDeliveryMap">
+        SELECT
+              po.prod_option_code
+            , p.prod_code
+            , s.stock_quantity
+            , p.prod_name
+            , po.prod_size
+            , po.prod_color
+            , p.prod_price * s.stock_quantity AS prod_price
+        FROM
+            tbl_prod_option po
+                JOIN tbl_stock s ON s.stock_option_code = po.prod_option_code
+                JOIN tbl_product p ON p.prod_code = po.prod_code
+        ORDER BY
+            p.prod_code
+    </select>
 
+    <select id="checkStockByProdCode" parameterType="_int" resultMap="prodResultMap">
+        SELECT
+              po.prod_option_code
+            , p.prod_code
+            , p.prod_name
+            , po.prod_color
+            , po.prod_size
+            , s.stock_quantity
+            , p.prod_price
+        FROM
+            tbl_product p
+                JOIN tbl_prod_option po ON po.prod_code = p.prod_code
+                JOIN tbl_stock s ON s.stock_option_code = po.prod_option_code
+        WHERE
+            p.prod_code = #{code}
+    </select>
+
+
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="prodCode">
+        INSERT INTO
+            tbl_product
+            (
+              category_code
+            , prod_name
+            , prod_price
+            , soldout_yn
+            , prod_desc
+            )
+        VALUES
+            (
+              #{categoryCode}
+            , #{prodName}
+            , #{prodPrice}
+            , #{soldOut}
+            , #{prodDesc}
+            )
+    </insert>
+
+    <insert id="addProductOption" parameterType="map" useGeneratedKeys="true">
+        INSERT INTO
+        tbl_prod_option
+        (prod_code, prod_size, prod_color, prod_option_soldout_yn)
+        VALUES
+            <foreach collection="list" item="option" separator=", ">
+                (
+                  #{option.prodCode}
+                , #{option.prodSize}
+                , #{option.prodColor}
+                , #{option.optionSoldOut}
+                )
+            </foreach>
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE
+            tbl_product
+        SET
+              category_code = #{categoryCode}
+            , prod_name = #{prodName}
+            , prod_price = #{prodPrice}
+            , soldout_yn = #{soldOut}
+            , prod_desc = #{prodDesc}
+        WHERE
+            prod_code = #{prodCode}
+    </update>
+
+    <update id="updateProductOption" parameterType="ProductOption">
+        UPDATE
+            tbl_prod_option
+        SET
+              prod_size = #{prodSize}
+            , prod_color = #{prodColor}
+            , prod_option_soldout_yn = #{optionSoldOut}
+        WHERE
+            prod_code = #{prodCode}
+    </update>
+
+    <delete id="deleteProduct" parameterType="_int">
+        DELETE
+        FROM
+            tbl_product
+        WHERE
+            prod_code = #{code}
+    </delete>
 </mapper>
