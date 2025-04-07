@@ -1,7 +1,9 @@
 package com.cjoa.wms.service;
 
+import com.cjoa.wms.dao.CartMapper;
 import com.cjoa.wms.dao.ProductMapper;
 import com.cjoa.wms.dao.UserMapper;
+import com.cjoa.wms.dto.CartDto;
 import com.cjoa.wms.dto.ProductDto;
 import com.cjoa.wms.dto.ProductOptionDto;
 import org.apache.ibatis.session.SqlSession;
@@ -17,6 +19,9 @@ import static com.cjoa.wms.view.ResultView.SuccessView;
 public class UserMainService {
 
     private ProductMapper productMapper;
+    private CartMapper cartMapper;
+
+
 
     public List<ProductDto> selectProductList() {
         SqlSession sqlSession = getSqlSession();
@@ -59,6 +64,9 @@ public class UserMainService {
         return prod;
     }
 
+    public int insertCart(CartDto cart) {
+        SqlSession sqlSession = getSqlSession();
+        cartMapper = sqlSession.getMapper(CartMapper.class);
 
     public int addProduct(ProductDto productDto) {
         SqlSession sqlSession = getSqlSession();
@@ -126,6 +134,26 @@ public class UserMainService {
         } else {
             FailView("deleteProduct");
             sqlSession.rollback();
+        }
+        return result;
+    }
+        // 조회 데이터가 있으면 업데이트 없으면 인서트
+        int count = cartMapper.checkCartProduct(cart);
+        int result = 0;
+        try {
+            if (count > 0) {
+                // 수량 증가 update
+                result = cartMapper.insertSameProductCart(cart);
+            } else {
+                // insert
+                result = cartMapper.insertCart(cart);
+            }
+            sqlSession.commit();
+        } catch (Exception e){
+            e.printStackTrace();
+            sqlSession.rollback();
+        }finally {
+            sqlSession.close();
         }
         return result;
     }
