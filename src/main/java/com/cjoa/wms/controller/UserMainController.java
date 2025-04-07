@@ -29,7 +29,7 @@ public class UserMainController {
 
     public void selectProductListByAdmin() {
         List<ProductDto> list =userMainService.selectProductListByAdmin();
-        ResultMainView.displayProductList(list);
+        resultMainView.displayProductList(list);
     }
 
     public void selectProductListByCategoryCode(String code) {
