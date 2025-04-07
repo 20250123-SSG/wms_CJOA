@@ -18,6 +18,7 @@ public class CartDto {
     private String prodColor;
     private String prodSize;
     private int prodPrice;
+    private int prodCode;
 
 
 }

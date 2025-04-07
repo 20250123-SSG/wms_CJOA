@@ -3,15 +3,15 @@ package com.cjoa.wms.view;
 import com.cjoa.wms.controller.CartController;
 import com.cjoa.wms.dto.CartDto;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
+import static com.cjoa.wms.view.LoginView.userCode;
 
 public class CartView {
 
-    private CartController cartController  = new CartController();
 
     // 장바구니 리스트
-    public static void cartProductList(List<CartDto> list){
+    public void cartProductList(List<CartDto> list){
 
         Scanner sc = new Scanner(System.in);
         if(list.isEmpty()) {
@@ -34,7 +34,7 @@ public class CartView {
                 total += cart.getProdPrice() * cart.getCartQuantity();
             }
             System.out.println("\n총가격: " + total);
-            System.out.println("\n1. 옵션수정 \t2. 구매하기 \t0. 뒤로가기");
+            System.out.println("\n1. 항목수정,삭제 \t2. 구매하기 \t0. 뒤로가기");
             String menu = sc.nextLine();
             switch (menu){
                 case "1" : modifyOptionInCart(list); break;
@@ -47,12 +47,27 @@ public class CartView {
         }
     }
 
-    public static void modifyOptionInCart(List<CartDto> list ){
+    public void modifyOptionInCart(List<CartDto> list){
         Scanner sc = new Scanner(System.in);
+        CartController cartController = new CartController();
 
-        System.out.println("수정할 상품번호 선택: ");
-        String num = sc.nextLine();
-        // num -1 번째 리스트 상품의 색상,사이즈, 수량 수정
+        System.out.println("변경할 옵션 번호 입력: ");
+        String code = sc.nextLine();
+        int optionCode = list.get(Integer.parseInt(code)-1).getProdOptionCode();
+        System.out.println("변경할 수량 입력(수량을 0으로 변경시 삭제됩니다.): ");
+        String quantity = sc.nextLine();
+
+        Map<String, Integer> requestParam = new HashMap<>();
+        requestParam.put("userCode", userCode);
+        requestParam.put("optionCode", optionCode);
+
+        if(quantity.equals("0")){
+            cartController.deleteCart(requestParam);
+        } else {
+            requestParam.put("quantity", Integer.parseInt(quantity));
+            cartController.modifyOptionInCart(requestParam);
+        }
+
     }
 
 

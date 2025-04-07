@@ -31,23 +31,62 @@
             )
     </insert>
 
+    <select id="checkCartProduct" resultType="_int">
+        SELECT
+            COUNT(*)
+        FROM
+            tbl_cart
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </select>
+
     <select id="selectCartProduct" resultMap="cartResultMap">
         SELECT
-            prod_name
+            p.prod_code
+          , prod_name
           , prod_color
           , prod_size
           , prod_price
-          , SUM(cart_quantity)
+          , cart_quantity
+          , c.prod_option_code
         FROM
             tbl_product p
                 JOIN tbl_prod_option po ON po.prod_code = p.prod_code
                 JOIN tbl_cart c ON c.prod_option_code = po.prod_option_code
                 JOIN tbl_user u ON u.user_code = c.user_code
         WHERE
-            c.user_code = #{code}
-        GROUP BY
-            c.prod_option_code
+            c.user_code = #{userCode}
     </select>
+
+    <update id="insertSameProductCart" parameterType="Cart">
+        UPDATE
+            tbl_cart
+        SET
+            cart_quantity = cart_quantity + #{cartQuantity}
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </update>
+
+
+    <update id="modifyCart" parameterType="Cart">
+        UPDATE
+            tbl_cart
+        SET
+            cart_quantity = #{cartQuantity}
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </update>
+
+    <delete id="deleteCart" parameterType="_int">
+        DELETE
+            FROM tbl_cart
+        WHERE
+            prod_option_code = #{prodOptionCode}
+        AND user_code = #{userCode}
+    </delete>
 
 
 
