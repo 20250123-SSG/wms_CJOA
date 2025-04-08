@@ -8,7 +8,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
 
 public class ProductDto {
@@ -24,5 +23,15 @@ public class ProductDto {
 
     private List<ProductOptionDto> productOptionList;
 
+    @Override
+    public String toString() {
+        return "상품코드: " + prodCode +
+                " | 카테고리코드: " + categoryCode +
+                " | 카테고리명: " + categoryName +
+                " | 상품명: " + prodName +
+                " | 가격: " + prodPrice +
+                " | 품절여부: " + soldOut +
+                " | 상품설명: " + prodDesc + '\n';
+    }
 
 }

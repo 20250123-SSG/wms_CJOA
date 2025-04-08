@@ -15,7 +15,7 @@ public class ProductSearchView {
 
 
         System.out.print("""
-                \n===== 검색 ==================
+                \n=============================
                 1. 상품 목록 조회
                 2. 카테고리 코드로 상품 조회
                 3. 상품 키워드 검색
@@ -94,9 +94,10 @@ public class ProductSearchView {
         String code = sc.nextLine();
 
         if (code.equals("0")) {
-            productSearchMenu();// 0을 입력하면 돌아갑니다.
+            return;
         } else {
             userMainController.selectProductOptionByProdCode(code);
+
         }
 
     }

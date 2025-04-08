@@ -22,7 +22,7 @@ public class ProductManageView {
                     4. 상품 삭제
                     0. 이전 메뉴로 돌아가기
                     ===============================
-                    """);
+                    >> 입력:""");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -40,7 +40,7 @@ public class ProductManageView {
                 case "0":
                     return;
                 default:
-                    System.out.println("wrong menu, input again");
+                    System.out.println("메뉴 번호를 다시 입력해주세요.");
                     break;
             }
         }
@@ -60,7 +60,7 @@ public class ProductManageView {
                     2. 상품 옵션 수정
                     0. 이전 메뉴로 돌아가기
                     ===============================
-                    """);
+                    >> 입력:""");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -72,7 +72,7 @@ public class ProductManageView {
                 case "0":
                     return;
                 default:
-                    System.out.println("메뉴를 잘못 입력하셨습니다, 다시 입력해주세요");
+                    System.out.println("메뉴 번호를 다시 입력해주세요.");
                     break;
             }
         }

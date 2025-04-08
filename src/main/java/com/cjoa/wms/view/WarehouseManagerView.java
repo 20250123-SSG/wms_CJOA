@@ -12,13 +12,13 @@ public class WarehouseManagerView {
 
         while (true) {
             System.out.print("""
-                    \n======= 창고관리자 메뉴 =======
+                    \n===============================
                     1. 입고관리
                     2. 출고관리
                     3. 재고조회
                     0. 로그아웃
                     ===============================
-                    >> 메뉴번호 선택:"""
+                    >> 입력:"""
             );
             String menu = sc.nextLine();
 

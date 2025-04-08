@@ -13,7 +13,7 @@ public class ResultMainView {
             System.out.println("조회된 메뉴가 없습니다😥");
         }else {
             for (ProductDto product : list) {
-                System.out.printf("%d\t%d.%s\t%s\t%d원\t%s\n",
+                System.out.printf("%d | %d.%s | %s | %d원 | %s\n",
                         product.getProdCode(),
                         product.getCategoryCode(),
                         product.getCategoryName(),
@@ -29,16 +29,13 @@ public class ResultMainView {
         if(product == null){
             System.out.println("없는 메뉴 번호입니다☹");
         }else {
-            System.out.print(product.getProdName() + "\t");
-            System.out.print(product.getProdPrice());
-            System.out.println();
+            System.out.printf("상품명: %s | 가격: %d\n", product.getProdName(), product.getProdPrice());
 
             List<ProductOptionDto> list = product.getProductOptionList();
             int i = 0;
             for (ProductOptionDto option : list) {
-                System.out.print(++i +": " + option.getProdColor() + "\t");
-                System.out.print(option.getProdSize() + "\t");
-                System.out.println();
+                System.out.printf("%d: 색상: %s | 사이즈: %s\n", ++i, option.getProdColor(), option.getProdSize());
+
             }
         }
     }

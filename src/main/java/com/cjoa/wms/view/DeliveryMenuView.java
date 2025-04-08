@@ -17,12 +17,12 @@ public class DeliveryMenuView {
 
         while (true) {
             System.out.print("""
-                    \n========= 출고관리 =========
+                    \n============================
                     1. 주문확인 및 출고
                     2. 출고내역조회
                     0. 뒤로가기
                     ============================
-                    >> 메뉴번호 선택:"""
+                    >> 입력:"""
             );
             String menu = sc.nextLine();
 
@@ -58,7 +58,7 @@ public class DeliveryMenuView {
             // 주문번호를 정확히 입력했을 경우 출고처리확인
             if (!orderDetail.isEmpty()) {
                 System.out.println("상품 출고처리 하시겠습니까? (y/n)");
-                System.out.print(">> ");
+                System.out.print(">> 입력:");
                 String out = sc.nextLine().toUpperCase();
 
                 if ("Y".equals(out)) {
@@ -68,7 +68,7 @@ public class DeliveryMenuView {
             }
 
             System.out.println("\n상품 출고를 추가로 진행하시겠습니까? (y/n)");
-            System.out.print(">> ");
+            System.out.print(">> 입력:");
             String menu = sc.nextLine().toUpperCase();
             switch (menu) {
                 case "Y": break;

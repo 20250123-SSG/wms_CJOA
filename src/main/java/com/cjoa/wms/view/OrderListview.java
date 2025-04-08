@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class OrderListview {
     private Scanner sc = new Scanner(System.in);
-    private OrderController orderController = new OrderController();
 
     public void orderList(List<OrderDeliveryDto> list) {
         if(list.isEmpty()){
@@ -19,7 +18,7 @@ public class OrderListview {
         }else {
             int i =0;
             for (OrderDeliveryDto order : list) {
-                System.out.printf("%d. \t%s\t%d원\t%s\t%s\n",
+                System.out.printf("%d. %s | %d원 | %s | %s\n",
                         ++i,
                         order.getOrderPayType(),
                         order.getOrderPrice(),
@@ -39,6 +38,7 @@ public class OrderListview {
         if(orderNum == 0){
             userMainView.userMainView();
         }else {
+            OrderController orderController = new OrderController();
             orderController.selectOrderDetail(orderNum);
         }
 

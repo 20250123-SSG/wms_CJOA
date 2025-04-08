@@ -12,12 +12,12 @@ public class StockMenuView {
 
         while (true) {
             System.out.print("""
-                    \n========= 재고조회 ==========
+                    \n=============================
                     1. 전체 재고 조회
                     2. 상품별 재고 조회
                     0. 뒤로가기
                     =============================
-                    >> 메뉴번호 선택:"""
+                    >> 입력:"""
             );
             String menu = sc.nextLine();
 
@@ -31,15 +31,14 @@ public class StockMenuView {
                 case "0":
                     return;
                 default:
-                    System.out.println("메뉴를 잘못 입력하셨습니다.");
+                    System.out.println("메뉴 번호를 다시 입력해주세요.");
             }
 
         }
     }
 
     private void checkStockByProdCode() {
-        // 상품리스트 조회가 있으면 좋을까?
-        System.out.print("\n======= 상품별 재고 조회 =======\n>> 상품번호입력:");
+        System.out.print("\n======= 상품별 재고 조회 =======\n>> 입력:");
         String menu = sc.nextLine();
         stockController.checkStockByProdCode(menu);
     }

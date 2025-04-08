@@ -21,7 +21,8 @@ public class OrderView {
     public void purchaseProduct(int total){
         System.out.println("카드 / 현금: ");
         String payType = sc.nextLine();
-        System.out.println("1. 집으로 배송\t 2. 배송지 입력");
+        System.out.println("1. 집으로 배송 | 2. 배송지 입력");
+        System.out.print(">> 입력:");
         String menu = sc.nextLine();
         String phone="";
         String address="";
