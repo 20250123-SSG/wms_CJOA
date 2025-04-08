@@ -33,14 +33,10 @@ public class OrderService {
         orderMapper = sqlSession.getMapper(OrderMapper.class);
         cartMapper = sqlSession.getMapper(CartMapper.class);
 
-
-
-        System.out.println(orderDelivery);
         int result = 0;
         try {
             int result1 = orderMapper.insertOrderTableByUser(orderDelivery);
             int result2 = orderMapper.insertOrderDeliveryTableByUser(orderDelivery);
-
 
             // orderDelivery 의 userCode를 넘겨서 해당 회원의 장바구니 목록(List)을 조회 해오기
             // orderDelivery에 orderProdOption 리스트에 조회해온 list 담기

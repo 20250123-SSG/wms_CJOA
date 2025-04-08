@@ -45,7 +45,7 @@ public class ReceiveView {
         int code = -1;
         while (true) {
             try {
-                System.out.println("조회하고자 하는 입고 내역의 코드를 입력해주세요 : ");
+                System.out.print("조회하고자 하는 입고 내역의 코드를 입력해주세요 : ");
                 String input = sc.nextLine();
                 code = Integer.parseInt(input);
                 break;

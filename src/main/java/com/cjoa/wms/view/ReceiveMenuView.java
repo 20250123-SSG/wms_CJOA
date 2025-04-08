@@ -11,23 +11,29 @@ public class ReceiveMenuView {
     private ReceiveView receiveView = new ReceiveView();
 
     public void receiveMenu(){
+        while (true) {
+            System.out.print("""
+                    \n========================
+                    1. 입고
+                    2. 입고내역 조회
+                    0. 뒤로가기
+                    ========================
+                    >> 입력:"""
+            );
+            String menu = sc.nextLine();
 
-        System.out.print("""
-                \n========================
-                1. 입고
-                2. 입고내역 조회
-                0. 뒤로가기
-                ========================
-                >> 입력:"""
-        );
-        String menu = sc.nextLine();
-
-        switch (menu) {
-            case "1": insertReceive(); break;
-            case "2": receiveView.mainView(); break;
-            case "0": return;
-            default:
-                System.out.println("메뉴 번호를 다시 입력해주세요.");
+            switch (menu) {
+                case "1":
+                    insertReceive();
+                    break;
+                case "2":
+                    receiveView.mainView();
+                    break;
+                case "0":
+                    return;
+                default:
+                    System.out.println("메뉴 번호를 다시 입력해주세요.");
+            }
         }
     }
 
