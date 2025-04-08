@@ -1,6 +1,7 @@
 package com.cjoa.wms.view;
 
 import com.cjoa.wms.controller.CartController;
+import com.cjoa.wms.controller.UserController;
 import com.cjoa.wms.controller.UserMainController;
 import com.cjoa.wms.dto.ProductDto;
 
@@ -14,6 +15,7 @@ public class UserMainView {
     private UserMainController userMainController = new UserMainController();
     private CartController cartController = new CartController();
     private Scanner sc = new Scanner(System.in);
+    private UserController userController = new UserController();
 
     public void userMainView() {
         while(true){
@@ -32,15 +34,13 @@ public class UserMainView {
                 case "1": new ProductSearchView().productSearchMenu();  break;
                 case "2": cartController.selectCartProductList(userCode); break;
                 case "3": break;
-                case "4": break;
+                case "4": userController.getUserByUserCode(userCode); break;
                 case "0": return;
                 default:
                     System.out.println("메뉴 번호를 잘못 입력하셨습니다😥");
             }
-
         }
     }
-
 
 
 

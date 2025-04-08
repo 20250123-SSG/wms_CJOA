@@ -87,4 +87,21 @@
         WHERE
             user_code = #{code}
     </delete>
+
+    <select id="getUserByUserCode" resultMap="userResultMap">
+        SELECT
+            user_code
+          , user_id
+          , user_password
+          , user_email
+          , user_phone
+          , user_address
+          , user_type
+          , user_name
+        FROM
+            tbl_user
+        WHERE
+            user_code = #{userCode}
+    </select>
+
 </mapper>

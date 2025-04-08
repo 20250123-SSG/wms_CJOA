@@ -68,4 +68,13 @@ public class UserService {
         }
         return result;
     }
+
+    public UserDto getUserByUserCode(int code) {
+        SqlSession sqlSession = getSqlSession();
+        userMapper = sqlSession.getMapper(UserMapper.class);
+        UserDto user = userMapper.getUserByUserCode(code);
+        sqlSession.close();
+        return user;
+    }
+
 }
