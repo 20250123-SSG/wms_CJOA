@@ -76,7 +76,7 @@
                 JOIN tbl_stock s ON s.stock_option_code = po.prod_option_code
                 JOIN tbl_product p ON p.prod_code = po.prod_code
         WHERE
-            o.order_prod_option_code = #{code}
+            o.order_code = #{code}
     </select>
 
     <insert id="insertDeliveryByOrder" parameterType="list">
