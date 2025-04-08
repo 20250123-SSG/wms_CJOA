@@ -98,11 +98,13 @@ public class UserMainService {
             List<ProductOptionDto> list = productDto.getProductOptionList();
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).setProdCode(productDto.getProdCode());
-                System.out.println(list.get(i).toString());
             }
-            int optionResult = productMapper.addProductOption(Map.of("list", list));
+            int optionResult = productMapper.addProductOption(list);
             if (optionResult == productDto.getProductOptionList().size()) {
                 SuccessView("addProductOptions");
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(list.get(i).toString());
+                }
                 sqlSession.commit();
             } else {
                 FailView("addProductOptions");

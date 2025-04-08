@@ -25,7 +25,7 @@ public interface ProductMapper {
 
     int addProduct(ProductDto productDto);
 
-    int addProductOption(Map<String, List<ProductOptionDto>> map);
+    int addProductOption(List<ProductOptionDto> list);
 
     int updateProduct(ProductDto productDto);
 
