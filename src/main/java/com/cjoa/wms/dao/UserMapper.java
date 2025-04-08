@@ -17,4 +17,6 @@ public interface UserMapper {
     int deleteUserByCode(int code);
 
     UserDto getUserByUserCode(int code);
+
+    UserDto selectUserInfoByUserCode(int userCode);
 }
