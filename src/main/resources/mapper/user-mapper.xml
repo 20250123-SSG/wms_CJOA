@@ -88,6 +88,15 @@
             user_code = #{code}
     </delete>
 
+    <select id="selectUserInfoByUserCode" resultMap="userResultMap">
+        SELECT
+            user_email = #{userEmail}
+          , user_phone = #{userPhone}
+          , user_address = #{userAddress}
+        WHERE
+            user_code = #{userCode}
+    </select>
+
     <select id="getUserByUserCode" resultMap="userResultMap">
         SELECT
             user_code

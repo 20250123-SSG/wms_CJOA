@@ -27,4 +27,6 @@ public interface DeliveryMapper {
     List<DeliveryDto> deliverySearchByDate(Map<String, String> param);
 
     int updateOptionSoldout(int prodOptionCode);
+
+
 }

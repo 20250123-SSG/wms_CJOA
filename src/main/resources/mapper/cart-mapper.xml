@@ -87,6 +87,13 @@
             prod_option_code = #{prodOptionCode}
         AND user_code = #{userCode}
     </delete>
+    
+    <delete id="dropCart" parameterType="_int">
+        DELETE FROM tbl_cart
+        WHERE
+            user_code = #{userCode}
+
+    </delete>
 
 
 
