@@ -10,8 +10,6 @@ public interface OrderMapper {
 
     int insertOrderDeliveryTableByUser(OrderDeliveryDto orderDelivery);
 
-    int insertOrderProdOptionByUser(OrderDeliveryDto orderDelivery);
 
-
-
+    int insertOrderProdOption(OrderDeliveryDto orderDelivery);
 }
