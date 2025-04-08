@@ -2,6 +2,8 @@ package com.cjoa.wms.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,7 +19,9 @@ public class OrderDto {
     private String orderStatus;
     private String orderDate;
 
-    // 제거해도 될듯?
+    private List<OrderProdOptionDto> orderProdOptionList;
+
+
 
 
 }

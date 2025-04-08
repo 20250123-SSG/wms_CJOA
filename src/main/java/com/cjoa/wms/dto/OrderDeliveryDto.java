@@ -18,11 +18,13 @@ public class OrderDeliveryDto {
     private int orderPrice;
     private String orderStatus;
     private String orderDate;
+
     private String orderRequest;
     private String orderDeliveryPhone;
     private String orderDeliveryAddress;
     private String orderDeliveryName;
 
-    private List<CartDto> cartList;
+    private List<CartDto> orderProdOptionList;
+
 
 }

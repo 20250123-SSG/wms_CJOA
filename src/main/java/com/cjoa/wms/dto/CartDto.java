@@ -20,5 +20,7 @@ public class CartDto {
     private int prodPrice;
     private int prodCode;
 
+    private int orderCode;
+
 
 }
