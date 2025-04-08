@@ -15,6 +15,7 @@
         <typeAlias type="com.cjoa.wms.dto.ProductOptionDto" alias="ProductOption"/>
         <typeAlias type="com.cjoa.wms.dto.CartDto"  alias="Cart"/>
         <typeAlias type="com.cjoa.wms.dto.ReceiveDeliveryDto" alias="ReceiveDelivery"/>
+        <typeAlias type="com.cjoa.wms.dto.OrderProdOptionDto" alias="OrderProdOption"/>
     </typeAliases>
     <environments default="dev">
         <environment id="dev">

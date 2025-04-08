@@ -15,12 +15,9 @@
         <result column="order_delivery_address" property="orderDeliveryAddress"/>
         <result column="order_delivery_name" property="orderDeliveryName"/>
 
-        <collection property="cartList" ofType="Cart">
-            <result column="cartQuantity" property="cart_quantity"/>
-        </collection>
     </resultMap>
 
-    <insert id="insertOrderTableByUser" parameterType="OrderProdOptionDelivery">
+    <insert id="insertOrderTableByUser" parameterType="OrderDelivery" useGeneratedKeys="true" keyProperty="orderCode">
         Insert INTO
         tbl_order
         (
@@ -36,11 +33,11 @@
         )
     </insert>
 
-    <insert id="insertOrderDeliveryTableByUser" parameterType="OrderProdOptionDelivery" useGeneratedKeys="true" keyProperty="orderCode">
+    <insert id="insertOrderDeliveryTableByUser" parameterType="OrderDelivery">
         INSERT INTO
         tbl_order_delivery
         (
-        order_code
+          order_code
         , order_request
         , order_delivery_phone
         , order_delivery_address
@@ -57,21 +54,25 @@
     </insert>
 
 
-
-    <insert id="insertOrderProdOptionByUser" parameterType="OrderProdOptionDelivery" useGeneratedKeys="true" keyProperty="orderCode">
-        INSERT INTO tbl_order_prod_option (
-        order_prod_option_quantity,
-        order_code,
-        prod_option_code
+    <insert id="insertOrderProdOption" parameterType="OrderDelivery">
+        INSERT INTO
+        tbl_order_prod_option
+        (
+        order_code
+        , prod_option_code
+        , order_prod_option_quantity
         )
-        SELECT
-        c.cart_quantity,
-        #{orderCode},      -- 주문 테이블 insert 후 생성된 key
-        po.prod_option_code
-        FROM tbl_prod_option po
-        JOIN tbl_cart c ON po.prod_option_code = c.prod_option_code
-        WHERE c.user_id = #{userId}
+        VALUES
+        <foreach collection="orderProdOptionList" item="item" separator=",">
+           (#{item.orderCode}, #{item.prodOptionCode}, #{item.cartQuantity})
+
+        </foreach>
     </insert>
+
+
+
+
+
 
 
   
