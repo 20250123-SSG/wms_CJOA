@@ -12,4 +12,6 @@ public interface OrderMapper {
 
 
     int insertOrderProdOption(OrderDeliveryDto orderDelivery);
+
+    List<OrderDeliveryDto> selectOrderList(int userCode);
 }

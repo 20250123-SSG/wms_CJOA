@@ -67,5 +67,12 @@ public class OrderService {
     }
 
 
+    public List<OrderDeliveryDto> selectOrderList(int userCode) {
+        SqlSession sqlSession = getSqlSession();
+        orderMapper = sqlSession.getMapper(OrderMapper.class);
+        List<OrderDeliveryDto> list = orderMapper.selectOrderList(userCode);
+        sqlSession.close();
+        return list;
 
+    }
 }

@@ -69,6 +69,30 @@
         </foreach>
     </insert>
 
+    <select id="selectOrderList" parameterType="_int" resultMap="resultOrderDeliveryListMap">
+        SELECT
+            order_pay_type
+          , order_price
+          , order_status
+          , order_date
+        FROM
+            tbl_order
+        WHERE
+            user_code = #{userCode}
+    </select>
+
+    <select id="selectOrderDetails" parameterType="_int" resultMap="resultOrderDeliveryListMap">
+        SELECT
+            order_request
+          , order_delivery_phone
+          , order_delivery_address
+          , order_delivery_name
+        FROM
+            tbl_order_delivery
+        WHERE
+            user_code = #{userCode}
+    </select>
+
 
 
 
