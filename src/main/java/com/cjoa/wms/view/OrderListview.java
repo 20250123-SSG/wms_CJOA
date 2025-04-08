@@ -26,7 +26,7 @@ public class OrderListview {
                         order.getOrderDate());
             }
         }
-        OrderProdOptionView(list);
+        //OrderProdOptionView(list);
 
     }
 
@@ -35,7 +35,7 @@ public class OrderListview {
         System.out.println("상세정보 확인할 주문번호 선택(0누를시 뒤로가기)");
         String num = sc.nextLine();
         int orderNum = list.get(Integer.parseInt(num)-1).getOrderCode();
-        if(orderNum == 0){
+        if(num.equals("0")){
             userMainView.userMainView();
         }else {
             OrderController orderController = new OrderController();
