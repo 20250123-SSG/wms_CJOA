@@ -9,6 +9,9 @@ import com.cjoa.wms.view.ResultView;
 import java.util.List;
 import java.util.Map;
 
+import static com.cjoa.wms.view.ResultView.FailView;
+import static com.cjoa.wms.view.ResultView.SuccessView;
+
 public class OrderController {
 
     private OrderService orderService = new OrderService();
@@ -30,8 +33,12 @@ public class OrderController {
                 .userCode(Integer.parseInt(requestParam.get("userCode")))
                 .build();
 
-                orderService.orderProcess(orderDelivery);
-
+        int result = orderService.orderProcess(orderDelivery);
+        if (result > 0) {
+            SuccessView("insertOrderInfo");
+        } else {
+            FailView("insertOrderInfo");
+        }
     }
 
 

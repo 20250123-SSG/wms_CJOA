@@ -19,7 +19,7 @@ public class OrderView {
 
     // 구매 뷰
     public void purchaseProduct(int total){
-        System.out.println("카드 / 현금: ");
+        System.out.print("카드 / 현금: ");
         String payType = sc.nextLine();
         System.out.println("1. 집으로 배송 | 2. 배송지 입력");
         System.out.print(">> 입력:");
@@ -30,22 +30,21 @@ public class OrderView {
         switch (menu){
             case "1": UserDto user = orderController.selectUserInfo(userCode);
             phone = user.getUserPhone();
-                System.out.println(phone);
             address = user.getUserAddress();
             name = user.getUserName();
             break;
             case "2":
-                System.out.println("배송받을 분의 전화번호를 입력해 주세요: ");
+                System.out.print("배송받을 분의 전화번호를 입력해 주세요: ");
                 phone = sc.nextLine();
-                System.out.println("배송받을 주소를 입력해주세요: ");
+                System.out.print("배송받을 주소를 입력해주세요: ");
                 address = sc.nextLine();
-                System.out.println("배송받을 분의 이름을 입력해주세요: ");
+                System.out.print("배송받을 분의 이름을 입력해주세요: ");
                 name = sc.nextLine();
                 break;
             default:
                 System.out.println("잘못입력하셨습니다. 다시 입력해주세요.");
         }
-        System.out.println("요청사항을 입력: ");
+        System.out.print("요청사항을 입력: ");
         String request = sc.nextLine();
 
         Map<String, String> requestParam = Map.of(

@@ -53,10 +53,10 @@ public class CartView {
         Scanner sc = new Scanner(System.in);
         CartController cartController = new CartController();
 
-        System.out.println("변경할 옵션 번호 입력: ");
+        System.out.print("변경할 옵션 번호 입력: ");
         String code = sc.nextLine();
         int optionCode = list.get(Integer.parseInt(code)-1).getProdOptionCode();
-        System.out.println("변경할 수량 입력(수량을 0으로 변경시 삭제됩니다.): ");
+        System.out.print("변경할 수량 입력(수량을 0으로 변경시 삭제됩니다.): ");
         String quantity = sc.nextLine();
 
         Map<String, Integer> requestParam = new HashMap<>();
