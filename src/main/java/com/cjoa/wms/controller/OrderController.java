@@ -1,6 +1,7 @@
 package com.cjoa.wms.controller;
 
 import com.cjoa.wms.dto.OrderDeliveryDto;
+import com.cjoa.wms.dto.OrderDto;
 import com.cjoa.wms.dto.UserDto;
 import com.cjoa.wms.service.OrderService;
 
@@ -18,7 +19,6 @@ public class OrderController {
 
     public void insertOrderInfo(Map<String, String> requestParam) {
         OrderDeliveryDto orderDelivery = OrderDeliveryDto.builder()
-                .orderCode(Integer.parseInt(requestParam.get("orderCode")))
                 .orderPrice( Integer.parseInt(requestParam.get("orderPrice")) )
                 .orderPayType(requestParam.get("orderPayType"))
                 .orderDeliveryPhone(requestParam.get("orderDeliveryPhone"))
@@ -28,8 +28,7 @@ public class OrderController {
                 .userCode(Integer.parseInt(requestParam.get("userCode")))
                 .build();
 
-        orderService.insertOrderInfo(orderDelivery);
-        orderService.insertOrderDeliveryInfo(orderDelivery);
-        //orderService.insertOrderProdOption(orderDelivery);
+                orderService.orderProcess(orderDelivery);
+
     }
 }

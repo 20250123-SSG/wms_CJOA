@@ -47,7 +47,6 @@ public class OrderView {
         System.out.println("요청사항을 입력: ");
         String request = sc.nextLine();
 
-        OrderDeliveryDto orderdelivery = new OrderDeliveryDto();
         Map<String, String> requestParam = Map.of(
                 "orderPrice", String.valueOf(total),
                 "orderPayType", payType,
