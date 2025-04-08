@@ -36,6 +36,7 @@ public class CartView {
             }
             System.out.println("\n총가격: " + total);
             System.out.println("\n1. 항목수정,삭제 \t2. 구매하기 \t0. 뒤로가기");
+            System.out.print(">> 입력: ");
             String menu = sc.nextLine();
             switch (menu){
                 case "1" : modifyOptionInCart(list); break;

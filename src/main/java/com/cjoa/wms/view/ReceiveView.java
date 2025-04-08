@@ -21,7 +21,7 @@ public class ReceiveView {
                     3. 날짜로 조회
                     0. 이전 메뉴로 돌아가기
                     ===============================
-                    """);
+                    >> 입력:""");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -35,6 +35,9 @@ public class ReceiveView {
                     break;
                 case "0":
                     return;
+                default:
+                    System.out.println("메뉴 번호를 다시 입력해주세요.");
+
             }
         }
     }

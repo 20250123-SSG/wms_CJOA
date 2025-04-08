@@ -8,16 +8,16 @@ public class RevenueController {
 
     public void calculateTotalSales(String startDate,String endDate){
         int totalSales = revenueService.calculateTotalSales(startDate,endDate);
-        ResultView.displayData(totalSales);
+        ResultView.displayRevenue(startDate,endDate,totalSales);
     }
     public void calculateTotalPurchaseCost(String startDate,String endDate){
         int totalPurchaseCost = revenueService.calculateTotalPurchaseCost(startDate,endDate);
-        ResultView.displayData(totalPurchaseCost);
+        ResultView.displayRevenue(startDate,endDate,totalPurchaseCost);
     }
 
     public void calculateTotalMarginCost(String startDate,String endDate){
         int totalMarginCost = revenueService.calculateTotalMarginCost(startDate,endDate);
-        ResultView.displayData(totalMarginCost);
+        ResultView.displayRevenue(startDate,endDate,totalMarginCost);
     }
 
 

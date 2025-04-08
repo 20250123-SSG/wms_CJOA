@@ -30,7 +30,7 @@ public class AdminView {
                     5. 수익 조회
                     0. 로그아웃
                     ===============================
-                    """);
+                    >> 입력: """);
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -50,6 +50,9 @@ public class AdminView {
                     break;
                 case "0":
                     return;
+                default:
+                    System.out.println("메뉴 번호를 다시 입력해주세요.");
+
             }
         }
     }

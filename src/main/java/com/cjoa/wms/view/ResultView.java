@@ -17,7 +17,7 @@ public class ResultView {
     public static <T> void displayData(List<T> data) {
         if (data != null) {
             for (int i = 0; i < data.size(); i++) {
-                System.out.println(data.get(i));
+                System.out.println(data.get(i).toString());
             }
         }else{
             System.out.println("data is null");
@@ -34,7 +34,7 @@ public class ResultView {
 
     public static void stockListView(List<OrderProdOptionDeliveryDto> list) {
         for (OrderProdOptionDeliveryDto stock : list) {
-            System.out.printf("[제품상세코드: %d, 제품이름: %s, 상세정보: %s/%s [재고수량: %s 재고금액: %d]]\n",
+            System.out.printf("제품상세코드: %d | 제품이름: %s | 상세정보: %s | %s | 재고수량: %s | 재고금액: %d\n",
                     stock.getProdOptionCode(),
                     stock.getProdName(),
                     stock.getProdSize(),
@@ -50,12 +50,12 @@ public class ResultView {
             System.out.println("없는 상품번호 입니다.");
         } else {
             int price = list.getProdPrice();
-            System.out.printf("[제품번호: %d, 제품명: %s]\n",
+            System.out.printf("제품번호: %d | 제품명: %s\n",
                     list.getProdCode(),
                     list.getProdName()
             );
             for (ProductOptionDto product : list.getProductOptionList()) {
-                System.out.printf("\t└[제품상세번호: %d, 사이즈: %s, 색상: %s][재고수량: %d 재고금액: %d]\n",
+                System.out.printf("\t└제품상세번호: %d | 사이즈: %s | 색상: %s | 재고수량: %d | 재고금액: %d\n",
                         product.getProdOptionCode(),
                         product.getProdSize(),
                         product.getProdColor(),
@@ -68,16 +68,20 @@ public class ResultView {
 
     public static void userInfoView(UserDto user) {
         if(user == null){
-            System.out.println("조회된 메뉴가 없습니다");
+            System.out.println("조회된 유저가 없습니다");
         }else{
-            System.out.println("~~~~~~ 메뉴 정보 ~~~~~~");
+            System.out.println("========================");
             System.out.println("Name: " + user.getUserName());
             System.out.println("ID: " + user.getUserId());
             System.out.println("Password: " + user.getUserPassword());
             System.out.println("Email: " + user.getUserEmail());
             System.out.println("Phone: " + user.getUserPhone());
             System.out.println("Address: " + user.getUserAddress());
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("========================");
         }
+    }
+
+    public static void displayRevenue(String startDate, String endDate, int totalSales) {
+        System.out.printf("%s ~ %s : %d원", startDate, endDate, totalSales);
     }
 }

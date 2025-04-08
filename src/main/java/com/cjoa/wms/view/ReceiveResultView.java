@@ -5,7 +5,7 @@ import com.cjoa.wms.dto.OrderProdOptionDeliveryDto;
 public class ReceiveResultView {
     public void productOptionDetail(OrderProdOptionDeliveryDto product) {
         if (product != null) {
-            System.out.printf("[상품상세번호: %d, 상품명: %s, 사이즈: %s, 색상: %s [상품 현재고: %d]]\n",
+            System.out.printf("상품상세번호: %d | 상품명: %s | 사이즈: %s | 색상: %s | 상품 현재고: %d\n",
                     product.getProdOptionCode(),
                     product.getProdName(),
                     product.getProdSize(),
