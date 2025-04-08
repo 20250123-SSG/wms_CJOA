@@ -15,7 +15,9 @@
         <result column="order_delivery_phone" property="orderDeliveryPhone"/>
         <result column="order_delivery_address" property="orderDeliveryAddress"/>
         <result column="order_delivery_name" property="orderDeliveryName"/>
+
     </resultMap>
+
 
     <resultMap id="resultOrderProdOptionDeliveryMap" type="OrderProdOptionDelivery">
         <id column="order_prod_option_code" property="orderProdOptionCode"/>
@@ -167,5 +169,6 @@
         WHERE
             prod_option_code = #{prodOptionCode}
     </update>
+
 
 </mapper>

@@ -12,4 +12,5 @@ public interface CartMapper {
     int checkCartProduct(CartDto cart);
     int modifyCart(CartDto cart);
     int deleteCart(CartDto cart);
+    int dropCart(int code);
 }

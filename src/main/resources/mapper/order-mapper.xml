@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjoa.wms.dao.OrderMapper">
+    <resultMap id="resultOrderDeliveryListMap" type="OrderDelivery">
+        <id column="order_code" property="orderCode"/>
+        <result column="user_code" property="userCode"/>
+        <result column="order_pay_type" property="orderPayType"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="order_date" property="orderDate"/>
+        <result column="order_request" property="orderRequest"/>
+        <result column="order_delivery_phone" property="orderDeliveryPhone"/>
+        <result column="order_delivery_address" property="orderDeliveryAddress"/>
+        <result column="order_delivery_name" property="orderDeliveryName"/>
+
+    </resultMap>
+
+    <insert id="insertOrderTableByUser" parameterType="OrderDelivery" useGeneratedKeys="true" keyProperty="orderCode">
+        Insert INTO
+        tbl_order
+        (
+        user_code
+        , order_pay_type
+        , order_price
+        )
+        VALUES
+        (
+        #{userCode}
+        , #{orderPayType}
+        , #{orderPrice}
+        )
+    </insert>
+
+    <insert id="insertOrderDeliveryTableByUser" parameterType="OrderDelivery">
+        INSERT INTO
+        tbl_order_delivery
+        (
+          order_code
+        , order_request
+        , order_delivery_phone
+        , order_delivery_address
+        , order_delivery_name
+        )
+        VALUES
+        (
+          #{orderCode}
+        , #{orderRequest}
+        , #{orderDeliveryPhone}
+        , #{orderDeliveryAddress}
+        , #{orderDeliveryName}
+        )
+    </insert>
+
+
+    <insert id="insertOrderProdOption" parameterType="OrderDelivery">
+        INSERT INTO
+        tbl_order_prod_option
+        (
+        order_code
+        , prod_option_code
+        , order_prod_option_quantity
+        )
+        VALUES
+        <foreach collection="orderProdOptionList" item="item" separator=",">
+           (#{item.orderCode}, #{item.prodOptionCode}, #{item.cartQuantity})
+
+        </foreach>
+    </insert>
+
+
+
+
+
+
+
+  
+</mapper>
