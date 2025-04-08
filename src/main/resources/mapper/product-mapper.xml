@@ -188,6 +188,7 @@
     </insert>
 
     <insert id="addProductOption" parameterType="list" useGeneratedKeys="true" keyProperty="prodOptionCode">
+
         INSERT INTO
             tbl_prod_option
             (

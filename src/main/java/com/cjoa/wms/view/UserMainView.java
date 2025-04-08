@@ -53,7 +53,7 @@ public class UserMainView {
                 \n=========================================================================
                 장바구니에 담을 옵션 선택(0을 입력하면 돌아갑니다)
                 =========================================================================
-                """
+                >> 입력:"""
         );
         String answer = sc.nextLine();
 
@@ -69,7 +69,7 @@ public class UserMainView {
 
             int optionCode = product.getProductOptionList().get(Integer.parseInt(answer)-1).getProdOptionCode();
 
-            System.out.println("수량 입력:");
+            System.out.print("수량 입력:");
             String quantity = sc.nextLine();
             Map<String, Integer> requestParam = Map.of(
                     "optionCode", optionCode,

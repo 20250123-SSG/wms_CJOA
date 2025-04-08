@@ -88,13 +88,15 @@
             user_code = #{code}
     </delete>
 
-    <select id="selectUserInfoByUserCode" resultMap="userResultMap">
+    <select id="selectUserInfoByUserCode" resultMap="userResultMap" parameterType="_int">
         SELECT
-            user_email = #{userEmail}
-          , user_phone = #{userPhone}
-          , user_address = #{userAddress}
+            user_name
+          , user_phone
+          , user_address
+        FROM
+            tbl_user
         WHERE
-            user_code = #{userCode}
+            user_code = #{code}
     </select>
 
     <select id="getUserByUserCode" resultMap="userResultMap">
